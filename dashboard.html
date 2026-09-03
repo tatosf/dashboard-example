@@ -199,7 +199,9 @@ ul.clean li{margin:3px 0}
 /* data.js is loaded by index.html with a cache-busting query, or directly
    below when this page is opened on its own. */
 if (!window.PORTFOLIO) {
-  document.write('<scr' + 'ipt src="data.js?v=' + Date.now() + '"></scr' + 'ipt>');
+  var v = Date.now();
+  document.write('<scr' + 'ipt src="data.js?v=' + v + '"></scr' + 'ipt>');
+  document.write('<scr' + 'ipt src="content.js?v=' + v + '"></scr' + 'ipt>');
 }
 </script>
 <script>
@@ -547,9 +549,12 @@ function renderDetail() {
   if (!a) { document.getElementById("detail").innerHTML = ""; return; }
   var m = movement(a);
   var rat = function (r, ax, title) {
-    return '<div class="dim"><b>' + esc(title) + " · " + esc(r.direction) + " · " +
-      esc(r.strength) + " · confidence " + r.confidence.toFixed(2) + "</b><br>" +
-      esc(r.text) + "</div>";
+    if (!r) return "";
+    var conf = typeof r.confidence === "number" ? " · confidence " + r.confidence.toFixed(2) : "";
+    return '<div class="dim"><b>' + esc(title) +
+      (r.direction ? " · " + esc(r.direction) : "") +
+      (r.strength ? " · " + esc(r.strength) : "") + conf + "</b>" +
+      (r.text ? "<br>" + esc(r.text) : "") + "</div>";
   };
   var facts = [
     ["Format", a.format], ["City", a.city],
@@ -804,7 +809,24 @@ function boot() {
   }
   AX = D.axes;
   assets = D.assets;
-  assets.forEach(function (a) { if (!Array.isArray(a.history)) a.history = []; });
+  // Narrative lives in content.js, keyed by asset id, so a numeric edit only
+  // has to rewrite the small file. Missing text is not fatal: the asset still
+  // plots, the prose sections just read as unavailable.
+  var TXT = (window.PORTFOLIO_TEXT || {});
+  var TA = TXT.assets || {};
+  assets.forEach(function (a) {
+    if (!Array.isArray(a.history)) a.history = [];
+    var t = TA[a.id] || {};
+    a.outline = t.outline || "No description recorded for this asset.";
+    a.summary = t.summary || "No commentary recorded for this asset.";
+    a.occRationale = a.occRationale || {};
+    a.noiRationale = a.noiRationale || {};
+    a.occRationale.text = t.occText || "";
+    a.noiRationale.text = t.noiText || "";
+    a.evidence = t.evidence || [];
+    a.measures = t.measures || [];
+  });
+  D.notes = TXT.notes || [];
   selected = assets[0].id;
   // Open on the asset that most needs attention -- the interesting one.
   var ranked = assets.slice().sort(function (a, b) { return attention(b) - attention(a); });
