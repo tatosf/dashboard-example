@@ -1,4 +1,4 @@
-/* ==========================================================================
+/* ========================================================================== 
    L&L Holding Company — retail portfolio dashboard data
    ALL FIGURES ARE ILLUSTRATIVE SAMPLE DATA. Not actual portfolio information.
 
@@ -473,7 +473,7 @@ window.PORTFOLIO = {
    "leased": 121900,
    "vacant": 54200,
    "contractedRent": 1366860,
-   "noi": 874790,
+   "noi": 2400000,
    "avgPsf": 11.21,
    "walt": 1.1,
    "arrears": 399600,
