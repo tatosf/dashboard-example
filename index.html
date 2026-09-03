@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MCH Group Risk Assessment</title>
+<link rel="icon" href="https://www.mch-group.com/favicon.ico">
+<style>
+  :root {
+    color-scheme: light;
+    --plane: #f9f9f7;
+    --surface: #fcfcfb;
+    --ink: #0b0b0b;
+    --ink-muted: #52514e;
+    --line: #e1e0d9;
+    --rail: 400px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      color-scheme: dark;
+      --plane: #0d0d0d;
+      --surface: #1a1a19;
+      --ink: #ffffff;
+      --ink-muted: #c3c2b7;
+      --line: #2c2c2a;
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    background: var(--plane);
+    color: var(--ink);
+    font: 14px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif;
+    display: flex;
+    flex-direction: column;
+  }
+  header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 14px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--line);
+    flex: none;
+  }
+  h1 { font-size: 14px; font-weight: 600; margin: 0; }
+  .spacer { flex: 1; }
+  a, button {
+    font: inherit;
+    color: var(--ink-muted);
+    background: none;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 4px 10px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  a:hover, button:hover { color: var(--ink); }
+  main {
+    flex: 1;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: 1fr var(--rail);
+  }
+  body.chat-hidden main { grid-template-columns: 1fr; }
+  body.chat-hidden #chat { display: none; }
+  iframe { width: 100%; height: 100%; border: 0; background: var(--surface); }
+  #chat { border-left: 1px solid var(--line); }
+  @media (max-width: 900px) {
+    main { grid-template-columns: 1fr; grid-template-rows: 1fr 45vh; }
+    #chat { border-left: 0; border-top: 1px solid var(--line); }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>MCH Group Risk Assessment</h1>
+  <div class="spacer"></div>
+  <a href="dashboard.html" target="_blank" rel="noopener">Open dashboard only</a>
+  <button id="refresh" type="button">Refresh dashboard</button>
+  <button id="toggle" type="button" aria-pressed="true">Hide assistant</button>
+</header>
+<main>
+  <iframe id="dashboard" title="Risk assessment dashboard"></iframe>
+  <iframe id="chat" src="https://www.stackai.com/chat/6a8becf8d80ab83a017bc923-4NZ8TnwHLlpiAmAYfIphCh?in_1=embedded" title="Risk assessment assistant"></iframe>
+</main>
+<script>
+  var dashboard = document.getElementById('dashboard');
+
+  // Pages serves the dashboard with max-age=600, so a plain reload keeps showing
+  // the cached copy inside the frame. A fresh query string is always a cache miss.
+  function refreshDashboard() {
+    dashboard.src = 'dashboard.html?v=' + Date.now();
+  }
+
+  refreshDashboard();
+  document.getElementById('refresh').addEventListener('click', refreshDashboard);
+  document.addEventListener('visibilitychange', function () {
+    if (!document.hidden) refreshDashboard();
+  });
+
+  var toggle = document.getElementById('toggle');
+  var KEY = 'risk-dashboard-chat-hidden';
+
+  function apply(hidden) {
+    document.body.classList.toggle('chat-hidden', hidden);
+    toggle.textContent = hidden ? 'Show assistant' : 'Hide assistant';
+    toggle.setAttribute('aria-pressed', String(!hidden));
+  }
+
+  var stored = null;
+  try { stored = localStorage.getItem(KEY); } catch (e) {}
+  apply(new URLSearchParams(location.search).get('chat') === '0' || stored === '1');
+
+  toggle.addEventListener('click', function () {
+    var hidden = !document.body.classList.contains('chat-hidden');
+    apply(hidden);
+    try { localStorage.setItem(KEY, hidden ? '1' : '0'); } catch (e) {}
+  });
+</script>
+</body>
+</html>
