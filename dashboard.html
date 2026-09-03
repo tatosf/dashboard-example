@@ -3,82 +3,721 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Expomobilia Risk Assessment Dashboard</title>
+<title>L&amp;L Retail Portfolio Dashboard</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <style>
-:root{--navy:#071f3d;--blue:#0a5a8c;--cyan:#18b8d8;--purple:#7c3aed;--ink:#142033;--muted:#667085;--line:#d9e1ea;--paper:#fff;--bg:#f3f6f9;--warn:#b54708;--good:#067647;--red:#b42318}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 Inter,Arial,sans-serif}button{font:inherit}.topbar{background:linear-gradient(105deg,#061d38,#0c4268);color:#fff;padding:20px 28px}.topbar h1{font-size:25px;margin:0 0 4px}.topbar p{margin:0;color:#c9d9e7}.wrap{max-width:1540px;margin:auto;padding:18px}.notice{background:#fff8e7;border:1px solid #f5d58b;border-left:5px solid #e6a700;border-radius:9px;padding:11px 14px;margin-bottom:14px}.notice strong{color:#7a4b00}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}.card,.panel{background:var(--paper);border:1px solid #e3e8ef;border-radius:12px;box-shadow:0 2px 10px #11243d0c}.card{padding:13px 16px}.card .k{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}.card .v{font-size:23px;font-weight:750;margin-top:3px}.main{display:grid;grid-template-columns:minmax(650px,1.7fr) minmax(350px,.8fr);gap:14px;align-items:start}.panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:15px 17px 9px}.panel-head h2{font-size:18px;margin:0}.sub{font-size:12px;color:var(--muted)}.legend{display:flex;flex-wrap:wrap;gap:10px;font-size:12px;color:#475467}.lg{display:inline-flex;align-items:center;gap:5px}.dot{width:12px;height:12px;display:inline-block}.current-dot{border:2px solid var(--cyan);border-radius:50%;background:#fff}.ai-dot{border-radius:50%;background:var(--navy)}.team-dot{background:var(--purple);transform:rotate(45deg);width:10px;height:10px}.heatbox{padding:0 10px 13px}.heatbox svg{width:100%;height:auto;display:block;touch-action:none}.risk-list{max-height:710px;overflow:auto;padding:0 10px 12px}.risk-row{width:100%;display:grid;grid-template-columns:40px 1fr auto;gap:9px;text-align:left;align-items:center;background:#fff;border:1px solid #e4e9ef;border-radius:8px;padding:9px;margin:6px 0;cursor:pointer;color:var(--ink)}.risk-row:hover,.risk-row.active{border-color:#2d6e9c;background:#f0f7fb}.risk-row .rid{font-weight:800;color:var(--navy)}.risk-row .rt{font-weight:650}.risk-row .score{font-size:12px;color:#475467;text-align:right}.badge{display:inline-block;font-size:10px;font-weight:750;padding:2px 6px;border-radius:10px;margin-left:4px}.up{background:#fee4e2;color:#b42318}.down{background:#dcfae6;color:#067647}.hold{background:#eef2f6;color:#475467}.review{background:#fff0c2;color:#8a4b00}.detail{margin-top:14px}.detail-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:14px}.detail .body{padding:0 17px 17px}.titleline{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.titleline h2{margin:0;font-size:20px}.pill{font-size:11px;padding:3px 8px;border-radius:12px;background:#e8f2f8;color:#174d70;font-weight:700}.pill.orange{background:#fff0c2;color:#8a4b00}.scores{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:13px 0}.scorebox{border:1px solid var(--line);border-radius:8px;padding:9px}.scorebox strong{display:block;margin-bottom:3px}.scorebox.current{border-top:3px solid var(--cyan)}.scorebox.ai{border-top:3px solid var(--navy)}.scorebox.team{border-top:3px solid var(--purple)}.coords{font-size:18px;font-weight:800}.band{font-size:11px;color:var(--muted)}.controls{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0}.controls button{border:1px solid #b8c5d2;border-radius:7px;background:#fff;padding:7px 10px;cursor:pointer}.controls button:hover{background:#f2f6f9}.controls .accept{background:var(--purple);border-color:var(--purple);color:#fff}.section{border-top:1px solid #e5e9ef;padding-top:11px;margin-top:11px}.section h3{font-size:13px;margin:0 0 6px;text-transform:uppercase;letter-spacing:.035em;color:#344054}.dim{border-left:4px solid #d8e2eb;padding:8px 10px;background:#f8fafc;border-radius:4px;margin:8px 0}.dim b{color:var(--navy)}ul.clean{margin:6px 0;padding-left:19px}.ev{margin:7px 0;padding:8px 10px;background:#f7f8fa;border-radius:6px;border-left:3px solid #9bacbd}.small{font-size:12px;color:var(--muted)}.bottom{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}.bottom .body{padding:0 17px 15px}.candidate{border-top:1px solid #e5e9ef;padding:10px 0}.candidate:first-child{border-top:0}.status{font-size:10px;text-transform:uppercase;font-weight:800;color:#6941c6}.history{margin:5px 0;padding:7px 9px;border-left:3px solid #c7d2df;background:#f8fafc}.footer{text-align:center;color:#667085;font-size:12px;padding:18px}.tooltip{position:fixed;z-index:10;pointer-events:none;background:#071f3d;color:#fff;padding:7px 9px;border-radius:6px;font-size:12px;box-shadow:0 3px 12px #0003;display:none}.axislabel{font-size:15px;font-weight:750;fill:#24364a}.tick{font-size:11px;fill:#536274}.bandlabel{font-size:11px;font-weight:700;fill:#24364a;opacity:.82}.marker-label{font-size:10px;font-weight:800;paint-order:stroke;stroke:#fff;stroke-width:3px;stroke-linejoin:round;fill:#071f3d}.risk-mark{cursor:pointer}.arrow{opacity:.42;stroke-width:1.6}.arrow.selected{opacity:.95;stroke-width:2.5}@media(max-width:1050px){.main,.detail-grid{grid-template-columns:1fr}.risk-list{max-height:360px}.cards{grid-template-columns:repeat(2,1fr)}}@media(max-width:620px){.topbar{padding:16px}.wrap{padding:10px}.cards{grid-template-columns:1fr 1fr}.scores{grid-template-columns:1fr}.bottom{grid-template-columns:1fr}.panel-head{display:block}.legend{margin-top:8px}.card .v{font-size:19px}}
-body{background:#f2fbf6;color:#153c2b}.topbar{background:linear-gradient(105deg,#063d2a,#0f8f5a)}.topbar p{color:#d7f6e6}.card,.panel{border-color:#cae8d8;box-shadow:0 2px 12px #0a5b3410}.card{border-top:3px solid #19a66a}.card .k,.sub,.small,.band{color:#587466}.card .v,.panel-head h2,.titleline h2{color:#075c3c}.notice{background:#edf9f2;border-color:#acd8bf;border-left-color:#19a66a}.notice strong{color:#075c3c}.risk-row:hover,.risk-row.active{border-color:#19a66a;background:#eaf8f0}.risk-row .rid{color:#0b7a4e}.pill{background:#dff4e8;color:#09643f}.controls button{border-color:#9fceb5}.controls button:hover{background:#eaf8f0}.section h3,.dim b{color:#09643f}.dim{border-left-color:#19a66a;background:#f5fcf8}.ev{background:#f7fcf9;border-left-color:#70ba91}.status{color:#0b7a4e}.history{border-left-color:#19a66a;background:#f5fcf8}.tooltip{background:#063d2a}.footer{color:#587466}
+:root{
+  color-scheme: light;
+  --navy:#071f3d; --slate:#0a5a8c; --cyan:#18b8d8; --purple:#7c3aed;
+  --ink:#142033; --muted:#667085; --line:#d9e1ea; --paper:#fff; --bg:#f3f6f9;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 Inter,Arial,sans-serif}
+button{font:inherit}
+.topbar{background:linear-gradient(105deg,#061d38,#0c4268);color:#fff;padding:20px 28px}
+.topbar h1{font-size:25px;margin:0 0 4px}
+.topbar p{margin:0;color:#c9d9e7}
+.wrap{max-width:1540px;margin:auto;padding:18px}
+.notice{background:#fff8e7;border:1px solid #f5d58b;border-left:5px solid #e6a700;border-radius:9px;padding:11px 14px;margin-bottom:14px}
+.notice strong{color:#7a4b00}
+.alert{background:#fef3f2;border:1px solid #fda29b;border-left:5px solid #d92d20;border-radius:9px;padding:11px 14px;margin-bottom:14px;display:none}
+.alert strong{color:#912018}
+.alert ul{margin:6px 0 0;padding-left:20px}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}
+.card,.panel{background:var(--paper);border:1px solid #e3e8ef;border-radius:12px;box-shadow:0 2px 10px #11243d0c}
+.card{padding:13px 16px;border-top:3px solid var(--slate)}
+.card .k{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.card .v{font-size:23px;font-weight:750;margin-top:3px;color:var(--navy)}
+.card .n{font-size:11px;color:var(--muted);margin-top:2px}
+.main{display:grid;grid-template-columns:minmax(640px,1.7fr) minmax(350px,.8fr);gap:14px;align-items:start}
+.panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:15px 17px 9px}
+.panel-head h2{font-size:18px;margin:0;color:var(--navy)}
+.sub{font-size:12px;color:var(--muted)}
+.legend{display:flex;flex-wrap:wrap;gap:10px;font-size:12px;color:#475467}
+.lg{display:inline-flex;align-items:center;gap:5px}
+.dot{width:12px;height:12px;display:inline-block}
+.rep-dot{border:2px solid var(--cyan);border-radius:50%;background:#fff}
+.prj-dot{border-radius:50%;background:var(--navy)}
+.mgr-dot{background:var(--purple);transform:rotate(45deg);width:10px;height:10px}
+.plotbox{padding:0 10px 13px}
+.plotbox svg{width:100%;height:auto;display:block;touch-action:none}
+.asset-list{max-height:710px;overflow:auto;padding:0 10px 12px}
+.asset-row{width:100%;display:grid;grid-template-columns:56px 1fr auto;gap:9px;text-align:left;align-items:center;background:#fff;border:1px solid #e4e9ef;border-radius:8px;padding:9px;margin:6px 0;cursor:pointer;color:var(--ink)}
+.asset-row:hover,.asset-row.active{border-color:#2d6e9c;background:#f0f7fb}
+.asset-row .aid{font-weight:800;color:var(--navy);font-size:12px}
+.asset-row .an{font-weight:650}
+.asset-row .am{font-size:11px;color:var(--muted)}
+.asset-row .score{font-size:12px;color:#475467;text-align:right;white-space:nowrap}
+.badge{display:inline-block;font-size:10px;font-weight:750;padding:2px 6px;border-radius:10px;margin-left:4px}
+/* polarity: improving is good on both axes here, so up is green */
+.up{background:#dcfae6;color:#067647}
+.down{background:#fee4e2;color:#b42318}
+.hold{background:#eef2f6;color:#475467}
+.review{background:#fff0c2;color:#8a4b00}
+.detail{margin-top:14px}
+.detail-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:14px}
+.detail .body{padding:0 17px 17px}
+.titleline{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.titleline h2{margin:0;font-size:20px;color:var(--navy)}
+.pill{font-size:11px;padding:3px 8px;border-radius:12px;background:#e8f2f8;color:#174d70;font-weight:700}
+.pill.amber{background:#fff0c2;color:#8a4b00}
+.scores{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:13px 0}
+.scorebox{border:1px solid var(--line);border-radius:8px;padding:9px}
+.scorebox strong{display:block;margin-bottom:3px}
+.scorebox.rep{border-top:3px solid var(--cyan)}
+.scorebox.prj{border-top:3px solid var(--navy)}
+.scorebox.mgr{border-top:3px solid var(--purple)}
+.coords{font-size:17px;font-weight:800}
+.band{font-size:11px;color:var(--muted)}
+.controls{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0}
+.controls button{border:1px solid #b8c5d2;border-radius:7px;background:#fff;padding:7px 10px;cursor:pointer}
+.controls button:hover{background:#f2f6f9}
+.controls button:disabled{opacity:.45;cursor:default}
+.controls .accept{background:var(--purple);border-color:var(--purple);color:#fff}
+.section{border-top:1px solid #e5e9ef;padding-top:11px;margin-top:11px}
+.section h3{font-size:13px;margin:0 0 6px;text-transform:uppercase;letter-spacing:.035em;color:#344054}
+.dim{border-left:4px solid #d8e2eb;padding:8px 10px;background:#f8fafc;border-radius:4px;margin:8px 0}
+.dim b{color:var(--navy)}
+ul.clean{margin:6px 0;padding-left:19px}
+ul.clean li{margin:3px 0}
+.ev{margin:7px 0;padding:8px 10px;background:#f7f8fa;border-radius:6px;border-left:3px solid #9bacbd}
+.cite{font-size:11px;color:var(--muted);margin-top:3px}
+.small{font-size:12px;color:var(--muted)}
+.facts{width:100%;border-collapse:collapse;font-size:13px}
+.facts td{padding:5px 0;border-bottom:1px solid #eef1f5}
+.facts td:first-child{color:var(--muted)}
+.facts td:last-child{text-align:right;font-weight:650}
+.bottom{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.bottom .body{padding:0 17px 15px}
+.exp{width:100%;border-collapse:collapse;font-size:12.5px}
+.exp th{text-align:left;color:var(--muted);font-weight:650;font-size:11px;text-transform:uppercase;letter-spacing:.03em;padding:6px 8px 6px 0;border-bottom:1px solid #e5e9ef}
+.exp td{padding:6px 8px 6px 0;border-bottom:1px solid #f0f3f7}
+.exp tr.mine{background:#f0f7fb}
+.exp td.r{text-align:right}
+.note{border-top:1px solid #e5e9ef;padding:10px 0}
+.note:first-child{border-top:0}
+.note b{color:var(--navy)}
+.history{margin:5px 0;padding:7px 9px;border-left:3px solid #c7d2df;background:#f8fafc;font-size:12.5px}
+.footer{text-align:center;color:#667085;font-size:12px;padding:18px}
+.tooltip{position:fixed;z-index:10;pointer-events:none;background:#071f3d;color:#fff;padding:7px 9px;border-radius:6px;font-size:12px;box-shadow:0 3px 12px #0003;display:none}
+.axislabel{font-size:15px;font-weight:750;fill:#24364a}
+.tick{font-size:11px;fill:#536274}
+.bandlabel{font-size:11px;font-weight:700;fill:#24364a;opacity:.82}
+.marker-label{font-size:10px;font-weight:800;paint-order:stroke;stroke:#fff;stroke-width:3px;stroke-linejoin:round;fill:#071f3d}
+.asset-mark{cursor:pointer}
+.arrow{opacity:.42;stroke-width:1.6}
+.arrow.selected{opacity:.95;stroke-width:2.5}
+@media(max-width:1050px){
+  .main,.detail-grid{grid-template-columns:1fr}
+  .asset-list{max-height:360px}
+  .cards{grid-template-columns:repeat(2,1fr)}
+  .bottom{grid-template-columns:1fr}
+}
+@media(max-width:620px){
+  .topbar{padding:16px}.wrap{padding:10px}
+  .cards{grid-template-columns:1fr 1fr}.scores{grid-template-columns:1fr}
+  .panel-head{display:block}.legend{margin-top:8px}.card .v{font-size:19px}
+}
 </style>
 </head>
 <body>
-<header class="topbar"><h1>MCH Group Risk Assessment Dashboard</h1><p>Expomobilia · Workshop assessment · 1 June 2026</p></header>
+<header class="topbar">
+  <h1 id="pageTitle">Retail Portfolio Asset Management</h1>
+  <p id="pageSub">&nbsp;</p>
+</header>
 <main class="wrap">
-<div class="notice"><strong>Assessment basis:</strong> The transcript provided verbal risk bands and relative movements, but not the prior heatmap’s exact decimal coordinates. Current baselines and final Team coordinates are therefore faithful band-based reconstructions. Drag the purple Team markers to confirm exact positions before acceptance.</div>
-<section class="cards" id="cards"></section>
-<section class="main">
-<div class="panel">
-<div class="panel-head"><div><h2>Continuous MCH risk heatmap</h2><div class="sub">Impact (X) · Probability (Y) · 0–10 continuous scale</div></div><div class="legend"><span class="lg"><i class="dot current-dot"></i>Current</span><span class="lg"><i class="dot ai-dot"></i>AI Proposed</span><span class="lg"><i class="dot team-dot"></i>Team Assessment</span></div></div>
-<div class="heatbox"><svg id="heatmap" viewBox="0 0 850 650" role="img" aria-label="Expomobilia continuous risk heatmap"></svg></div>
-</div>
-<div class="panel">
-<div class="panel-head"><div><h2>Risk ranking</h2><div class="sub">Display proxy: Impact × Probability; not an official MCH risk score</div></div></div>
-<div class="risk-list" id="riskList"></div>
-</div>
-</section>
-<section class="panel detail" id="detail"></section>
-<section class="bottom">
-<div class="panel"><div class="panel-head"><div><h2>Emerging-risk candidates</h2><div class="sub">Not plotted until explicitly accepted into the risk universe</div></div></div><div class="body" id="emerging"></div></div>
-<div class="panel"><div class="panel-head"><div><h2>Scope decisions & assessment notes</h2><div class="sub">Workshop decisions retained for traceability</div></div></div><div class="body"><div class="candidate"><b>Removed from active map: Project / client concentration</b><p>The Team explicitly removed the Watches and Wonders concentration risk after the work had already reduced and resource preparation was considered adequate. MCH intercompany concentration remains a structural fact to monitor, not an active standalone risk in this assessment.</p></div><div class="candidate"><b>Supply-chain transport retained at monitoring level</b><p>Alternative suppliers, local build options and logistics planning were described as established business-as-usual controls. The risk remains plotted because geopolitical routing disruption can still occur.</p></div><div class="candidate"><b>Shared-accountability actions need owners and dates</b><p>The workshop repeatedly requested named responsibilities, due dates and status updates—especially for LMS strategy, FX protocol, central support and process implementation.</p></div></div></div>
-</section>
-<div class="footer">Internal risk-assessment working document · Team Assessment is not approved until “Accept Team as Current” is used.</div>
-</main><div class="tooltip" id="tooltip"></div>
+  <div class="alert" id="alert"></div>
+  <div class="notice">
+    <strong>Illustrative sample data.</strong> Every figure on this page is fabricated for
+    demonstration and is not actual portfolio information. Occupancy, NOI, WALT and the expiry
+    schedule are derived from the lease schedule below. Drag the purple manager diamond to record
+    your own view of an asset, then accept it to make it the reported position.
+  </div>
+  <section class="cards" id="cards"></section>
+  <section class="main">
+    <div class="panel">
+      <div class="panel-head">
+        <div>
+          <h2>Portfolio positioning</h2>
+          <div class="sub" id="axisSub">&nbsp;</div>
+        </div>
+        <div class="legend">
+          <span class="lg"><i class="dot rep-dot"></i>Reported</span>
+          <span class="lg"><i class="dot prj-dot"></i>Projected</span>
+          <span class="lg"><i class="dot mgr-dot"></i>Manager view</span>
+        </div>
+      </div>
+      <div class="plotbox"><svg id="plot" viewBox="0 0 850 650" aria-label="Retail portfolio occupancy against NOI growth"></svg></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head">
+        <div>
+          <h2>Asset ranking</h2>
+          <div class="sub" id="rankSub">&nbsp;</div>
+        </div>
+      </div>
+      <div class="asset-list" id="assetList"></div>
+    </div>
+  </section>
+  <section class="panel detail" id="detail"></section>
+  <section class="bottom">
+    <div class="panel">
+      <div class="panel-head">
+        <div>
+          <h2>Lease expiry schedule</h2>
+          <div class="sub">Next twelve months from the reporting date. Rows for the selected asset are highlighted.</div>
+        </div>
+      </div>
+      <div class="body" id="expiry"></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head">
+        <div>
+          <h2>Asset management notes</h2>
+          <div class="sub">Portfolio decisions retained for traceability</div>
+        </div>
+      </div>
+      <div class="body" id="notes"></div>
+    </div>
+  </section>
+  <div class="footer" id="footer">&nbsp;</div>
+</main>
+<div class="tooltip" id="tooltip"></div>
+
 <script>
-const assessmentDate="2026-06-01";
-const seedRisks=[
-{id:"R01",title:"Personnel management",outline:"Ability to attract, onboard, develop, retain and succession-plan the talent required for project delivery and growth.",current:{i:6.5,p:8.0},ai:{i:5.5,p:6.0},team:{i:5.0,p:5.5},summary:"The risk has materially improved from last year’s layoff and transition context. Specialist recruiters and better local flexibility produced several good hires, but junior development, sales-team experience and slow vacancy posting remain weaknesses.",impact:{direction:"decrease",strength:"strong",confidence:.81,rationale:"Reduced because successful hiring and a less bureaucratic interface improve delivery resilience. MCH scale interpretation: consequences remain Critical at the Team boundary because shortages can still delay projects and constrain growth."},probability:{direction:"decrease",strength:"strong",confidence:.86,rationale:"Reduced because multiple hires were described as good quality and the process is more flexible. MCH scale interpretation: exposure moved from Often toward Occasionally, though development capacity and posting delays keep it above Rarely."},evidence:["Participants said the organisation is in a much better position than last year and cited several strong hires.","Specialist recruiters delivered a high-quality long list and improved access to international talent.","The sales team includes several new people with limited industry knowledge, described as difficult to develop in the current stabilisation phase.","Approved jobs can still take about three weeks to post when the expected turnaround is roughly 48 hours."],measures:["Complete workforce planning and skills matrix in Q3/Q4 2026.","Define a practical junior-talent development and succession framework.","Shorten the approved-vacancy posting cycle and track turnaround.","Retain effective specialist recruiting partners where justified."],review:false,history:[]},
-{id:"R02",title:"Insufficient strategy definition and execution",outline:"Risk that the LMS one-company vision is not translated into a documented operating model, incentives, accountabilities and repeatable cross-regional execution.",current:{i:6.0,p:7.0},ai:{i:6.5,p:8.0},team:{i:6.5,p:8.5},summary:"High-level strategic alignment and collaboration improved, but the promised LMS playbook did not launch. Intercompany economics, sales credit, incentives and ownership are still interpreted differently, causing wasted bid effort and limiting synergies.",impact:{direction:"increase",strength:"moderate",confidence:.77,rationale:"Increased because unresolved operating rules affect growth, margin, resource allocation and cross-company delivery. MCH scale interpretation: consequences are clearly Critical, but not described as existential."},probability:{direction:"increase",strength:"strong",confidence:.86,rationale:"Increased because the issue recurs in live opportunities and the August playbook action stalled. MCH scale interpretation: repeated friction and unclear ownership support Often."},evidence:["The Team said there is a high-level unified vision, but people still have to interpret what it means operationally.","An LMS playbook discussed at the prior off-site failed to launch because everyone returned to day-to-day work.","Bid teams spend substantial time estimating opportunities and can then be rejected because of intercompany transfer pricing.","A quarterly LMS management forum and documented rules for credit, pricing and hand-offs were proposed."],measures:["Document the LMS playbook: lead ownership, delivery hand-offs, credit, incentives and intercompany economics.","Assign an accountable owner, due date and status cadence to the strategy rollout.","Establish a quarterly LMS management forum for opportunities and global clients.","Align cross-regional goals and KPIs to the one-company approach."],review:true,history:[]},
-{id:"R03",title:"IT dependency and business enablement",outline:"Dependency on Group IT infrastructure, tools, service communication and business-fit decisions, including secure and effective AI adoption.",current:{i:6.0,p:7.0},ai:{i:6.0,p:7.5},team:{i:6.0,p:7.0},summary:"Core infrastructure concerns appear less prominent, but the discussion exposed recurring gaps in business consultation, rollout communication, purchasing protocols and role-specific AI onboarding. Tools are sometimes selected or released without first understanding Expomobilia’s operating needs.",impact:{direction:"hold",strength:"weak",confidence:.72,rationale:"Held because poor-fit tools, outages or insecure AI use can still cause major disruption, cost and reputational exposure. MCH scale interpretation: Critical remains appropriate."},probability:{direction:"increase",strength:"moderate",confidence:.74,rationale:"AI adoption and repeated examples of unconsulted rollouts add recurring exposure. MCH scale interpretation: the AI proposal sits on the 7.5 boundary; the Team retained upper Occasionally pending validation."},evidence:["Participants said AI tools are being pushed out without clear role-specific onboarding or explanation of safe, effective use.","A project-management system was selected before the business was asked how its two operating models work.","Printer changes, device billing and office-technology decisions were described as poorly communicated.","No clearly known dedicated IT business partner was identified for Expomobilia."],measures:["Appoint or clarify a dedicated IT business partner for Expomobilia.","Introduce role-based AI onboarding covering limitations, verification, data and acceptable use.","Consult the business before tool selection and major rollout decisions.","Publish clear IT purchasing, billing and new-office technology protocols."],review:true,history:[]},
-{id:"R04",title:"Procurement and supply-chain capability",outline:"Ability to source suitable materials, specialist suppliers and freelance capacity efficiently and with sufficient operational resilience.",current:{i:5.5,p:6.0},ai:{i:4.5,p:4.5},team:{i:4.5,p:4.5},summary:"The position improved after procurement and supply-chain responsibilities were assigned in Arlesheim and at the policy centre, and process work was completed. Specialist availability remains a monitoring issue, but the earlier coordination gap has reduced.",impact:{direction:"decrease",strength:"moderate",confidence:.79,rationale:"Reduced because named capability and more consistent processes contain disruption. MCH scale interpretation: residual consequences are Significant."},probability:{direction:"decrease",strength:"strong",confidence:.84,rationale:"Reduced because two operational leads and supplier-process improvements address the prior control weakness. MCH scale interpretation: residual issues are expected Rarely rather than Occasionally."},evidence:["The Team identified dedicated people leading procurement and supply chain in two locations.","A procurement and supplier process workshop was completed and new processes were put in place.","The four-eyes principle remains manual and could be administered more efficiently.","Some specialised materials and skills may still be difficult to source."],measures:["Embed procurement roles and supplier-governance processes.","Evaluate workflow support for the four-eyes approval principle.","Continue monitoring specialist material and freelance availability."],review:false,history:[]},
-{id:"R05",title:"Currency fluctuation",outline:"Exposure to foreign-exchange volatility across global client work, intercompany delivery and project margins without a current, standard Group protocol.",current:{i:5.5,p:5.5},ai:{i:6.0,p:6.0},team:{i:6.5,p:6.5},summary:"FX is managed project by project, while the last referenced written guidance dates from 2015. Participants described inconsistent rate practices and uncertainty over accounting treatment, hedging and contractual protection.",impact:{direction:"increase",strength:"moderate",confidence:.78,rationale:"Increased because material currency movement can erode project margin and create intercompany disputes. MCH scale interpretation: the consequences are Critical, but currently manageable rather than catastrophic."},probability:{direction:"increase",strength:"moderate",confidence:.81,rationale:"Increased because global projects create repeated exposure and geopolitical/market volatility remains high. MCH scale interpretation: this can reasonably be anticipated Occasionally."},evidence:["Participants said the business still handles FX project by project and lacks a clear current protocol.","The most recent document known in the discussion was dated 2015.","A live example showed disagreement about changing an established rate practice on a Friday afternoon without written policy.","Hedging, below-the-line treatment and client contract clauses were all raised as unresolved points."],measures:["Create and issue a Group FX protocol covering rate setting, ownership, accounting treatment and exceptions.","Assess practical hedging options with Treasury.","Standardise appropriate FX fluctuation clauses in client and intercompany contracts.","Assign an owner and due date across Treasury and Finance."],review:true,history:[]},
-{id:"R06",title:"Competition, market structure and pricing",outline:"Risk that changing competitors, client price pressure and Expomobilia’s shift from stand builder to brand-experience provider reduce win rates or margins.",current:{i:6.5,p:7.0},ai:{i:6.0,p:6.5},team:{i:6.0,p:6.5},summary:"Competitive pressure remains, but the new customer-engagement strategy and lower-cost operating model provide a clearer response. The competitor set is changing as production firms and agencies converge, while clients remain highly price-sensitive.",impact:{direction:"decrease",strength:"moderate",confidence:.74,rationale:"Slightly reduced because repositioning and restructuring improve the response to margin pressure. MCH scale interpretation: losing major work or margin still has Critical consequences."},probability:{direction:"decrease",strength:"moderate",confidence:.72,rationale:"Slightly reduced because the Team described better positioning and cost modelling, while acknowledging competition is persistent. MCH scale interpretation: remains Occasionally."},evidence:["The business is repositioning as a brand-experience provider rather than only a booth producer.","Participants said no single competitor cleanly defines the new market because agencies and producers are moving toward the same middle ground.","Price ranked above sustainability in a recent client evaluation example.","The Team said this risk had moved down slightly from last year."],measures:["Maintain and periodically test the customer-engagement strategy against market change.","Model the restructured cost base and pricing after the move to the new building.","Continue supplier aggregation where it produces genuine buying advantage.","Review competitive positioning at least annually and on major market shifts."],review:false,history:[]},
-{id:"R07",title:"Resources and competencies for sustainability",outline:"Ability to maintain credible sustainability practices, certifications, know-how and market relevance as client and political priorities change.",current:{i:5.0,p:5.5},ai:{i:4.0,p:3.5},team:{i:4.0,p:3.5},summary:"Sustainability has declined in near-term client priority, but remains embedded in team practice. Submission work, pragmatic goals, local responsibility and collaboration with Group sustainability resources are in place.",impact:{direction:"decrease",strength:"moderate",confidence:.77,rationale:"Reduced because the team has practical know-how and support relationships. MCH scale interpretation: any shortfall would currently be Significant rather than Critical."},probability:{direction:"decrease",strength:"strong",confidence:.83,rationale:"Reduced because a local lead, completed work and broader competence make a material failure infrequent. MCH scale interpretation: Rarely is appropriate."},evidence:["The Team said sustainability is currently lower on many clients’ priority lists as cost pressure rises.","A sustainability submission was completed and pragmatic goals were established.","A local sustainability lead and good working relationships with Group specialists were identified.","The Team stressed that sustainability remains in its DNA and should not disappear from monitoring."],measures:["Maintain local sustainability ownership and Group collaboration.","Confirm whether current certification remains valuable under the new operating model.","Refresh team competence and client-facing proof points as requirements evolve."],review:false,history:[]},
-{id:"R08",title:"Governance and process landscape",outline:"Risk of inefficiency, rework, inconsistent controls and financial leakage while key operational processes are redesigned, documented and embedded.",current:{i:6.5,p:8.0},ai:{i:6.0,p:7.5},team:{i:6.0,p:7.5},summary:"Process redesign progressed despite an imperfect workshop approach and major organisational change. Key processes are being documented, but rollout and risk/control integration remain incomplete; the new office creates an important implementation point.",impact:{direction:"decrease",strength:"moderate",confidence:.75,rationale:"Slightly reduced because core processes were redefined and documentation is underway. MCH scale interpretation: incomplete controls can still create Critical financial and operational disruption."},probability:{direction:"decrease",strength:"moderate",confidence:.76,rationale:"Slightly reduced due to tangible process work, but embedded adoption is not yet business as usual. MCH scale interpretation: the Team retained the 7.5 boundary because inconsistency remains recurrent."},evidence:["The Team invested in process workshops and redefined core processes, even though the exercise did not work as well as hoped.","Boris and a Group counterpart are connecting process documentation work.","Project-risk awareness and a project checklist were identified as a later subset of the process work.","The move to the new office was described as a trigger to implement new rules and avoid carrying old habits forward."],measures:["Complete, approve and communicate the key process landscape.","Use the office move to embed new controls and working standards.","Add project-risk identification and a practical project checklist after process foundations are stable.","Assign process owners, rollout dates and adoption checks."],review:true,history:[]},
-{id:"R09",title:"Supply-chain transport disruption",outline:"Exposure to geopolitical routing constraints, transport delays and logistics cost increases affecting global project delivery.",current:{i:6.0,p:6.5},ai:{i:5.5,p:5.5},team:{i:5.5,p:5.5},summary:"The Team considers this risk actively managed through local builds, a global supplier network, route monitoring and logistics planning. Disruption remains possible, but recent rerouting was contained without material delivery failure.",impact:{direction:"decrease",strength:"moderate",confidence:.78,rationale:"Reduced because local sourcing and limited shipment volumes constrain disruption. MCH scale interpretation: consequences remain just inside Critical for major projects."},probability:{direction:"decrease",strength:"moderate",confidence:.80,rationale:"Reduced because alternative routes and suppliers are established business-as-usual controls. MCH scale interpretation: geopolitical events remain Occasionally foreseeable."},evidence:["A recent project used air rather than sea transport when boat routes were unavailable.","Only one container was affected because most elements were built locally.","The global supplier network and alternative sourcing were described as established and effective.","Participants agreed the item should remain a monitoring risk rather than a major active mitigation programme."],measures:["Monitor geopolitical transport conditions and route changes.","Maintain alternative suppliers, local-build options and logistics contingencies.","Review warehouse and routing choices when project geography materially changes."],review:false,history:[]},
-{id:"R10",title:"Taxes and legal compliance",outline:"International growth increases tax, legal and compliance complexity, particularly where local capability or interpretation is limited.",current:{i:4.5,p:5.5},ai:{i:4.5,p:6.0},team:{i:4.5,p:6.0},summary:"Tax complexity was described as having increased significantly. The transcript contains limited detail on specific incidents or controls, so the proposed movement is deliberately small and the risk needs owner validation.",impact:{direction:"hold",strength:"weak",confidence:.66,rationale:"Held because no evidence showed a change from Significant consequences, although errors could create cost and compliance exposure. Counter-signal: discussion detail was limited."},probability:{direction:"increase",strength:"moderate",confidence:.71,rationale:"Slightly increased because international activity and perceived tax complexity are growing. MCH scale interpretation: issues can arise Occasionally, but the evidence is not sufficient for a larger move."},evidence:["Participants said international growth increases tax and compliance complexity.","The US and Hong Kong were referenced as areas with limited tax/legal resources or unresolved clarification needs.","A participant reported a view that tax complexity had increased significantly.","The workshop did not document concrete incidents, quantified exposure or a complete control assessment."],measures:["Confirm accountable Group and local tax/legal support for each active jurisdiction.","Document open US and Hong Kong questions, decisions and escalation routes.","Validate the position with Finance/Tax and add owners and due dates."],review:true,history:[]},
-{id:"R11",title:"Customer and market development",outline:"Risk that changing client demand, shorter lead times, price shopping and weak market conversion prevent replacement of declining legacy production revenue.",current:{i:6.5,p:6.5},ai:{i:7.5,p:8.0},team:{i:8.0,p:8.5},summary:"The Team identified this as the highest risk. Clients are cautious, commitments arrive later, budgets are pressured and legacy stand-building demand is not growing. A new customer-engagement strategy and 90-day execution cadence are positive, but must convert into diversified revenue.",impact:{direction:"increase",strength:"strong",confidence:.87,rationale:"Increased because failure to replace a large share of legacy business would materially affect growth, capacity and financial performance. MCH scale interpretation: the Team placed this in Catastrophic due to the scale of business-model dependence."},probability:{direction:"increase",strength:"strong",confidence:.89,rationale:"Increased because shorter client lead times, price shopping and market transition are already observable. MCH scale interpretation: the pressure occurs Often and is expected to continue."},evidence:["Participants described clients as cautious, more short-term and sometimes confirming activations only four months ahead.","The Team said the market for the traditional industry is not growing.","The workshop explicitly identified customer and market development as the biggest risk and moved it into the red/red area.","A new customer-engagement strategy now has roadmaps, 90-day reviews and more frequent check-ins."],measures:["Execute and monitor the customer-engagement strategy through 90-day roadmaps and frequent check-ins.","Develop brand-experience offerings that extend beyond stand production.","Use cross-LMS opportunities and global delivery capability to diversify revenue.","Track conversion, pipeline quality, lead times, margin and concentration indicators."],review:true,history:[]},
-{id:"R12",title:"Occupational health and safety",outline:"Potential for workplace or event-site injury, structural failure, quality failure or sabotage to harm people, operations and reputation.",current:{i:6.5,p:2.5},ai:{i:6.0,p:2.0},team:{i:6.0,p:2.0},summary:"No material incidents were reported. Safety standards, quality assurance, management-level training and local responsibilities are in place, so the Team retained high consequence but low likelihood.",impact:{direction:"decrease",strength:"moderate",confidence:.73,rationale:"Slightly reduced from the prior reconstruction because the Team rejected Catastrophic and described Critical as appropriate. A serious incident could still cause major harm and reputational damage."},probability:{direction:"decrease",strength:"moderate",confidence:.81,rationale:"Reduced because controls are routine and no recent incidents were raised. MCH scale interpretation: Unlikely under normal circumstances."},evidence:["The Team said no incidents had been heard of and the position appeared good.","Management-level occupational-safety training had been completed.","Safety standards, quality assurance and local security responsibility were described as ongoing controls.","Participants said this is an inherent industry risk that must remain visible even when controls are business as usual."],measures:["Maintain recurring safety communication and training.","Continue strict quality-assurance and HSE awareness controls.","Keep local safety/security responsibilities current and documented.","Monitor incidents and near misses for any probability change."],review:false,history:[]}
-];
-const emerging=[
-{title:"Transformation execution and capacity (Project Vanguard)",status:"candidate",confidence:"0.78",outline:"A large Group transformation can absorb substantial management capacity and repeatedly interrupt forward-looking business work.",why:"The discussion described a material, cross-functional distraction not fully captured by strategy or process risk. Validate scope, duration and accountable mitigations before adding it."},
-{title:"AI governance and workforce adoption",status:"merge candidate",confidence:"0.82",outline:"Unstructured AI use may create poor-quality work, confidentiality issues, over-reliance and reputational embarrassment, while inadequate onboarding limits productivity gains.",why:"Currently reflected inside IT dependency. Consider a standalone risk if usage, data governance or incidents become material enough to require a distinct owner and controls."},
-{title:"Central-function business-partner model",status:"needs review",confidence:"0.76",outline:"Group functions may implement tools, charging practices or protocols without sufficient business consultation, causing friction, delay and control gaps.",why:"The pattern spans IT, Finance, HR and governance. It may be broader than any single active risk, but could also be treated as a root cause within governance and process landscape."}
-];
-const storeKey="mch-expomobilia-risk-2026-v1";
-let risks=JSON.parse(JSON.stringify(seedRisks));let selected="R11";let drag=null;
-try{const saved=JSON.parse(localStorage.getItem(storeKey)||"null");if(saved&&Array.isArray(saved.risks)){saved.risks.forEach(s=>{const r=risks.find(x=>x.id===s.id);if(r){if(s.current)r.current=s.current;if(s.team!==undefined)r.team=s.team;if(Array.isArray(s.history))r.history=s.history}});if(saved.selected)selected=saved.selected}}catch(e){}
-function save(){localStorage.setItem(storeKey,JSON.stringify({selected,risks:risks.map(r=>({id:r.id,current:r.current,team:r.team,history:r.history}))}))}
-function clamp(n){return Math.max(0,Math.min(10,Math.round(n*10)/10))}
-function band(v,type){const labels=type==="i"?["Marginal","Significant","Critical","Catastrophic"]:["Unlikely","Rarely","Occasionally","Often"];if(v===2.5||v===5||v===7.5)return "Boundary "+v.toFixed(1);return labels[v<2.5?0:v<5?1:v<7.5?2:3]}
-function effective(r){return r.team||r.ai}
-function proxy(r){const x=effective(r);return x.i*x.p}
-function movement(r){const a=r.ai.i*r.ai.p,c=r.current.i*r.current.p;if(a>c+1)return ["↑","up","AI increase"];if(a<c-1)return ["↓","down","AI decrease"];return ["→","hold","AI hold"]}
-function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]))}
-function renderCards(){const highest=[...risks].sort((a,b)=>proxy(b)-proxy(a))[0];const reviews=risks.filter(r=>r.review).length;const down=risks.filter(r=>r.ai.i*r.ai.p<r.current.i*r.current.p-1).length;document.getElementById("cards").innerHTML=`<div class="card"><div class="k">Active risks</div><div class="v">${risks.length}</div></div><div class="card"><div class="k">Highest Team position</div><div class="v" style="font-size:18px">${highest.id} · ${esc(highest.title)}</div></div><div class="card"><div class="k">AI decreases</div><div class="v">${down}</div></div><div class="card"><div class="k">Require review</div><div class="v">${reviews}</div></div>`}
-function renderList(){const list=[...risks].sort((a,b)=>proxy(b)-proxy(a));document.getElementById("riskList").innerHTML=list.map(r=>{const m=movement(r),e=effective(r);return `<button class="risk-row ${r.id===selected?"active":""}" data-id="${r.id}"><span class="rid">${r.id}</span><span><span class="rt">${esc(r.title)}</span>${r.review?'<span class="badge review">review</span>':""}<span class="badge ${m[1]}">${m[0]} ${m[2]}</span></span><span class="score">I ${e.i.toFixed(1)}<br>P ${e.p.toFixed(1)}<br><b>${proxy(r).toFixed(1)}</b></span></button>`}).join("");document.querySelectorAll(".risk-row").forEach(b=>b.onclick=()=>{selected=b.dataset.id;save();renderAll()})}
-function renderHeat(){const svg=document.getElementById("heatmap"),L=92,T=34,W=650,H=520,x=v=>L+v/10*W,y=v=>T+(10-v)/10*H;let s=`<defs><linearGradient id="riskgrad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#49b66e"/><stop offset="38%" stop-color="#dce45c"/><stop offset="60%" stop-color="#f5cf4b"/><stop offset="78%" stop-color="#ef8b3c"/><stop offset="100%" stop-color="#d93b35"/></linearGradient><marker id="arrN" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 z" fill="#071f3d"/></marker><marker id="arrP" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 z" fill="#7c3aed"/></marker></defs><rect x="${L}" y="${T}" width="${W}" height="${H}" rx="4" fill="url(#riskgrad)"/>`;
-[0,2.5,5,7.5,10].forEach(v=>{s+=`<line x1="${x(v)}" y1="${T}" x2="${x(v)}" y2="${T+H}" stroke="#fff" stroke-opacity=".65"/><line x1="${L}" y1="${y(v)}" x2="${L+W}" y2="${y(v)}" stroke="#fff" stroke-opacity=".65"/><text class="tick" x="${x(v)}" y="${T+H+20}" text-anchor="middle">${v}</text><text class="tick" x="${L-12}" y="${y(v)+4}" text-anchor="end">${v}</text>`});
-[[1.25,"Marginal"],[3.75,"Significant"],[6.25,"Critical"],[8.75,"Catastrophic"]].forEach(a=>s+=`<text class="bandlabel" x="${x(a[0])}" y="${T+H+39}" text-anchor="middle">${a[1]}</text>`);[[1.25,"Unlikely"],[3.75,"Rarely"],[6.25,"Occasionally"],[8.75,"Often"]].forEach(a=>s+=`<text class="bandlabel" x="27" y="${y(a[0])+4}" text-anchor="middle" transform="rotate(-90 27 ${y(a[0])+4})">${a[1]}</text>`);s+=`<text class="axislabel" x="${L+W/2}" y="632" text-anchor="middle">Impact</text><text class="axislabel" x="13" y="${T+H/2}" text-anchor="middle" transform="rotate(-90 13 ${T+H/2})">Probability</text>`;
-risks.forEach(r=>{const c=r.current,a=r.ai,t=r.team,sel=r.id===selected?" selected":"";if(c.i!==a.i||c.p!==a.p)s+=`<line class="arrow${sel}" x1="${x(c.i)}" y1="${y(c.p)}" x2="${x(a.i)}" y2="${y(a.p)}" stroke="#071f3d" stroke-dasharray="5 4" marker-end="url(#arrN)"/>`;if(t&&(t.i!==a.i||t.p!==a.p))s+=`<line class="arrow${sel}" x1="${x(a.i)}" y1="${y(a.p)}" x2="${x(t.i)}" y2="${y(t.p)}" stroke="#7c3aed" stroke-dasharray="5 4" marker-end="url(#arrP)"/>`});
-risks.forEach(r=>{const c=r.current,a=r.ai,t=r.team;let op=r.id===selected?1:.82;s+=`<g class="risk-mark" data-id="${r.id}" opacity="${op}"><circle data-kind="current" cx="${x(c.i)}" cy="${y(c.p)}" r="9" fill="#fff" fill-opacity=".65" stroke="#18b8d8" stroke-width="3"/><circle data-kind="ai" cx="${x(a.i)}" cy="${y(a.p)}" r="6.5" fill="#071f3d" stroke="#fff" stroke-width="1.5"/>`;if(t){const tx=x(t.i),ty=y(t.p);s+=`<path data-kind="team" d="M ${tx} ${ty-8} L ${tx+8} ${ty} L ${tx} ${ty+8} L ${tx-8} ${ty} Z" fill="#7c3aed" stroke="#fff" stroke-width="1.5"/>`}const label=t||a;s+=`<text class="marker-label" x="${x(label.i)+10}" y="${y(label.p)-10}">${r.id}</text></g>`});svg.innerHTML=s;
-svg.querySelectorAll(".risk-mark").forEach(g=>{g.addEventListener("click",e=>{selected=g.dataset.id;save();renderAll()});g.querySelectorAll('[data-kind="ai"],[data-kind="team"]').forEach(el=>el.addEventListener("pointerdown",e=>{e.preventDefault();e.stopPropagation();selected=g.dataset.id;const r=risks.find(z=>z.id===selected);if(el.dataset.kind==="ai"&&!r.team)r.team={...r.ai};drag={id:selected};save();renderAll()}));g.addEventListener("pointermove",e=>showTip(e,risks.find(z=>z.id===g.dataset.id)));g.addEventListener("pointerleave",hideTip)})}
-function svgPoint(e){const svg=document.getElementById("heatmap"),pt=svg.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;return pt.matrixTransform(svg.getScreenCTM().inverse())}
-window.addEventListener("pointermove",e=>{if(!drag)return;const q=svgPoint(e),r=risks.find(z=>z.id===drag.id),L=92,T=34,W=650,H=520;r.team={i:clamp((q.x-L)/W*10),p:clamp((T+H-q.y)/H*10)};save();renderAll()});window.addEventListener("pointerup",()=>drag=null);
-function showTip(e,r){const t=document.getElementById("tooltip"),z=effective(r);t.innerHTML=`<b>${r.id} · ${esc(r.title)}</b><br>Team/effective: I ${z.i.toFixed(1)}, P ${z.p.toFixed(1)}`;t.style.display="block";t.style.left=(e.clientX+12)+"px";t.style.top=(e.clientY+12)+"px"}function hideTip(){document.getElementById("tooltip").style.display="none"}
-function posBox(label,cls,z){return `<div class="scorebox ${cls}"><strong>${label}</strong><div class="coords">I ${z.i.toFixed(1)} · P ${z.p.toFixed(1)}</div><div class="band">${band(z.i,"i")} impact · ${band(z.p,"p")} probability</div></div>`}
-function renderDetail(){const r=risks.find(x=>x.id===selected);document.getElementById("detail").innerHTML=`<div class="panel-head"><div class="titleline"><span class="pill">${r.id}</span><h2>${esc(r.title)}</h2>${r.review?'<span class="pill orange">Requires review</span>':""}</div><div class="sub">Select a marker or ranking row · drag the navy AI point or purple Team diamond</div></div><div class="body"><div class="detail-grid"><div><p>${esc(r.outline)}</p><div class="scores">${posBox("Current","current",r.current)}${posBox("AI Proposed","ai",r.ai)}${r.team?posBox("Team Assessment","team",r.team):'<div class="scorebox team"><strong>Team Assessment</strong><div class="small">Not set — drag from AI Proposed</div></div>'}</div><div class="controls"><button id="resetTeam">Reset Team to AI</button><button id="clearTeam">Clear Team Assessment</button><button class="accept" id="acceptTeam" ${r.team?"":"disabled"}>Accept Team as Current</button></div><div class="section"><h3>Workshop discussion</h3><p>${esc(r.summary)}</p></div><div class="section"><h3>Sentiment and scoring rationale</h3><div class="dim"><b>Impact · ${esc(r.impact.direction)} · ${esc(r.impact.strength)} · confidence ${r.impact.confidence.toFixed(2)}</b><br>${esc(r.impact.rationale)}</div><div class="dim"><b>Probability · ${esc(r.probability.direction)} · ${esc(r.probability.strength)} · confidence ${r.probability.confidence.toFixed(2)}</b><br>${esc(r.probability.rationale)}</div></div></div><div><div class="section" style="border-top:0;margin-top:0;padding-top:0"><h3>Supporting evidence</h3>${r.evidence.map(e=>`<div class="ev">${esc(e)}<div class="small">Workshop discussion · timestamp unavailable</div></div>`).join("")}</div><div class="section"><h3>Mitigation / follow-up</h3><ul class="clean">${r.measures.map(e=>`<li>${esc(e)}</li>`).join("")}</ul></div><div class="section"><h3>Assessment history</h3>${r.history.length?r.history.slice().reverse().map(h=>`<div class="history"><b>${esc(h.date)}</b> · Current I ${h.current.i.toFixed(1)}, P ${h.current.p.toFixed(1)} → accepted I ${h.accepted.i.toFixed(1)}, P ${h.accepted.p.toFixed(1)}<br><span class="small">AI footprint: I ${h.ai.i.toFixed(1)}, P ${h.ai.p.toFixed(1)}</span></div>`).join(""):'<div class="small">No accepted-position history yet.</div>'}</div></div></div></div>`;
-document.getElementById("resetTeam").onclick=()=>{r.team={...r.ai};save();renderAll()};document.getElementById("clearTeam").onclick=()=>{r.team=null;save();renderAll()};document.getElementById("acceptTeam").onclick=()=>{if(!r.team)return;r.history.push({date:new Date().toISOString().slice(0,10),current:{...r.current},ai:{...r.ai},accepted:{...r.team}});r.current={...r.team};r.team=null;save();renderAll()}}
-function renderEmerging(){document.getElementById("emerging").innerHTML=emerging.map(e=>`<div class="candidate"><div class="status">${esc(e.status)} · confidence ${e.confidence}</div><b>${esc(e.title)}</b><p>${esc(e.outline)}</p><div class="small"><b>Why separate:</b> ${esc(e.why)}</div></div>`).join("")}
-function renderAll(){renderCards();renderList();renderHeat();renderDetail();renderEmerging()}renderAll();
+/* data.js is loaded by index.html with a cache-busting query, or directly
+   below when this page is opened on its own. */
+if (!window.PORTFOLIO) {
+  document.write('<scr' + 'ipt src="data.js?v=' + Date.now() + '"></scr' + 'ipt>');
+}
+</script>
+<script>
+(function () {
+"use strict";
+
+// ---------------------------------------------------------------------------
+// Axes and plot geometry. Single source for both the forward mapping and its
+// inverse, so widening the plot can never desynchronise the drag from the
+// cursor. The viewBox is set from here too, rather than hardcoded in markup.
+// ---------------------------------------------------------------------------
+var PLOT = { L: 92, T: 34, W: 650, H: 520, PAD_B: 96, PAD_R: 108 };
+PLOT.VBW = PLOT.L + PLOT.W + PLOT.PAD_R;
+PLOT.VBH = PLOT.T + PLOT.H + PLOT.PAD_B;
+
+// How much the projection must close the gap to the ideal corner before it is
+// called an improvement. Tuned so the seed data reads 6 up / 2 hold / 4 down.
+var MOVE_TAU = 0.05;
+
+var STORE_KEY = "lnl-retail-portfolio-2026q3-v1";
+
+var D, AX, assets, selected, drag = null;
+
+function xOf(v) { return PLOT.L + (v - AX.occ.min) / (AX.occ.max - AX.occ.min) * PLOT.W; }
+function yOf(v) { return PLOT.T + (AX.growth.max - v) / (AX.growth.max - AX.growth.min) * PLOT.H; }
+function xInv(px) { return AX.occ.min + (px - PLOT.L) / PLOT.W * (AX.occ.max - AX.occ.min); }
+function yInv(py) { return AX.growth.max - (py - PLOT.T) / PLOT.H * (AX.growth.max - AX.growth.min); }
+
+function clampAx(v, ax) {
+  return Math.max(ax.min, Math.min(ax.max, Math.round(v * 10) / 10));
+}
+function fmt(v, ax) {
+  return (ax.signed && v > 0 ? "+" : "") + v.toFixed(ax.decimals) + ax.unit;
+}
+// Quartile-free banding: cuts and labels both come from the axis descriptor,
+// and there is deliberately no "on the boundary" special case.
+function band(v, ax) {
+  var i = 0;
+  while (i < ax.bandCuts.length && v >= ax.bandCuts[i]) i++;
+  return ax.bandLabels[i];
+}
+function pos(a) { return a.manager || a.projected; }
+// Normalised distance from the ideal corner (full occupancy, strongest growth).
+function dist(p) {
+  var nx = (AX.occ.max - p.occ) / (AX.occ.max - AX.occ.min);
+  var ny = (AX.growth.max - p.growth) / (AX.growth.max - AX.growth.min);
+  return Math.sqrt(nx * nx + ny * ny);
+}
+// The only definition of movement. Everything that shows a direction calls this.
+function movement(a) {
+  var delta = dist(a.reported) - dist(a.projected);
+  if (delta > MOVE_TAU) return { glyph: "↑", cls: "up", label: "Improving", delta: delta };
+  if (delta < -MOVE_TAU) return { glyph: "↓", cls: "down", label: "Deteriorating", delta: delta };
+  return { glyph: "→", cls: "hold", label: "Holding", delta: delta };
+}
+// Ranking: exposure x trajectory. Moves when a marker is dragged, which is the
+// point -- ranking by NOI alone would freeze the panel during the demo.
+function attention(a) {
+  var totalNoi = D.meta.totals.noi || 1;
+  return (a.noi / totalNoi) * dist(pos(a));
+}
+function money(n) {
+  if (Math.abs(n) >= 1e6) return "$" + (n / 1e6).toFixed(1) + "M";
+  if (Math.abs(n) >= 1e3) return "$" + Math.round(n / 1e3) + "k";
+  return "$" + n;
+}
+function num(n) { return n.toLocaleString("en-US"); }
+function esc(s) {
+  return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+}
+function monthName(ym) {
+  var p = String(ym).split("-");
+  var m = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  return m[parseInt(p[1], 10) - 1] + " " + p[0];
+}
+
+// ---------------------------------------------------------------------------
+// Validation. Turns a bad edit into a listed problem instead of a blank page.
+// ---------------------------------------------------------------------------
+function validate() {
+  var problems = [], seen = {};
+  if (!D || !D.axes || !D.assets || !D.assets.length) {
+    return ["data.js did not define window.PORTFOLIO with an axes block and a non-empty assets array."];
+  }
+  D.assets.forEach(function (a, i) {
+    var where = a.id || ("assets[" + i + "]");
+    if (!a.id) problems.push(where + ": missing id");
+    else if (seen[a.id]) problems.push(where + ": duplicate id");
+    seen[a.id] = true;
+    if (!a.name) problems.push(where + ": missing name");
+    ["reported", "projected"].forEach(function (k) {
+      var p = a[k];
+      if (!p || typeof p.occ !== "number" || typeof p.growth !== "number") {
+        problems.push(where + ": " + k + " must have numeric occ and growth");
+        return;
+      }
+      if (p.occ < 0 || p.occ > 100) problems.push(where + ": " + k + ".occ " + p.occ + " outside 0..100");
+      if (p.growth < -20 || p.growth > 20) problems.push(where + ": " + k + ".growth " + p.growth + " outside -20..20");
+    });
+    if (a.manager && (typeof a.manager.occ !== "number" || typeof a.manager.growth !== "number")) {
+      problems.push(where + ": manager must be null or have numeric occ and growth");
+    }
+  });
+  (D.leases || []).forEach(function (l, i) {
+    if (!seen[l.assetId]) problems.push("leases[" + i + "]: assetId '" + l.assetId + "' matches no asset");
+  });
+  return problems;
+}
+
+function showAlert(title, items) {
+  var el = document.getElementById("alert");
+  el.innerHTML = "<strong>" + esc(title) + "</strong><ul>" +
+    items.slice(0, 12).map(function (p) { return "<li>" + esc(p) + "</li>"; }).join("") +
+    (items.length > 12 ? "<li>and " + (items.length - 12) + " more</li>" : "") + "</ul>";
+  el.style.display = "block";
+}
+
+// ---------------------------------------------------------------------------
+// Persistence. Only the mutable fields are stored, merged back by id, and the
+// restored selection is validated -- a stale id used to throw and leave the
+// detail pane dead with nothing on screen to say why.
+// ---------------------------------------------------------------------------
+function load() {
+  try {
+    var saved = JSON.parse(localStorage.getItem(STORE_KEY) || "null");
+    if (!saved || !Array.isArray(saved.assets)) return;
+    saved.assets.forEach(function (s) {
+      var a = assets.filter(function (x) { return x.id === s.id; })[0];
+      if (!a) return;
+      if (s.reported) a.reported = s.reported;
+      if (s.manager !== undefined) a.manager = s.manager;
+      if (Array.isArray(s.history)) a.history = s.history;
+    });
+    if (saved.selected && assets.some(function (a) { return a.id === saved.selected; })) {
+      selected = saved.selected;
+    }
+  } catch (e) { /* private mode, cleared storage, quota - render from seed */ }
+}
+function save() {
+  try {
+    localStorage.setItem(STORE_KEY, JSON.stringify({
+      selected: selected,
+      assets: assets.map(function (a) {
+        return { id: a.id, reported: a.reported, manager: a.manager, history: a.history };
+      })
+    }));
+  } catch (e) { /* never let a storage failure break the page */ }
+}
+function current() {
+  return assets.filter(function (a) { return a.id === selected; })[0] || assets[0];
+}
+
+// ---------------------------------------------------------------------------
+// Renderers
+// ---------------------------------------------------------------------------
+function renderChrome() {
+  var t = D.meta.totals;
+  document.getElementById("pageTitle").textContent =
+    D.meta.client + " — " + D.meta.portfolio;
+  document.getElementById("pageSub").textContent =
+    t.assets + " assets · " + num(t.gla) + " sqft · asset management review · as at " +
+    monthName(D.meta.asOf.slice(0, 7));
+  document.getElementById("axisSub").textContent =
+    AX.occ.label + " (X) · " + AX.growth.label + " (Y) · reported, projected and manager positions";
+  document.getElementById("footer").textContent =
+    "Illustrative sample data · internal asset-management working document · " +
+    "a manager view is not reported until “Accept as reported” is used.";
+}
+
+function renderCards() {
+  var t = D.meta.totals;
+  var flagged = assets.filter(function (a) { return a.review; }).length;
+  var cards = [
+    { k: "Portfolio NOI", v: money(t.noi), n: num(t.gla) + " sqft across " + t.assets + " assets" },
+    { k: "Occupancy", v: t.occupancy.toFixed(1) + "%", n: num(t.gla - assets.reduce(function (s, a) { return s + a.leased; }, 0)) + " sqft available" },
+    { k: "WALT", v: t.walt.toFixed(1) + " yr", n: "rent weighted" },
+    { k: "Expiring in 12 months", v: t.expiring12m + " leases", n: flagged + " assets flagged for review" }
+  ];
+  document.getElementById("cards").innerHTML = cards.map(function (c) {
+    return '<div class="card"><div class="k">' + esc(c.k) + '</div><div class="v">' +
+      esc(c.v) + '</div><div class="n">' + esc(c.n) + "</div></div>";
+  }).join("");
+}
+
+function renderList() {
+  var ranked = assets.slice().sort(function (a, b) {
+    return attention(b) - attention(a) || b.noi - a.noi;
+  });
+  var flagged = assets.filter(function (a) { return a.review; }).length;
+  document.getElementById("rankSub").textContent =
+    "Exposure × trajectory · " + flagged + " flagged for review · not a valuation";
+  document.getElementById("assetList").innerHTML = ranked.map(function (a) {
+    var m = movement(a), p = pos(a);
+    return '<button class="asset-row' + (a.id === selected ? " active" : "") +
+      '" data-id="' + esc(a.id) + '">' +
+      '<div class="aid">' + esc(a.id) + "</div>" +
+      '<div><div class="an">' + esc(a.name) +
+      '<span class="badge ' + m.cls + '">' + m.glyph + " " + esc(m.label) + "</span>" +
+      (a.review ? '<span class="badge review">review</span>' : "") + "</div>" +
+      '<div class="am">' + esc(a.city) + " · " + money(a.noi) + " NOI</div></div>" +
+      '<div class="score">' + fmt(p.occ, AX.occ) + "<br>" + fmt(p.growth, AX.growth) + "</div>" +
+      "</button>";
+  }).join("");
+  Array.prototype.forEach.call(document.querySelectorAll(".asset-row"), function (b) {
+    b.onclick = function () { selected = b.getAttribute("data-id"); save(); renderAll(); };
+  });
+}
+
+function renderPlot() {
+  var svg = document.getElementById("plot");
+  svg.setAttribute("viewBox", "0 0 " + PLOT.VBW + " " + PLOT.VBH);
+  var L = PLOT.L, T = PLOT.T, W = PLOT.W, H = PLOT.H;
+  // Desirable corner is top-right (full occupancy, strongest growth), so the
+  // gradient runs red at bottom-left to green at top-right -- the opposite way
+  // round from a risk heatmap.
+  var s = '<defs><linearGradient id="grad" x1="0%" y1="100%" x2="100%" y2="0%">' +
+    '<stop offset="0%" stop-color="#d93b35"/><stop offset="30%" stop-color="#ef8b3c"/>' +
+    '<stop offset="55%" stop-color="#f5cf4b"/><stop offset="78%" stop-color="#dce45c"/>' +
+    '<stop offset="100%" stop-color="#49b66e"/></linearGradient>' +
+    '<marker id="arrN" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">' +
+    '<path d="M 0 0 L 10 5 L 0 10 z" fill="#071f3d"/></marker>' +
+    '<marker id="arrP" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">' +
+    '<path d="M 0 0 L 10 5 L 0 10 z" fill="#7c3aed"/></marker></defs>';
+  s += '<rect x="' + L + '" y="' + T + '" width="' + W + '" height="' + H + '" rx="4" fill="url(#grad)" opacity=".92"/>';
+
+  AX.occ.ticks.forEach(function (v) {
+    var px = xOf(v);
+    s += '<line x1="' + px + '" y1="' + T + '" x2="' + px + '" y2="' + (T + H) + '" stroke="#fff" stroke-opacity=".65"/>';
+    s += '<text class="tick" x="' + px + '" y="' + (T + H + 18) + '" text-anchor="middle">' + fmt(v, AX.occ) + "</text>";
+  });
+  AX.growth.ticks.forEach(function (v) {
+    var py = yOf(v);
+    s += '<line x1="' + L + '" y1="' + py + '" x2="' + (L + W) + '" y2="' + py + '" stroke="#fff" stroke-opacity=".65"/>';
+    s += '<text class="tick" x="' + (L - 10) + '" y="' + (py + 4) + '" text-anchor="end">' + fmt(v, AX.growth) + "</text>";
+  });
+  // Band labels sit at the midpoint of each band, derived from the cuts so they
+  // cannot drift out of step with band().
+  function mids(ax) {
+    var edges = [ax.min].concat(ax.bandCuts, [ax.max]), out = [];
+    for (var i = 0; i < edges.length - 1; i++) out.push((edges[i] + edges[i + 1]) / 2);
+    return out;
+  }
+  mids(AX.occ).forEach(function (v, i) {
+    s += '<text class="bandlabel" x="' + xOf(v) + '" y="' + (T + H + 39) + '" text-anchor="middle">' + esc(AX.occ.bandLabels[i]) + "</text>";
+  });
+  mids(AX.growth).forEach(function (v, i) {
+    s += '<text class="bandlabel" x="27" y="' + yOf(v) + '" text-anchor="middle" transform="rotate(-90 27 ' + yOf(v) + ')">' + esc(AX.growth.bandLabels[i]) + "</text>";
+  });
+  s += '<text class="axislabel" x="' + (L + W / 2) + '" y="' + (PLOT.VBH - 18) + '" text-anchor="middle">' + esc(AX.occ.label) + "</text>";
+  s += '<text class="axislabel" x="13" y="' + (T + H / 2) + '" text-anchor="middle" transform="rotate(-90 13 ' + (T + H / 2) + ')">' + esc(AX.growth.label) + "</text>";
+
+  // Connectors first, so markers sit on top of them.
+  assets.forEach(function (a) {
+    var sel = a.id === selected ? " selected" : "";
+    var r = a.reported, p = a.projected, m = a.manager;
+    if (r.occ !== p.occ || r.growth !== p.growth) {
+      s += '<line class="arrow' + sel + '" x1="' + xOf(r.occ) + '" y1="' + yOf(r.growth) +
+        '" x2="' + xOf(p.occ) + '" y2="' + yOf(p.growth) +
+        '" stroke="#071f3d" stroke-dasharray="5 4" marker-end="url(#arrN)"/>';
+    }
+    if (m && (m.occ !== p.occ || m.growth !== p.growth)) {
+      s += '<line class="arrow' + sel + '" x1="' + xOf(p.occ) + '" y1="' + yOf(p.growth) +
+        '" x2="' + xOf(m.occ) + '" y2="' + yOf(m.growth) +
+        '" stroke="#7c3aed" stroke-dasharray="5 4" marker-end="url(#arrP)"/>';
+    }
+  });
+
+  assets.forEach(function (a) {
+    var r = a.reported, p = a.projected, m = a.manager;
+    var op = a.id === selected ? 1 : 0.82;
+    s += '<g class="asset-mark" data-id="' + esc(a.id) + '" opacity="' + op + '">';
+    s += '<circle data-kind="reported" cx="' + xOf(r.occ) + '" cy="' + yOf(r.growth) +
+      '" r="9" fill="#fff" fill-opacity=".65" stroke="#18b8d8" stroke-width="3"/>';
+    s += '<circle data-kind="projected" cx="' + xOf(p.occ) + '" cy="' + yOf(p.growth) +
+      '" r="6.5" fill="#071f3d" stroke="#fff" stroke-width="1.5"/>';
+    if (m) {
+      var mx = xOf(m.occ), my = yOf(m.growth);
+      s += '<path data-kind="manager" d="M ' + mx + " " + (my - 8) + " L " + (mx + 8) + " " + my +
+        " L " + mx + " " + (my + 8) + " L " + (mx - 8) + " " + my + ' Z" fill="#7c3aed" stroke="#fff" stroke-width="1.5"/>';
+    }
+    var lab = m || p;
+    s += '<text class="marker-label" x="' + (xOf(lab.occ) + 10) + '" y="' + (yOf(lab.growth) - 10) + '">' + esc(a.id) + "</text>";
+    s += "</g>";
+  });
+  svg.innerHTML = s;
+
+  Array.prototype.forEach.call(svg.querySelectorAll(".asset-mark"), function (g) {
+    var id = g.getAttribute("data-id");
+    g.addEventListener("click", function () { selected = id; save(); renderAll(); });
+    g.addEventListener("pointermove", function (e) { showTip(e, id); });
+    g.addEventListener("pointerleave", hideTip);
+    Array.prototype.forEach.call(
+      g.querySelectorAll('[data-kind="projected"],[data-kind="manager"]'),
+      function (el) {
+        el.addEventListener("pointerdown", function (e) {
+          e.preventDefault(); e.stopPropagation();
+          selected = id;
+          var a = current();
+          // Grabbing the projected dot creates the manager view and hands the
+          // drag to it, rather than moving the projection itself.
+          if (el.getAttribute("data-kind") === "projected" && !a.manager) {
+            a.manager = { occ: a.projected.occ, growth: a.projected.growth };
+          }
+          drag = { id: id };
+          save(); renderAll();
+        });
+      });
+  });
+}
+
+function posBox(label, cls, p) {
+  if (!p) {
+    return '<div class="scorebox ' + cls + '"><strong>' + esc(label) +
+      '</strong><div class="band">Not set — drag from the projected point</div></div>';
+  }
+  return '<div class="scorebox ' + cls + '"><strong>' + esc(label) + "</strong>" +
+    '<div class="coords">' + fmt(p.occ, AX.occ) + " · " + fmt(p.growth, AX.growth) + "</div>" +
+    '<div class="band">' + esc(band(p.occ, AX.occ)) + " occupancy · " +
+    esc(band(p.growth, AX.growth)) + " NOI</div></div>";
+}
+
+function renderDetail() {
+  var a = current();
+  if (!a) { document.getElementById("detail").innerHTML = ""; return; }
+  var m = movement(a);
+  var rat = function (r, ax, title) {
+    return '<div class="dim"><b>' + esc(title) + " · " + esc(r.direction) + " · " +
+      esc(r.strength) + " · confidence " + r.confidence.toFixed(2) + "</b><br>" +
+      esc(r.text) + "</div>";
+  };
+  var facts = [
+    ["Format", a.format], ["City", a.city],
+    ["Built / acquired", a.yearBuilt + " / " + monthName(a.acquired)],
+    ["Gross lettable area", num(a.gla) + " sqft"],
+    ["Leased / vacant", num(a.leased) + " / " + num(a.vacant) + " sqft"],
+    ["Contracted rent", money(a.contractedRent)],
+    ["Net operating income", money(a.noi)],
+    ["Average passing rent", "$" + a.avgPsf.toFixed(2) + " psf"],
+    ["WALT", a.walt.toFixed(1) + " yr"],
+    ["Anchor tenant", a.anchor || "None"],
+    ["Arrears", a.arrears ? money(a.arrears) : "None"],
+    ["Expiring in 12 months", a.expiring12m + " leases"]
+  ];
+  var html =
+    '<div class="panel-head"><div><div class="titleline">' +
+      '<span class="pill">' + esc(a.id) + "</span><h2>" + esc(a.name) + "</h2>" +
+      '<span class="badge ' + m.cls + '">' + m.glyph + " " + esc(m.label) + "</span>" +
+      (a.review ? '<span class="pill amber">Flagged for review</span>' : "") +
+    '</div><div class="sub">Select a marker or a ranking row · drag the navy projected dot or the purple manager diamond</div></div></div>' +
+    '<div class="body"><div class="detail-grid"><div>' +
+      "<p>" + esc(a.outline) + "</p>" +
+      '<div class="scores">' +
+        posBox("Reported", "rep", a.reported) +
+        posBox("Projected", "prj", a.projected) +
+        posBox("Manager view", "mgr", a.manager) +
+      "</div>" +
+      '<div class="controls">' +
+        '<button id="resetMgr">Reset to projected</button>' +
+        '<button id="clearMgr">Clear manager view</button>' +
+        '<button class="accept" id="acceptMgr"' + (a.manager ? "" : " disabled") + ">Accept as reported</button>" +
+      "</div>" +
+      '<div class="section"><h3>Trading and leasing</h3><p>' + esc(a.summary) + "</p></div>" +
+      '<div class="section"><h3>Position rationale</h3>' +
+        rat(a.occRationale, AX.occ, AX.occ.label) +
+        rat(a.noiRationale, AX.growth, AX.growth.label) +
+      "</div>" +
+    '</div><div>' +
+      '<div class="section" style="border-top:0;margin-top:0;padding-top:0"><h3>Asset facts</h3><table class="facts">' +
+        facts.map(function (f) {
+          return "<tr><td>" + esc(f[0]) + "</td><td>" + esc(f[1]) + "</td></tr>";
+        }).join("") +
+      "</table></div>" +
+      '<div class="section"><h3>Supporting evidence</h3>' +
+        a.evidence.map(function (e) {
+          return '<div class="ev">' + esc(e.quote) +
+            '<div class="cite">' + esc(docName(e.doc)) + ", page " + e.page + "</div></div>";
+        }).join("") +
+      "</div>" +
+      '<div class="section"><h3>Asset management actions</h3><ul class="clean">' +
+        a.measures.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") +
+      "</ul></div>" +
+      '<div class="section"><h3>Position history</h3>' +
+        (a.history.length
+          ? a.history.map(function (h) {
+              return '<div class="history">' + esc(h.date) + " — accepted " +
+                fmt(h.accepted.occ, AX.occ) + " · " + fmt(h.accepted.growth, AX.growth) +
+                ", from " + fmt(h.reported.occ, AX.occ) + " · " + fmt(h.reported.growth, AX.growth) +
+                "</div>";
+            }).join("")
+          : '<div class="small">No accepted-position history yet.</div>') +
+      "</div>" +
+    "</div></div></div>";
+  document.getElementById("detail").innerHTML = html;
+
+  document.getElementById("resetMgr").onclick = function () {
+    a.manager = { occ: a.projected.occ, growth: a.projected.growth };
+    save(); renderAll();
+  };
+  document.getElementById("clearMgr").onclick = function () {
+    a.manager = null; save(); renderAll();
+  };
+  document.getElementById("acceptMgr").onclick = function () {
+    if (!a.manager) return;
+    a.history.push({
+      date: new Date().toISOString().slice(0, 10),
+      reported: { occ: a.reported.occ, growth: a.reported.growth },
+      projected: { occ: a.projected.occ, growth: a.projected.growth },
+      accepted: { occ: a.manager.occ, growth: a.manager.growth }
+    });
+    a.reported = { occ: a.manager.occ, growth: a.manager.growth };
+    // Collapse the projection onto the accepted position so the arrows settle
+    // rather than pointing backwards at a superseded forecast.
+    a.projected = { occ: a.manager.occ, growth: a.manager.growth };
+    a.manager = null;
+    save(); renderAll();
+  };
+}
+
+function docName(key) {
+  var names = {
+    AMR: "Q3 2026 Asset Management Report",
+    RR: "Rent Roll Extract, 30 Sep 2026",
+    "LA-RAM": "Lease Abstract — Rampart Sporting Goods",
+    "LA-FLD": "Lease Abstract — Fieldcrest Grocers"
+  };
+  return names[key] || key;
+}
+
+function renderExpiry() {
+  var horizon = (function () {
+    var p = D.meta.asOf.split("-");
+    var d = new Date(Date.UTC(+p[0] + 1, +p[1] - 1, 1));
+    return d.toISOString().slice(0, 7);
+  })();
+  var byId = {};
+  assets.forEach(function (a) { byId[a.id] = a; });
+  var rows = (D.leases || []).filter(function (l) { return l.expiry <= horizon; });
+  if (!rows.length) {
+    document.getElementById("expiry").innerHTML = '<div class="small">No leases expire within twelve months.</div>';
+    return;
+  }
+  document.getElementById("expiry").innerHTML =
+    '<table class="exp"><thead><tr><th>Expiry</th><th>Asset</th><th>Tenant</th>' +
+    '<th class="r">Sqft</th><th class="r">$ psf</th><th class="r">Option</th><th class="r">Arrears</th></tr></thead><tbody>' +
+    rows.map(function (l) {
+      var a = byId[l.assetId];
+      return "<tr" + (l.assetId === selected ? ' class="mine"' : "") + ">" +
+        "<td>" + esc(monthName(l.expiry)) + "</td>" +
+        "<td>" + esc(l.assetId) + "</td>" +
+        "<td>" + esc(l.tenant) + (l.anchor ? " <span class=\"badge hold\">anchor</span>" : "") + "</td>" +
+        '<td class="r">' + num(l.sqft) + "</td>" +
+        '<td class="r">' + l.psf.toFixed(2) + "</td>" +
+        '<td class="r">' + (l.opt ? l.opt + " yr" : "—") + "</td>" +
+        '<td class="r">' + (l.arrears ? money(l.arrears) : "—") + "</td>" +
+        "</tr>";
+    }).join("") + "</tbody></table>";
+}
+
+function renderNotes() {
+  document.getElementById("notes").innerHTML = (D.notes || []).map(function (n) {
+    return '<div class="note"><b>' + esc(n.title) + "</b><br>" + esc(n.body) + "</div>";
+  }).join("");
+}
+
+function showTip(e, id) {
+  var a = assets.filter(function (x) { return x.id === id; })[0];
+  if (!a) return;
+  var p = pos(a), t = document.getElementById("tooltip");
+  t.innerHTML = "<b>" + esc(a.id) + " · " + esc(a.name) + "</b><br>" +
+    AX.occ.label + " " + fmt(p.occ, AX.occ) + " · " +
+    AX.growth.label + " " + fmt(p.growth, AX.growth) +
+    (a.manager ? "<br>manager view" : "<br>projected");
+  t.style.display = "block";
+  t.style.left = (e.clientX + 12) + "px";
+  t.style.top = (e.clientY + 12) + "px";
+}
+function hideTip() { document.getElementById("tooltip").style.display = "none"; }
+
+function renderAll() {
+  try {
+    renderChrome(); renderCards(); renderList(); renderPlot(); renderDetail();
+    renderExpiry(); renderNotes();
+  } catch (err) {
+    showAlert("The dashboard could not finish rendering. The data file is probably malformed.",
+      [String(err && err.message || err)]);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Boot
+// ---------------------------------------------------------------------------
+function boot() {
+  D = window.PORTFOLIO;
+  var problems = validate();
+  if (problems.length) {
+    showAlert("data.js has " + problems.length + " problem" + (problems.length > 1 ? "s" : "") + ":", problems);
+    if (!D || !D.assets || !D.assets.length || !D.axes) return;
+  }
+  AX = D.axes;
+  assets = D.assets;
+  assets.forEach(function (a) { if (!Array.isArray(a.history)) a.history = []; });
+  selected = assets[0].id;
+  // Open on the asset that most needs attention -- the interesting one.
+  var ranked = assets.slice().sort(function (a, b) { return attention(b) - attention(a); });
+  if (ranked[0]) selected = ranked[0].id;
+  load();
+  renderAll();
+
+  window.addEventListener("pointermove", function (e) {
+    if (!drag) return;
+    var svg = document.getElementById("plot");
+    var pt = svg.createSVGPoint();
+    pt.x = e.clientX; pt.y = e.clientY;
+    var q = pt.matrixTransform(svg.getScreenCTM().inverse());
+    var a = assets.filter(function (x) { return x.id === drag.id; })[0];
+    if (!a) return;
+    a.manager = { occ: clampAx(xInv(q.x), AX.occ), growth: clampAx(yInv(q.y), AX.growth) };
+    save(); renderAll();
+  });
+  window.addEventListener("pointerup", function () { drag = null; });
+}
+
+if (window.PORTFOLIO) boot();
+else window.addEventListener("load", function () {
+  if (window.PORTFOLIO) boot();
+  else showAlert("data.js did not load.", ["window.PORTFOLIO is undefined. Check that data.js sits next to this page."]);
+});
+})();
 </script>
 </body>
 </html>

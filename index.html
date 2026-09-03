@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MCH Group Risk Assessment</title>
+<title>L&amp;L Retail Portfolio</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <style>
   :root {
@@ -75,15 +75,15 @@
 </head>
 <body>
 <header>
-  <h1>MCH Group Risk Assessment</h1>
+  <h1>L&amp;L Holding Company — Retail Portfolio</h1>
   <div class="spacer"></div>
   <a href="dashboard.html" target="_blank" rel="noopener">Open dashboard only</a>
   <button id="refresh" type="button">Refresh dashboard</button>
   <button id="toggle" type="button" aria-pressed="true">Hide assistant</button>
 </header>
 <main>
-  <iframe id="dashboard" title="Risk assessment dashboard"></iframe>
-  <iframe id="chat" src="https://www.stackai.com/chat/6a9996c24cb49584761c5789-613qi5YQWz2maZTgHE9yQh?in_1=embedded" title="Risk assessment assistant"></iframe>
+  <iframe id="dashboard" title="Retail portfolio dashboard"></iframe>
+  <iframe id="chat" src="https://www.stackai.com/chat/6a9996c24cb49584761c5789-613qi5YQWz2maZTgHE9yQh?in_1=embedded" title="Retail portfolio assistant"></iframe>
 </main>
 <script>
   var dashboard = document.getElementById('dashboard');
@@ -101,7 +101,7 @@
   });
 
   var toggle = document.getElementById('toggle');
-  var KEY = 'risk-dashboard-chat-hidden';
+  var KEY = 'lnl-retail-chat-hidden';
 
   function apply(hidden) {
     document.body.classList.toggle('chat-hidden', hidden);
