@@ -8,30 +8,31 @@
 <style>
 :root{
   color-scheme: light;
-  --navy:#071f3d; --slate:#0a5a8c; --cyan:#18b8d8; --purple:#7c3aed;
-  --ink:#142033; --muted:#667085; --line:#d9e1ea; --paper:#fff; --bg:#f3f6f9;
+  --navy:#071f3d; --cyan:#18b8d8; --purple:#7c3aed;
+  --head:#075c3c; --accent:#19a66a; --deep:#063d2a;
+  --ink:#153c2b; --muted:#587466; --line:#cae8d8; --paper:#fff; --bg:#f2fbf6;
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 Inter,Arial,sans-serif}
 button{font:inherit}
-.topbar{background:linear-gradient(105deg,#061d38,#0c4268);color:#fff;padding:20px 28px}
+.topbar{background:linear-gradient(105deg,#063d2a,#0f8f5a);color:#fff;padding:20px 28px}
 .topbar h1{font-size:25px;margin:0 0 4px}
-.topbar p{margin:0;color:#c9d9e7}
+.topbar p{margin:0;color:#d7f6e6}
 .wrap{max-width:1540px;margin:auto;padding:18px}
-.notice{background:#fff8e7;border:1px solid #f5d58b;border-left:5px solid #e6a700;border-radius:9px;padding:11px 14px;margin-bottom:14px}
-.notice strong{color:#7a4b00}
+.notice{background:#edf9f2;border:1px solid #acd8bf;border-left:5px solid var(--accent);border-radius:9px;padding:11px 14px;margin-bottom:14px}
+.notice strong{color:var(--head)}
 .alert{background:#fef3f2;border:1px solid #fda29b;border-left:5px solid #d92d20;border-radius:9px;padding:11px 14px;margin-bottom:14px;display:none}
 .alert strong{color:#912018}
 .alert ul{margin:6px 0 0;padding-left:20px}
 .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}
-.card,.panel{background:var(--paper);border:1px solid #e3e8ef;border-radius:12px;box-shadow:0 2px 10px #11243d0c}
-.card{padding:13px 16px;border-top:3px solid var(--slate)}
+.card,.panel{background:var(--paper);border:1px solid var(--line);border-radius:12px;box-shadow:0 2px 12px #0a5b3410}
+.card{padding:13px 16px;border-top:3px solid var(--accent)}
 .card .k{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
-.card .v{font-size:23px;font-weight:750;margin-top:3px;color:var(--navy)}
+.card .v{font-size:23px;font-weight:750;margin-top:3px;color:var(--head)}
 .card .n{font-size:11px;color:var(--muted);margin-top:2px}
 .main{display:grid;grid-template-columns:minmax(640px,1.7fr) minmax(350px,.8fr);gap:14px;align-items:start}
 .panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:15px 17px 9px}
-.panel-head h2{font-size:18px;margin:0;color:var(--navy)}
+.panel-head h2{font-size:18px;margin:0;color:var(--head)}
 .sub{font-size:12px;color:var(--muted)}
 .legend{display:flex;flex-wrap:wrap;gap:10px;font-size:12px;color:#475467}
 .lg{display:inline-flex;align-items:center;gap:5px}
@@ -43,8 +44,8 @@ button{font:inherit}
 .plotbox svg{width:100%;height:auto;display:block;touch-action:none}
 .asset-list{max-height:710px;overflow:auto;padding:0 10px 12px}
 .asset-row{width:100%;display:grid;grid-template-columns:56px 1fr auto;gap:9px;text-align:left;align-items:center;background:#fff;border:1px solid #e4e9ef;border-radius:8px;padding:9px;margin:6px 0;cursor:pointer;color:var(--ink)}
-.asset-row:hover,.asset-row.active{border-color:#2d6e9c;background:#f0f7fb}
-.asset-row .aid{font-weight:800;color:var(--navy);font-size:12px}
+.asset-row:hover,.asset-row.active{border-color:var(--accent);background:#eaf8f0}
+.asset-row .aid{font-weight:800;color:#0b7a4e;font-size:12px}
 .asset-row .an{font-weight:650}
 .asset-row .am{font-size:11px;color:var(--muted)}
 .asset-row .score{font-size:12px;color:#475467;text-align:right;white-space:nowrap}
@@ -58,8 +59,8 @@ button{font:inherit}
 .detail-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:14px}
 .detail .body{padding:0 17px 17px}
 .titleline{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.titleline h2{margin:0;font-size:20px;color:var(--navy)}
-.pill{font-size:11px;padding:3px 8px;border-radius:12px;background:#e8f2f8;color:#174d70;font-weight:700}
+.titleline h2{margin:0;font-size:20px;color:var(--head)}
+.pill{font-size:11px;padding:3px 8px;border-radius:12px;background:#dff4e8;color:#09643f;font-weight:700}
 .pill.amber{background:#fff0c2;color:#8a4b00}
 .scores{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:13px 0}
 .scorebox{border:1px solid var(--line);border-radius:8px;padding:9px}
@@ -70,17 +71,17 @@ button{font:inherit}
 .coords{font-size:17px;font-weight:800}
 .band{font-size:11px;color:var(--muted)}
 .controls{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0}
-.controls button{border:1px solid #b8c5d2;border-radius:7px;background:#fff;padding:7px 10px;cursor:pointer}
-.controls button:hover{background:#f2f6f9}
+.controls button{border:1px solid #9fceb5;border-radius:7px;background:#fff;padding:7px 10px;cursor:pointer}
+.controls button:hover{background:#eaf8f0}
 .controls button:disabled{opacity:.45;cursor:default}
 .controls .accept{background:var(--purple);border-color:var(--purple);color:#fff}
 .section{border-top:1px solid #e5e9ef;padding-top:11px;margin-top:11px}
-.section h3{font-size:13px;margin:0 0 6px;text-transform:uppercase;letter-spacing:.035em;color:#344054}
-.dim{border-left:4px solid #d8e2eb;padding:8px 10px;background:#f8fafc;border-radius:4px;margin:8px 0}
-.dim b{color:var(--navy)}
+.section h3{font-size:13px;margin:0 0 6px;text-transform:uppercase;letter-spacing:.035em;color:#09643f}
+.dim{border-left:4px solid var(--accent);padding:8px 10px;background:#f5fcf8;border-radius:4px;margin:8px 0}
+.dim b{color:#09643f}
 ul.clean{margin:6px 0;padding-left:19px}
 ul.clean li{margin:3px 0}
-.ev{margin:7px 0;padding:8px 10px;background:#f7f8fa;border-radius:6px;border-left:3px solid #9bacbd}
+.ev{margin:7px 0;padding:8px 10px;background:#f7fcf9;border-radius:6px;border-left:3px solid #70ba91}
 .cite{font-size:11px;color:var(--muted);margin-top:3px}
 .small{font-size:12px;color:var(--muted)}
 .facts{width:100%;border-collapse:collapse;font-size:13px}
@@ -92,14 +93,14 @@ ul.clean li{margin:3px 0}
 .exp{width:100%;border-collapse:collapse;font-size:12.5px}
 .exp th{text-align:left;color:var(--muted);font-weight:650;font-size:11px;text-transform:uppercase;letter-spacing:.03em;padding:6px 8px 6px 0;border-bottom:1px solid #e5e9ef}
 .exp td{padding:6px 8px 6px 0;border-bottom:1px solid #f0f3f7}
-.exp tr.mine{background:#f0f7fb}
+.exp tr.mine{background:#eaf8f0}
 .exp td.r{text-align:right}
 .note{border-top:1px solid #e5e9ef;padding:10px 0}
 .note:first-child{border-top:0}
-.note b{color:var(--navy)}
-.history{margin:5px 0;padding:7px 9px;border-left:3px solid #c7d2df;background:#f8fafc;font-size:12.5px}
-.footer{text-align:center;color:#667085;font-size:12px;padding:18px}
-.tooltip{position:fixed;z-index:10;pointer-events:none;background:#071f3d;color:#fff;padding:7px 9px;border-radius:6px;font-size:12px;box-shadow:0 3px 12px #0003;display:none}
+.note b{color:var(--head)}
+.history{margin:5px 0;padding:7px 9px;border-left:3px solid var(--accent);background:#f5fcf8;font-size:12.5px}
+.footer{text-align:center;color:var(--muted);font-size:12px;padding:18px}
+.tooltip{position:fixed;z-index:10;pointer-events:none;background:var(--deep);color:#fff;padding:7px 9px;border-radius:6px;font-size:12px;box-shadow:0 3px 12px #0003;display:none}
 .axislabel{font-size:15px;font-weight:750;fill:#24364a}
 .tick{font-size:11px;fill:#536274}
 .bandlabel{font-size:11px;font-weight:700;fill:#24364a;opacity:.82}
@@ -134,6 +135,15 @@ ul.clean li{margin:3px 0}
     your own view of an asset, then accept it to make it the reported position.
   </div>
   <section class="cards" id="cards"></section>
+  <section class="panel" style="margin-bottom:14px">
+    <div class="panel-head">
+      <div>
+        <h2>Net operating income by asset</h2>
+        <div class="sub" id="noiSub">&nbsp;</div>
+      </div>
+    </div>
+    <div class="plotbox"><svg id="noiChart" aria-label="Net operating income by asset"></svg></div>
+  </section>
   <section class="main">
     <div class="panel">
       <div class="panel-head">
@@ -164,10 +174,11 @@ ul.clean li{margin:3px 0}
     <div class="panel">
       <div class="panel-head">
         <div>
-          <h2>Lease expiry schedule</h2>
-          <div class="sub">Next twelve months from the reporting date. Rows for the selected asset are highlighted.</div>
+          <h2>Lease expiry profile</h2>
+          <div class="sub">Contracted rent falling away by expiry year · the selected asset is shown in solid green</div>
         </div>
       </div>
+      <div class="plotbox"><svg id="expiryChart" aria-label="Contracted rent expiring by year"></svg></div>
       <div class="body" id="expiry"></div>
     </div>
     <div class="panel">
@@ -247,8 +258,28 @@ function movement(a) {
 // Ranking: exposure x trajectory. Moves when a marker is dragged, which is the
 // point -- ranking by NOI alone would freeze the panel during the demo.
 function attention(a) {
-  var totalNoi = D.meta.totals.noi || 1;
+  var totalNoi = totals().noi || 1;
   return (a.noi / totalNoi) * dist(pos(a));
+}
+// Recomputed from the assets array on every render. Deliberately NOT read from
+// meta.totals: a frozen total would leave the headline unchanged when a single
+// asset's number is edited, which is the whole point of the demo.
+function totals() {
+  var t = { assets: assets.length, gla: 0, leased: 0, noi: 0, rent: 0, waltW: 0, expiring: 0, arrears: 0 };
+  assets.forEach(function (a) {
+    t.gla += a.gla || 0; t.leased += a.leased || 0; t.noi += a.noi || 0;
+    t.rent += a.contractedRent || 0; t.arrears += a.arrears || 0;
+    t.waltW += (a.contractedRent || 0) * (a.walt || 0);
+  });
+  var horizon = horizonMonth();
+  t.expiring = (D.leases || []).filter(function (l) { return l.expiry <= horizon; }).length;
+  t.occupancy = t.gla ? t.leased / t.gla * 100 : 0;
+  t.walt = t.rent ? t.waltW / t.rent : 0;
+  return t;
+}
+function horizonMonth() {
+  var p = String(D.meta.asOf).split("-");
+  return new Date(Date.UTC(+p[0] + 1, +p[1] - 1, 1)).toISOString().slice(0, 7);
 }
 function money(n) {
   if (Math.abs(n) >= 1e6) return "$" + (n / 1e6).toFixed(1) + "M";
@@ -346,7 +377,7 @@ function current() {
 // Renderers
 // ---------------------------------------------------------------------------
 function renderChrome() {
-  var t = D.meta.totals;
+  var t = totals();
   document.getElementById("pageTitle").textContent =
     D.meta.client + " — " + D.meta.portfolio;
   document.getElementById("pageSub").textContent =
@@ -360,13 +391,13 @@ function renderChrome() {
 }
 
 function renderCards() {
-  var t = D.meta.totals;
+  var t = totals();
   var flagged = assets.filter(function (a) { return a.review; }).length;
   var cards = [
     { k: "Portfolio NOI", v: money(t.noi), n: num(t.gla) + " sqft across " + t.assets + " assets" },
-    { k: "Occupancy", v: t.occupancy.toFixed(1) + "%", n: num(t.gla - assets.reduce(function (s, a) { return s + a.leased; }, 0)) + " sqft available" },
-    { k: "WALT", v: t.walt.toFixed(1) + " yr", n: "rent weighted" },
-    { k: "Expiring in 12 months", v: t.expiring12m + " leases", n: flagged + " assets flagged for review" }
+    { k: "Occupancy", v: t.occupancy.toFixed(1) + "%", n: num(t.gla - t.leased) + " sqft available" },
+    { k: "WALT", v: t.walt.toFixed(1) + " yr", n: "rent weighted · " + money(t.arrears) + " arrears" },
+    { k: "Expiring in 12 months", v: t.expiring + " leases", n: flagged + " assets flagged for review" }
   ];
   document.getElementById("cards").innerHTML = cards.map(function (c) {
     return '<div class="card"><div class="k">' + esc(c.k) + '</div><div class="v">' +
@@ -618,12 +649,94 @@ function docName(key) {
   return names[key] || key;
 }
 
+// The canonical commercial-real-estate chart: how much contracted rent rolls
+// off in each year. It is what makes a projected NOI decline legible -- a tall
+// near-year bar is the reason, sitting right next to the effect.
+function renderNoi() {
+  var svg = document.getElementById("noiChart");
+  var ranked = assets.slice().sort(function (a, b) { return b.noi - a.noi; });
+  var max = Math.max.apply(null, ranked.map(function (a) { return a.noi; })) || 1;
+  var total = ranked.reduce(function (t, a) { return t + a.noi; }, 0);
+  var W = 1180, H = 250, L = 58, T = 22, PB = 44;
+  var pw = W - L - 12, ph = H - T - PB;
+  var step = pw / ranked.length, bw = Math.min(64, step - 12);
+  svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+  var s = "";
+  [0, 0.25, 0.5, 0.75, 1].forEach(function (f) {
+    var py = T + ph - f * ph;
+    s += '<line x1="' + L + '" y1="' + py + '" x2="' + (L + pw) + '" y2="' + py +
+      '" stroke="#dbeade"/>';
+    s += '<text class="tick" x="' + (L - 8) + '" y="' + (py + 4) + '" text-anchor="end">' +
+      money(Math.round(f * max)) + "</text>";
+  });
+  ranked.forEach(function (a, i) {
+    var cx = L + (i + 0.5) * step, h = a.noi / max * ph;
+    var sel = a.id === selected;
+    s += '<g class="asset-mark" data-id="' + esc(a.id) + '">';
+    s += '<rect x="' + (cx - bw / 2) + '" y="' + (T + ph - h) + '" width="' + bw +
+      '" height="' + Math.max(1, h) + '" rx="4" fill="' + (sel ? "#075c3c" : "#19a66a") +
+      '" opacity="' + (sel ? 1 : 0.72) + '"/>';
+    s += '<text class="tick" x="' + cx + '" y="' + (T + ph - h - 6) + '" text-anchor="middle"' +
+      (sel ? ' font-weight="800"' : "") + ">" + money(a.noi) + "</text>";
+    s += '<text class="bandlabel" x="' + cx + '" y="' + (T + ph + 17) +
+      '" text-anchor="middle">' + esc(a.id) + "</text>";
+    s += '<text class="tick" x="' + cx + '" y="' + (T + ph + 32) + '" text-anchor="middle">' +
+      Math.round(a.noi / total * 100) + "%</text>";
+    s += "</g>";
+  });
+  svg.innerHTML = s;
+  document.getElementById("noiSub").textContent =
+    "Annual NOI per asset · " + money(total) + " total · sorted by contribution · click a bar to open the asset";
+  Array.prototype.forEach.call(svg.querySelectorAll(".asset-mark"), function (g) {
+    g.addEventListener("click", function () {
+      selected = g.getAttribute("data-id"); save(); renderAll();
+    });
+  });
+}
+
+function renderExpiryProfile() {
+  var svg = document.getElementById("expiryChart");
+  var byYear = {}, total = 0;
+  (D.leases || []).forEach(function (l) {
+    var y = String(l.expiry).slice(0, 4), rent = l.sqft * l.psf;
+    if (!byYear[y]) byYear[y] = { total: 0, mine: 0 };
+    byYear[y].total += rent;
+    if (l.assetId === selected) byYear[y].mine += rent;
+    total += rent;
+  });
+  var years = Object.keys(byYear).sort();
+  if (!years.length) { svg.innerHTML = ""; return; }
+  var W = 620, H = 210, L = 46, T = 12, PB = 40;
+  var pw = W - L - 10, ph = H - T - PB;
+  var max = Math.max.apply(null, years.map(function (y) { return byYear[y].total; }));
+  var bw = Math.min(52, pw / years.length - 8);
+  svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+  var s = "";
+  [0, 0.5, 1].forEach(function (f) {
+    var py = T + ph - f * ph;
+    s += '<line x1="' + L + '" y1="' + py + '" x2="' + (L + pw) + '" y2="' + py + '" stroke="#dbeade"/>';
+    s += '<text class="tick" x="' + (L - 8) + '" y="' + (py + 4) + '" text-anchor="end">' +
+      (f * max >= 1e6 ? "$" + (f * max / 1e6).toFixed(1) + "M" : "$" + Math.round(f * max / 1e3) + "k") + "</text>";
+  });
+  years.forEach(function (y, i) {
+    var d = byYear[y];
+    var cx = L + (i + 0.5) * (pw / years.length);
+    var hTot = d.total / max * ph, hMine = d.mine / max * ph;
+    s += '<rect x="' + (cx - bw / 2) + '" y="' + (T + ph - hTot) + '" width="' + bw +
+      '" height="' + hTot + '" rx="3" fill="#a8d9bf"/>';
+    if (hMine > 0.4) {
+      s += '<rect x="' + (cx - bw / 2) + '" y="' + (T + ph - hMine) + '" width="' + bw +
+        '" height="' + hMine + '" rx="3" fill="#19a66a"/>';
+    }
+    s += '<text class="tick" x="' + cx + '" y="' + (T + ph + 16) + '" text-anchor="middle">' + esc(y) + "</text>";
+    s += '<text class="bandlabel" x="' + cx + '" y="' + (T + ph + 31) + '" text-anchor="middle">' +
+      Math.round(d.total / total * 100) + "%</text>";
+  });
+  svg.innerHTML = s;
+}
+
 function renderExpiry() {
-  var horizon = (function () {
-    var p = D.meta.asOf.split("-");
-    var d = new Date(Date.UTC(+p[0] + 1, +p[1] - 1, 1));
-    return d.toISOString().slice(0, 7);
-  })();
+  var horizon = horizonMonth();
   var byId = {};
   assets.forEach(function (a) { byId[a.id] = a; });
   var rows = (D.leases || []).filter(function (l) { return l.expiry <= horizon; });
@@ -632,6 +745,7 @@ function renderExpiry() {
     return;
   }
   document.getElementById("expiry").innerHTML =
+    '<div class="section" style="border-top:0;margin-top:0;padding-top:0"><h3>Next twelve months</h3></div>' +
     '<table class="exp"><thead><tr><th>Expiry</th><th>Asset</th><th>Tenant</th>' +
     '<th class="r">Sqft</th><th class="r">$ psf</th><th class="r">Option</th><th class="r">Arrears</th></tr></thead><tbody>' +
     rows.map(function (l) {
@@ -670,8 +784,8 @@ function hideTip() { document.getElementById("tooltip").style.display = "none"; 
 
 function renderAll() {
   try {
-    renderChrome(); renderCards(); renderList(); renderPlot(); renderDetail();
-    renderExpiry(); renderNotes();
+    renderChrome(); renderCards(); renderNoi(); renderList(); renderPlot(); renderDetail();
+    renderExpiryProfile(); renderExpiry(); renderNotes();
   } catch (err) {
     showAlert("The dashboard could not finish rendering. The data file is probably malformed.",
       [String(err && err.message || err)]);
