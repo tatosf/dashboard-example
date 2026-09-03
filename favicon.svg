@@ -1,6 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Risk assessment dashboard">
-  <rect width="64" height="64" rx="14" fill="#071f3d"/>
-  <rect x="14" y="34" width="8" height="16" rx="2" fill="#18b8d8"/>
-  <rect x="28" y="26" width="8" height="24" rx="2" fill="#18b8d8"/>
-  <rect x="42" y="16" width="8" height="34" rx="2" fill="#7c3aed"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Retail portfolio dashboard">
+  <rect width="64" height="64" rx="14" fill="#063d2a"/>
+  <rect x="13" y="34" width="8" height="16" rx="2" fill="#70ba91"/>
+  <rect x="24" y="26" width="8" height="24" rx="2" fill="#19a66a"/>
+  <rect x="35" y="18" width="8" height="32" rx="2" fill="#19a66a"/>
+  <rect x="46" y="28" width="8" height="22" rx="2" fill="#70ba91"/>
 </svg>
