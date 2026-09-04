@@ -23,6 +23,9 @@ button{font:inherit}
 .notice strong{color:var(--head)}
 .alert{background:#fef3f2;border:1px solid #fda29b;border-left:5px solid #d92d20;border-radius:9px;padding:11px 14px;margin-bottom:14px;display:none}
 .alert strong{color:#912018}
+.empty{display:none;background:var(--paper);border:1px dashed var(--line);border-radius:12px;padding:34px 28px;text-align:center;margin-bottom:14px}
+.empty h2{margin:0 0 8px;font-size:19px;color:var(--head)}
+.empty p{margin:0 auto 6px;max-width:620px;color:var(--muted)}
 .alert ul{margin:6px 0 0;padding-left:20px}
 .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}
 .card,.panel{background:var(--paper);border:1px solid var(--line);border-radius:12px;box-shadow:0 2px 12px #0a5b3410}
@@ -128,14 +131,22 @@ ul.clean li{margin:3px 0}
 </header>
 <main class="wrap">
   <div class="alert" id="alert"></div>
-  <div class="notice">
+  <div class="empty" id="empty">
+    <h2>No portfolio data yet</h2>
+    <p>This dashboard is populated from source documents. Upload a report, a rent
+    roll or a schedule to the assistant and ask it to build the portfolio. It reads
+    the documents, derives the figures and publishes them here.</p>
+    <p class="small">The page, the charts and the interactions are already in place
+    and are never edited &mdash; only the data changes.</p>
+  </div>
+  <div class="notice" id="notice">
     <strong>Illustrative sample data.</strong> Every figure on this page is fabricated for
     demonstration and is not actual portfolio information. Occupancy, NOI, WALT and the expiry
     schedule are derived from the lease schedule below. Drag the purple manager diamond to record
     your own view of an asset, then accept it to make it the reported position.
   </div>
   <section class="cards" id="cards"></section>
-  <section class="panel" style="margin-bottom:14px">
+  <section class="panel" id="noiPanel" style="margin-bottom:14px">
     <div class="panel-head">
       <div>
         <h2>Net operating income by asset</h2>
@@ -144,7 +155,7 @@ ul.clean li{margin:3px 0}
     </div>
     <div class="plotbox"><svg id="noiChart" aria-label="Net operating income by asset"></svg></div>
   </section>
-  <section class="main">
+  <section class="main" id="mainRow">
     <div class="panel">
       <div class="panel-head">
         <div>
@@ -170,7 +181,7 @@ ul.clean li{margin:3px 0}
     </div>
   </section>
   <section class="panel detail" id="detail"></section>
-  <section class="bottom">
+  <section class="bottom" id="bottomRow">
     <div class="panel">
       <div class="panel-head">
         <div>
@@ -196,13 +207,89 @@ ul.clean li{margin:3px 0}
 <div class="tooltip" id="tooltip"></div>
 
 <script>
-/* data.js is loaded by index.html with a cache-busting query, or directly
-   below when this page is opened on its own. */
-if (!window.PORTFOLIO) {
-  var v = Date.now();
-  document.write('<scr' + 'ipt src="data.js?v=' + v + '"></scr' + 'ipt>');
-  document.write('<scr' + 'ipt src="content.js?v=' + v + '"></scr' + 'ipt>');
-}
+/* ============================================================================
+   DATA - the assistant edits ONLY between the two markers below.
+   Everything outside them is the page: chart, layout and interaction code.
+   ALL FIGURES ARE ILLUSTRATIVE SAMPLE DATA.
+
+   UNITS come from `axes`, not from field names.
+     occ     occupancy, percent.       97.5 means 97.5 percent
+     growth  forward NOI growth, pct.  0 means flat, -4.6 means minus 4.6
+   "Flat" is growth: 0, never 5.
+
+   Each asset carries three positions - reported (from the documents),
+   projected (the forward view) and manager (the human's, null until they drag
+   one) - plus its own prose, evidence and actions.
+   ============================================================================ */
+/* ==== DATA START ==== */
+var PORTFOLIO = {
+ "meta": {
+  "client": "Demonstration Portfolio",
+  "portfolio": "Retail Asset Management",
+  "asOf": "2026-09-30",
+  "sampleData": true
+ },
+ "axes": {
+  "occ": {
+   "key": "occ",
+   "label": "Occupancy",
+   "unit": "%",
+   "min": 60,
+   "max": 100,
+   "ticks": [
+    60,
+    70,
+    80,
+    90,
+    100
+   ],
+   "bandCuts": [
+    70,
+    85,
+    95
+   ],
+   "bandLabels": [
+    "Vacant",
+    "Weak",
+    "Stabilised",
+    "Full"
+   ],
+   "decimals": 1,
+   "signed": false
+  },
+  "growth": {
+   "key": "growth",
+   "label": "NOI growth",
+   "unit": "%",
+   "min": -8,
+   "max": 8,
+   "ticks": [
+    -8,
+    -4,
+    0,
+    4,
+    8
+   ],
+   "bandCuts": [
+    -2,
+    1,
+    4
+   ],
+   "bandLabels": [
+    "Declining",
+    "Flat",
+    "Growing",
+    "Strong"
+   ],
+   "decimals": 1,
+   "signed": true
+  }
+ },
+ "assets": [],
+ "leases": [],
+ "notes": []
+};
+/* ==== DATA END ==== */
 </script>
 <script>
 (function () {
@@ -304,9 +391,12 @@ function monthName(ym) {
 // ---------------------------------------------------------------------------
 function validate() {
   var problems = [], seen = {};
-  if (!D || !D.axes || !D.assets || !D.assets.length) {
-    return ["data.js did not define window.PORTFOLIO with an axes block and a non-empty assets array."];
+  if (!D || !D.axes || !Array.isArray(D.assets)) {
+    return ["The DATA block does not define PORTFOLIO with an axes block and an assets array."];
   }
+  // An empty assets array is the starting state, not a fault: the dashboard is
+  // populated by uploading documents to the assistant.
+  if (!D.assets.length) return [];
   D.assets.forEach(function (a, i) {
     var where = a.id || ("assets[" + i + "]");
     if (!a.id) problems.push(where + ": missing id");
@@ -660,6 +750,7 @@ function docName(key) {
 function renderNoi() {
   var svg = document.getElementById("noiChart");
   var ranked = assets.slice().sort(function (a, b) { return b.noi - a.noi; });
+  if (!ranked.length) { svg.innerHTML = ""; return; }
   var max = Math.max.apply(null, ranked.map(function (a) { return a.noi; })) || 1;
   var total = ranked.reduce(function (t, a) { return t + a.noi; }, 0);
   var W = 1180, H = 250, L = 58, T = 22, PB = 44;
@@ -787,8 +878,29 @@ function showTip(e, id) {
 }
 function hideTip() { document.getElementById("tooltip").style.display = "none"; }
 
+var CHROME = ["notice", "cards", "noiPanel", "mainRow", "detail", "bottomRow"];
+
+function showChrome(on) {
+  CHROME.forEach(function (id) {
+    var el = document.getElementById(id);
+    if (el) el.style.display = on ? "" : "none";
+  });
+  document.getElementById("empty").style.display = on ? "none" : "block";
+}
+
+function renderEmptyState() {
+  showChrome(false);
+  document.getElementById("pageTitle").textContent =
+    (D.meta && D.meta.portfolio) || "Portfolio dashboard";
+  document.getElementById("pageSub").textContent =
+    "No data yet — upload source documents to the assistant";
+  document.getElementById("footer").textContent = "";
+}
+
 function renderAll() {
   try {
+    if (!assets.length) { renderEmptyState(); return; }
+    showChrome(true);
     renderChrome(); renderCards(); renderNoi(); renderList(); renderPlot(); renderDetail();
     renderExpiryProfile(); renderExpiry(); renderNotes();
   } catch (err) {
@@ -801,36 +913,31 @@ function renderAll() {
 // Boot
 // ---------------------------------------------------------------------------
 function boot() {
-  D = window.PORTFOLIO;
+  D = PORTFOLIO;
   var problems = validate();
   if (problems.length) {
-    showAlert("data.js has " + problems.length + " problem" + (problems.length > 1 ? "s" : "") + ":", problems);
+    showAlert("The DATA block has " + problems.length + " problem" + (problems.length > 1 ? "s" : "") + ":", problems);
     if (!D || !D.assets || !D.assets.length || !D.axes) return;
   }
   AX = D.axes;
   assets = D.assets;
-  // Narrative lives in content.js, keyed by asset id, so a numeric edit only
-  // has to rewrite the small file. Missing text is not fatal: the asset still
-  // plots, the prose sections just read as unavailable.
-  var TXT = (window.PORTFOLIO_TEXT || {});
-  var TA = TXT.assets || {};
+  // Prose travels with each asset. Anything missing degrades gracefully: the
+  // asset still plots, its prose sections just read as unavailable.
   assets.forEach(function (a) {
     if (!Array.isArray(a.history)) a.history = [];
-    var t = TA[a.id] || {};
-    a.outline = t.outline || "No description recorded for this asset.";
-    a.summary = t.summary || "No commentary recorded for this asset.";
+    if (!a.outline) a.outline = "No description recorded for this asset.";
+    if (!a.summary) a.summary = "No commentary recorded for this asset.";
     a.occRationale = a.occRationale || {};
     a.noiRationale = a.noiRationale || {};
-    a.occRationale.text = t.occText || "";
-    a.noiRationale.text = t.noiText || "";
-    a.evidence = t.evidence || [];
-    a.measures = t.measures || [];
+    if (!Array.isArray(a.evidence)) a.evidence = [];
+    if (!Array.isArray(a.measures)) a.measures = [];
   });
-  D.notes = TXT.notes || [];
-  selected = assets[0].id;
-  // Open on the asset that most needs attention -- the interesting one.
-  var ranked = assets.slice().sort(function (a, b) { return attention(b) - attention(a); });
-  if (ranked[0]) selected = ranked[0].id;
+  D.notes = D.notes || [];
+  if (assets.length) {
+    // Open on the entity that most needs attention -- the interesting one.
+    var ranked = assets.slice().sort(function (a, b) { return attention(b) - attention(a); });
+    selected = ranked[0].id;
+  }
   load();
   renderAll();
 
@@ -848,11 +955,7 @@ function boot() {
   window.addEventListener("pointerup", function () { drag = null; });
 }
 
-if (window.PORTFOLIO) boot();
-else window.addEventListener("load", function () {
-  if (window.PORTFOLIO) boot();
-  else showAlert("data.js did not load.", ["window.PORTFOLIO is undefined. Check that data.js sits next to this page."]);
-});
+boot();
 })();
 </script>
 </body>
