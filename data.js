@@ -1,5 +1,5 @@
 /* ==========================================================================
-   L&L Holding Company — retail portfolio dashboard data
+   Retail portfolio asset management — dashboard data
    ALL FIGURES ARE ILLUSTRATIVE SAMPLE DATA. Not actual portfolio information.
 
    This file is the ONLY file to edit. Do not touch dashboard.html or
@@ -29,8 +29,8 @@
 
 window.PORTFOLIO = {
  "meta": {
-  "client": "L&L Holding Company",
-  "portfolio": "Retail Portfolio",
+  "client": "Demonstration Portfolio",
+  "portfolio": "Retail Asset Management",
   "asOf": "2026-09-30",
   "sampleData": true,
   "totals": {

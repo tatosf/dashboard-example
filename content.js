@@ -1,5 +1,5 @@
 /* ==========================================================================
-   L&L retail portfolio — narrative text, keyed by asset id.
+   Retail portfolio — narrative text, keyed by asset id.
    ILLUSTRATIVE SAMPLE DATA.
 
    Split out of data.js on purpose: this is the bulk of the bytes and it
