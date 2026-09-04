@@ -56,7 +56,7 @@ window.PORTFOLIO_TEXT = {
     {
      "quote": "Rampart Sporting Goods carries $128,000 outstanding and has confirmed it will not exercise a renewal.",
      "doc": "LA-RAM",
-     "page": 1
+     "page": 2
     },
     {
      "quote": "Halcyon Home Depot Co. expires February 2027 with no remaining option years.",
@@ -66,12 +66,12 @@ window.PORTFOLIO_TEXT = {
     {
      "quote": "Riverbend's weighted average lease term has fallen to 1.1 years at 30 September.",
      "doc": "AMR",
-     "page": 5
+     "page": 6
     },
     {
      "quote": "Together the two boxes represent approximately 67% of Riverbend's contracted rent.",
      "doc": "AMR",
-     "page": 5
+     "page": 6
     }
    ],
    "measures": [
@@ -100,12 +100,12 @@ window.PORTFOLIO_TEXT = {
     {
      "quote": "The R-6 corner unit has been withheld from the market pending a licensed operator.",
      "doc": "AMR",
-     "page": 6
+     "page": 8
     },
     {
      "quote": "Average passing rent at Harbor Point is $64.84 psf, the second highest in the portfolio.",
      "doc": "AMR",
-     "page": 6
+     "page": 8
     }
    ],
    "measures": [
@@ -129,12 +129,12 @@ window.PORTFOLIO_TEXT = {
     {
      "quote": "Four of the five Maple Row leases expire within twelve months of 30 September.",
      "doc": "AMR",
-     "page": 7
+     "page": 10
     },
     {
      "quote": "No capital expenditure has been committed at Maple Row since acquisition in 2014.",
      "doc": "AMR",
-     "page": 7
+     "page": 10
     },
     {
      "quote": "Maple Row occupancy stood at 78.5% with 11,500 sqft available.",
@@ -163,12 +163,12 @@ window.PORTFOLIO_TEXT = {
     {
      "quote": "Petal & Stem Florists was let in January 2024 at $265 psf, 12% above the prior passing rent.",
      "doc": "AMR",
-     "page": 8
+     "page": 12
     },
     {
      "quote": "The unlet 540 sqft at Lexington Street is basement storage, not trading area.",
      "doc": "AMR",
-     "page": 8
+     "page": 12
     },
     {
      "quote": "Average passing rent across the four units is $299.04 psf.",
@@ -197,7 +197,7 @@ window.PORTFOLIO_TEXT = {
     {
      "quote": "Westfall Square occupancy was 69.2% at 30 September with 54,200 sqft vacant.",
      "doc": "AMR",
-     "page": 9
+     "page": 14
     },
     {
      "quote": "The Grandview lease expires January 2027 with no remaining option years.",
@@ -207,7 +207,7 @@ window.PORTFOLIO_TEXT = {
     {
      "quote": "Westfall's average passing rent of $11.21 psf is the lowest in the portfolio.",
      "doc": "AMR",
-     "page": 9
+     "page": 14
     }
    ],
    "measures": [
@@ -231,7 +231,7 @@ window.PORTFOLIO_TEXT = {
     {
      "quote": "Both Cedar & Vine tenants expiring within the year have requested extensions.",
      "doc": "AMR",
-     "page": 10
+     "page": 16
     },
     {
      "quote": "Cedarhouse Provisions holds ten option years from 2031.",
@@ -241,7 +241,7 @@ window.PORTFOLIO_TEXT = {
     {
      "quote": "Vine Street Bakery and Harrow Barbers are the two highest-rented units in the parade.",
      "doc": "AMR",
-     "page": 10
+     "page": 16
     }
    ],
    "measures": [
@@ -260,7 +260,7 @@ window.PORTFOLIO_TEXT = {
     {
      "quote": "Orchard Gate reported flat net operating income year on year at 30 September.",
      "doc": "AMR",
-     "page": 11
+     "page": 18
     },
     {
      "quote": "Bellamy Home Goods carries $34,000 outstanding against a December 2027 expiry.",
@@ -270,7 +270,7 @@ window.PORTFOLIO_TEXT = {
     {
      "quote": "The 13,200 sqft vacated in 2025 has been subdivided into two units of 7,400 and 5,800 sqft.",
      "doc": "AMR",
-     "page": 11
+     "page": 18
     },
     {
      "quote": "Fieldcrest Grocers anchors Orchard Gate to September 2029 with ten option years.",
@@ -294,12 +294,12 @@ window.PORTFOLIO_TEXT = {
     {
      "quote": "Saltbox Cinema Group has resumed full monthly payments and carries $76,000 outstanding on a recovery plan.",
      "doc": "AMR",
-     "page": 12
+     "page": 20
     },
     {
      "quote": "Two of the three vacant Saltbox restaurant units are under offer.",
      "doc": "AMR",
-     "page": 12
+     "page": 20
     },
     {
      "quote": "The cinema concession reverts to full contracted rent in March 2027.",
@@ -338,12 +338,12 @@ window.PORTFOLIO_TEXT = {
     {
      "quote": "Two mid-box enquiries have been received on the 12,000 sqft vacancy at close to quoting rent.",
      "doc": "AMR",
-     "page": 13
+     "page": 22
     },
     {
      "quote": "The Stonefield lease carries a fixed uplift effective 2027.",
      "doc": "AMR",
-     "page": 13
+     "page": 22
     }
    ],
    "measures": [
@@ -362,7 +362,7 @@ window.PORTFOLIO_TEXT = {
     {
      "quote": "Fairwater's weighted average lease term stood at 0.8 years at 30 September, the shortest in the portfolio.",
      "doc": "AMR",
-     "page": 14
+     "page": 24
     },
     {
      "quote": "Wexler Outlet Apparel carries $88,000 outstanding against a May 2027 expiry.",
@@ -377,7 +377,7 @@ window.PORTFOLIO_TEXT = {
     {
      "quote": "Fairwater occupancy was 64.5% with 27,500 sqft available at 30 September.",
      "doc": "AMR",
-     "page": 14
+     "page": 24
     }
    ],
    "measures": [
@@ -406,12 +406,12 @@ window.PORTFOLIO_TEXT = {
     {
      "quote": "Beacon Yard reported 6.8% net operating income growth, the strongest in the portfolio.",
      "doc": "AMR",
-     "page": 15
+     "page": 26
     },
     {
      "quote": "The residential lease-up above Beacon Yard completed ahead of the acquisition forecast.",
      "doc": "AMR",
-     "page": 15
+     "page": 26
     }
    ],
    "measures": [
