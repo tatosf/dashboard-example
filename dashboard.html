@@ -6,890 +6,189 @@
 <title>Retail Portfolio Asset Management</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <style>
-:root{
-  color-scheme: light;
-  --navy:#071f3d; --cyan:#18b8d8; --purple:#7c3aed;
-  --head:#075c3c; --accent:#19a66a; --deep:#063d2a;
-  --ink:#153c2b; --muted:#587466; --line:#cae8d8; --paper:#fff; --bg:#f2fbf6;
-}
+:root{color-scheme:light;--paper:#fff;--bg:#f2fbf6;--ink:#153c2b;--head:#075c3c;
+--muted:#587466;--line:#cae8d8;--accent:#19a66a}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 Inter,Arial,sans-serif}
-button{font:inherit}
-.topbar{background:linear-gradient(105deg,#063d2a,#0f8f5a);color:#fff;padding:20px 28px}
-.topbar h1{font-size:25px;margin:0 0 4px}
-.topbar p{margin:0;color:#d7f6e6}
-.wrap{max-width:1540px;margin:auto;padding:18px}
-.notice{background:#edf9f2;border:1px solid #acd8bf;border-left:5px solid var(--accent);border-radius:9px;padding:11px 14px;margin-bottom:14px}
-.notice strong{color:var(--head)}
-.alert{background:#fef3f2;border:1px solid #fda29b;border-left:5px solid #d92d20;border-radius:9px;padding:11px 14px;margin-bottom:14px;display:none}
-.alert strong{color:#912018}
-.empty{display:none;background:var(--paper);border:1px dashed var(--line);border-radius:12px;padding:34px 28px;text-align:center;margin-bottom:14px}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 Inter,-apple-system,"Segoe UI",Arial,sans-serif}
+.topbar{background:linear-gradient(105deg,#063d2a,#0f8f5a);color:#fff;padding:18px 26px}
+.topbar h1{font-size:23px;margin:0 0 3px}.topbar p{margin:0;color:#d7f6e6;font-size:13px}
+.wrap{max-width:1400px;margin:auto;padding:16px}
+.notice{background:#edf9f2;border:1px solid var(--line);border-left:5px solid var(--accent);
+border-radius:8px;padding:10px 13px;margin-bottom:14px;font-size:13px}
+.notice b{color:var(--head)}
+.alert{background:#fef3f2;border:1px solid #fda29b;border-left:5px solid #d92d20;border-radius:8px;
+padding:10px 13px;margin-bottom:14px;display:none;font-size:13px}
+.empty{display:none;background:var(--paper);border:1px dashed var(--line);border-radius:10px;
+padding:34px 26px;text-align:center}
 .empty h2{margin:0 0 8px;font-size:19px;color:var(--head)}
-.empty p{margin:0 auto 6px;max-width:620px;color:var(--muted)}
-.alert ul{margin:6px 0 0;padding-left:20px}
-.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}
-.card,.panel{background:var(--paper);border:1px solid var(--line);border-radius:12px;box-shadow:0 2px 12px #0a5b3410}
-.card{padding:13px 16px;border-top:3px solid var(--accent)}
-.card .k{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
-.card .v{font-size:23px;font-weight:750;margin-top:3px;color:var(--head)}
+.empty p{margin:0 auto;max-width:600px;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin-bottom:14px}
+.card,.panel{background:var(--paper);border:1px solid var(--line);border-radius:10px;box-shadow:0 2px 10px #0a5b3410}
+.card{padding:12px 15px;border-top:3px solid var(--accent)}
+.card .k{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.card .v{font-size:22px;font-weight:750;margin-top:2px;color:var(--head)}
 .card .n{font-size:11px;color:var(--muted);margin-top:2px}
-.main{display:grid;grid-template-columns:minmax(640px,1.7fr) minmax(350px,.8fr);gap:14px;align-items:start}
-.panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:15px 17px 9px}
-.panel-head h2{font-size:18px;margin:0;color:var(--head)}
-.sub{font-size:12px;color:var(--muted)}
-.legend{display:flex;flex-wrap:wrap;gap:10px;font-size:12px;color:#475467}
-.lg{display:inline-flex;align-items:center;gap:5px}
-.dot{width:12px;height:12px;display:inline-block}
-.rep-dot{border:2px solid var(--cyan);border-radius:50%;background:#fff}
-.prj-dot{border-radius:50%;background:var(--navy)}
-.mgr-dot{background:var(--purple);transform:rotate(45deg);width:10px;height:10px}
-.plotbox{padding:0 10px 13px}
-.plotbox svg{width:100%;height:auto;display:block;touch-action:none}
-.asset-list{max-height:710px;overflow:auto;padding:0 10px 12px}
-.asset-row{width:100%;display:grid;grid-template-columns:56px 1fr auto;gap:9px;text-align:left;align-items:center;background:#fff;border:1px solid #e4e9ef;border-radius:8px;padding:9px;margin:6px 0;cursor:pointer;color:var(--ink)}
-.asset-row:hover,.asset-row.active{border-color:var(--accent);background:#eaf8f0}
-.asset-row .aid{font-weight:800;color:#0b7a4e;font-size:12px}
-.asset-row .an{font-weight:650}
-.asset-row .am{font-size:11px;color:var(--muted)}
-.asset-row .score{font-size:12px;color:#475467;text-align:right;white-space:nowrap}
-.badge{display:inline-block;font-size:10px;font-weight:750;padding:2px 6px;border-radius:10px;margin-left:4px}
-/* polarity: improving is good on both axes here, so up is green */
-.up{background:#dcfae6;color:#067647}
-.down{background:#fee4e2;color:#b42318}
-.hold{background:#eef2f6;color:#475467}
-.review{background:#fff0c2;color:#8a4b00}
-.detail{margin-top:14px}
-.detail-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:14px}
-.detail .body{padding:0 17px 17px}
-.titleline{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.titleline h2{margin:0;font-size:20px;color:var(--head)}
-.pill{font-size:11px;padding:3px 8px;border-radius:12px;background:#dff4e8;color:#09643f;font-weight:700}
-.pill.amber{background:#fff0c2;color:#8a4b00}
-.scores{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:13px 0}
-.scorebox{border:1px solid var(--line);border-radius:8px;padding:9px}
-.scorebox strong{display:block;margin-bottom:3px}
-.scorebox.rep{border-top:3px solid var(--cyan)}
-.scorebox.prj{border-top:3px solid var(--navy)}
-.scorebox.mgr{border-top:3px solid var(--purple)}
-.coords{font-size:17px;font-weight:800}
-.band{font-size:11px;color:var(--muted)}
-.controls{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0}
-.controls button{border:1px solid #9fceb5;border-radius:7px;background:#fff;padding:7px 10px;cursor:pointer}
-.controls button:hover{background:#eaf8f0}
-.controls button:disabled{opacity:.45;cursor:default}
-.controls .accept{background:var(--purple);border-color:var(--purple);color:#fff}
-.section{border-top:1px solid #e5e9ef;padding-top:11px;margin-top:11px}
-.section h3{font-size:13px;margin:0 0 6px;text-transform:uppercase;letter-spacing:.035em;color:#09643f}
-.dim{border-left:4px solid var(--accent);padding:8px 10px;background:#f5fcf8;border-radius:4px;margin:8px 0}
-.dim b{color:#09643f}
-ul.clean{margin:6px 0;padding-left:19px}
-ul.clean li{margin:3px 0}
-.ev{margin:7px 0;padding:8px 10px;background:#f7fcf9;border-radius:6px;border-left:3px solid #70ba91}
-.cite{font-size:11px;color:var(--muted);margin-top:3px}
-.small{font-size:12px;color:var(--muted)}
-.facts{width:100%;border-collapse:collapse;font-size:13px}
-.facts td{padding:5px 0;border-bottom:1px solid #eef1f5}
-.facts td:first-child{color:var(--muted)}
-.facts td:last-child{text-align:right;font-weight:650}
-.bottom{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
-.bottom .body{padding:0 17px 15px}
-.exp{width:100%;border-collapse:collapse;font-size:12.5px}
-.exp th{text-align:left;color:var(--muted);font-weight:650;font-size:11px;text-transform:uppercase;letter-spacing:.03em;padding:6px 8px 6px 0;border-bottom:1px solid #e5e9ef}
-.exp td{padding:6px 8px 6px 0;border-bottom:1px solid #f0f3f7}
-.exp tr.mine{background:#eaf8f0}
-.exp td.r{text-align:right}
-.note{border-top:1px solid #e5e9ef;padding:10px 0}
-.note:first-child{border-top:0}
-.note b{color:var(--head)}
-.history{margin:5px 0;padding:7px 9px;border-left:3px solid var(--accent);background:#f5fcf8;font-size:12.5px}
-.footer{text-align:center;color:var(--muted);font-size:12px;padding:18px}
-.tooltip{position:fixed;z-index:10;pointer-events:none;background:var(--deep);color:#fff;padding:7px 9px;border-radius:6px;font-size:12px;box-shadow:0 3px 12px #0003;display:none}
-.axislabel{font-size:15px;font-weight:750;fill:#24364a}
-.tick{font-size:11px;fill:#536274}
-.bandlabel{font-size:11px;font-weight:700;fill:#24364a;opacity:.82}
-.marker-label{font-size:10px;font-weight:800;paint-order:stroke;stroke:#fff;stroke-width:3px;stroke-linejoin:round;fill:#071f3d}
-.asset-mark{cursor:pointer}
-.arrow{opacity:.42;stroke-width:1.6}
-.arrow.selected{opacity:.95;stroke-width:2.5}
-@media(max-width:1050px){
-  .main,.detail-grid{grid-template-columns:1fr}
-  .asset-list{max-height:360px}
-  .cards{grid-template-columns:repeat(2,1fr)}
-  .bottom{grid-template-columns:1fr}
-}
-@media(max-width:620px){
-  .topbar{padding:16px}.wrap{padding:10px}
-  .cards{grid-template-columns:1fr 1fr}.scores{grid-template-columns:1fr}
-  .panel-head{display:block}.legend{margin-top:8px}.card .v{font-size:19px}
-}
+.panel{margin-bottom:14px}
+.phead{padding:14px 16px 8px}.phead h2{font-size:17px;margin:0;color:var(--head)}
+.phead .sub{font-size:12px;color:var(--muted);margin-top:2px}
+.plot{padding:0 10px 12px}.plot svg{width:100%;height:auto;display:block}
+.tick{font-size:11px;fill:#587466}.blab{font-size:11px;font-weight:700;fill:#153c2b}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+color:var(--muted);padding:9px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:10px 12px;border-bottom:1px solid #eaf3ee;vertical-align:top}
+tr:last-child td{border-bottom:0}
+th.r,td.r{text-align:right;font-variant-numeric:tabular-nums}
+.aid{font-weight:800;color:#0b7a4e;font-size:12px}.an{font-weight:650}
+.ac{font-size:11.5px;color:var(--muted)}.note{font-size:12px;color:var(--muted);max-width:36ch}
+.flag{display:inline-block;font-size:10px;font-weight:750;padding:2px 6px;border-radius:9px;
+background:#fff0c2;color:#8a4b00;margin-left:5px}
+.tblwrap{overflow-x:auto;padding:0 4px 6px}
+.footer{text-align:center;color:var(--muted);font-size:12px;padding:14px}
+@media(max-width:900px){.cards{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
-<header class="topbar">
-  <h1 id="pageTitle">Retail Portfolio Asset Management</h1>
-  <p id="pageSub">&nbsp;</p>
-</header>
+<header class="topbar"><h1 id="ttl">Retail Portfolio Asset Management</h1><p id="sub">&nbsp;</p></header>
 <main class="wrap">
-  <div class="alert" id="alert"></div>
-  <div class="empty" id="empty">
-    <h2>No portfolio data yet</h2>
-    <p>This dashboard is populated from source documents. Upload a report, a rent
-    roll or a schedule to the assistant and ask it to build the portfolio. It reads
-    the documents, derives the figures and publishes them here.</p>
-    <p class="small">The page, the charts and the interactions are already in place
-    and are never edited &mdash; only the data changes.</p>
-  </div>
-  <div class="notice" id="notice">
-    <strong>Illustrative sample data.</strong> Every figure on this page is fabricated for
-    demonstration and is not actual portfolio information. Occupancy, NOI, WALT and the expiry
-    schedule are derived from the lease schedule below. Drag the purple manager diamond to record
-    your own view of an asset, then accept it to make it the reported position.
-  </div>
-  <section class="cards" id="cards"></section>
-  <section class="panel" id="noiPanel" style="margin-bottom:14px">
-    <div class="panel-head">
-      <div>
-        <h2>Net operating income by asset</h2>
-        <div class="sub" id="noiSub">&nbsp;</div>
-      </div>
-    </div>
-    <div class="plotbox"><svg id="noiChart" aria-label="Net operating income by asset"></svg></div>
-  </section>
-  <section class="main" id="mainRow">
-    <div class="panel">
-      <div class="panel-head">
-        <div>
-          <h2>Portfolio positioning</h2>
-          <div class="sub" id="axisSub">&nbsp;</div>
-        </div>
-        <div class="legend">
-          <span class="lg"><i class="dot rep-dot"></i>Reported</span>
-          <span class="lg"><i class="dot prj-dot"></i>Projected</span>
-          <span class="lg"><i class="dot mgr-dot"></i>Manager view</span>
-        </div>
-      </div>
-      <div class="plotbox"><svg id="plot" viewBox="0 0 850 650" aria-label="Retail portfolio occupancy against NOI growth"></svg></div>
-    </div>
-    <div class="panel">
-      <div class="panel-head">
-        <div>
-          <h2>Asset ranking</h2>
-          <div class="sub" id="rankSub">&nbsp;</div>
-        </div>
-      </div>
-      <div class="asset-list" id="assetList"></div>
-    </div>
-  </section>
-  <section class="panel detail" id="detail"></section>
-  <section class="bottom" id="bottomRow">
-    <div class="panel">
-      <div class="panel-head">
-        <div>
-          <h2>Lease expiry profile</h2>
-          <div class="sub">Contracted rent falling away by expiry year · the selected asset is shown in solid green</div>
-        </div>
-      </div>
-      <div class="plotbox"><svg id="expiryChart" aria-label="Contracted rent expiring by year"></svg></div>
-      <div class="body" id="expiry"></div>
-    </div>
-    <div class="panel">
-      <div class="panel-head">
-        <div>
-          <h2>Asset management notes</h2>
-          <div class="sub">Portfolio decisions retained for traceability</div>
-        </div>
-      </div>
-      <div class="body" id="notes"></div>
-    </div>
-  </section>
-  <div class="footer" id="footer">&nbsp;</div>
+<div class="alert" id="alert"></div>
+<div class="empty" id="empty"><h2>No portfolio data yet</h2>
+<p>This dashboard is built from source documents. Upload a report to the assistant and ask it to build the portfolio.</p></div>
+<div id="chrome">
+<div class="notice"><b>Illustrative sample data.</b> Every figure is fabricated for demonstration and is not actual portfolio information.</div>
+<section class="cards" id="cards"></section>
+<section class="panel"><div class="phead"><h2>Net operating income by asset</h2>
+<div class="sub" id="noisub">&nbsp;</div></div>
+<div class="plot"><svg id="bars" aria-label="Net operating income by asset"></svg></div></section>
+<section class="panel"><div class="phead"><h2>Portfolio</h2>
+<div class="sub">One row per asset, ranked by income contribution</div></div>
+<div class="tblwrap"><table id="tbl"></table></div></section>
+</div>
+<div class="footer" id="foot">&nbsp;</div>
 </main>
-<div class="tooltip" id="tooltip"></div>
 
 <script>
 /* ============================================================================
    DATA - the assistant edits ONLY between the two markers below.
-   Everything outside them is the page: chart, layout and interaction code.
+   Everything outside them is the page. Reproduce it exactly.
    ALL FIGURES ARE ILLUSTRATIVE SAMPLE DATA.
 
-   UNITS come from `axes`, not from field names.
-     occ     occupancy, percent.       97.5 means 97.5 percent
-     growth  forward NOI growth, pct.  0 means flat, -4.6 means minus 4.6
-   "Flat" is growth: 0, never 5.
-
-   Each asset carries three positions - reported (from the documents),
-   projected (the forward view) and manager (the human's, null until they drag
-   one) - plus its own prose, evidence and actions.
+   One object per asset. Keep it terse - no prose beyond a single short `note`.
+     id           short code, unique, 2-4 letters
+     name, city
+     gla          lettable area, sq ft, integer
+     occ          occupancy percent (97.5 means 97.5)
+     noi          net operating income, dollars per year, integer
+     walt         weighted average lease term in years, one decimal
+     arrears      dollars outstanding, 0 when none
+     expiring12m  count of leases expiring within twelve months
+     review       true when the asset needs attention
+     note         one short sentence, optional
    ============================================================================ */
 /* ==== DATA START ==== */
-var PORTFOLIO = {"meta":{"client":"Demonstration Portfolio","portfolio":"Retail Asset Management","asOf":"2026-09-30","sampleData":true},"axes":{"occ":{"key":"occ","label":"Occupancy","unit":"%","min":60,"max":100,"ticks":[60,70,80,90,100],"bandCuts":[70,85,95],"bandLabels":["Vacant","Weak","Stabilised","Full"],"decimals":1,"signed":false},"growth":{"key":"growth","label":"NOI growth","unit":"%","min":-8,"max":8,"ticks":[-8,-4,0,4,8],"bandCuts":[-2,1,4],"bandLabels":["Declining","Flat","Growing","Strong"],"decimals":1,"signed":true}},"assets":[{"id":"NGT","name":"Northgate Commons","city":"Yonkers, NY","format":"Grocery-anchored neighbourhood centre","yearBuilt":1998,"acquired":"2016-05","gla":120100,"leased":115900,"vacant":4200,"contractedRent":2930620,"noi":2110046,"avgPsf":25.29,"walt":2.9,"arrears":4100,"anchor":"Fieldcrest Grocers","expiring12m":2,"reported":{"occ":96.5,"growth":2.1},"projected":{"occ":97.5,"growth":3.4},"manager":null,"review":false,"outline":"Grocery-anchored neighbourhood centre in Yonkers, trading at 96.","summary":"Fieldcrest Grocers underpins the rent roll, footfall is stable and only 4,200 sqft is vacant. Two small leases expire within twelve months, while the main credit issue is a modest cafe balance.","occRationale":{"direction":"Improving","strength":"Moderate","confidence":0.86,"text":"Improving within the Full band: the vacancy is limited to 4,200 sqft and the two near-term expiries are small inline units with active interest."},"noiRationale":{"direction":"Improving","strength":"Moderate","confidence":0.88,"text":"Improving within the Growing band: the 2027 anchor uplift is fixed and the pharmacy is under-rented, although no major lease is being re-based this year."},"evidence":[{"quote":"Occupancy was 96.5% with 4,200 sqft available at 30 September.","doc":"AMR","page":4},{"quote":"The anchor's fixed uplift lands in 2027.","doc":"AMR","page":4}],"measures":["Open renewal discussions with Marlow & Sons Hardware twelve months ahead — Leasing, Q4.","Agree a written deferral schedule with Sunroot Cafe or serve notice — Asset Mgmt, Q4."],"history":[]},{"id":"RBC","name":"Riverbend Crossing","city":"New Rochelle, NY","format":"Power centre","yearBuilt":2004,"acquired":"2018-11","gla":225300,"leased":205700,"vacant":19600,"contractedRent":3587670,"noi":2475492,"avgPsf":17.44,"walt":1.1,"arrears":150400,"anchor":"Halcyon Home Depot Co.","expiring12m":3,"reported":{"occ":91.3,"growth":-1.4},"projected":{"occ":86.0,"growth":-4.6},"manager":null,"review":true,"outline":"Power centre in New Rochelle with two major boxes exposed and a sporting-goods tenant in arrears ahead of expiry.","summary":"Rampart Sporting Goods occupies 42,000 sqft, carries $128,000 of arrears and has confirmed it will not renew in November 2026. The home-improvement anchor expires in February 2027, exposing about 67% of contracted.","occRationale":{"direction":"Deteriorating","strength":"Strong","confidence":0.94,"text":"Deteriorating from Stabilised toward Weak: the November box expiry is not expected to renew, and the asset already has 19,600 sqft available."},"noiRationale":{"direction":"Deteriorating","strength":"Strong","confidence":0.93,"text":"Deteriorating into Declining: big-box re-letting evidence is 18 to 24 months and the projection assumes no replacement income within the year."},"evidence":[{"quote":"Rampart Sporting Goods carries $128,000 outstanding and has confirmed it will not exercise a renewal.","doc":"AMR","page":6},{"quote":"Halcyon Home Depot Co. expires February 2027 with no remaining option years.","doc":"AMR","page":6}],"measures":["Instruct agents on Unit 2 now rather than at lease end — Leasing, Q4.","Open renewal negotiations with Halcyon Home Depot Co. immediately — Leasing, Q4."],"history":[]},{"id":"HPR","name":"Harbor Point Retail","city":"Stamford, CT","format":"Mixed-use ground-floor retail","yearBuilt":2019,"acquired":"2019-03","gla":44250,"leased":38950,"vacant":5300,"contractedRent":2525650,"noi":1868981,"avgPsf":64.84,"walt":6.5,"arrears":0,"anchor":"Alder & Bright Market","expiring12m":1,"reported":{"occ":88.0,"growth":3.8},"projected":{"occ":93.0,"growth":5.2},"manager":null,"review":false,"outline":"Ground-floor retail beneath a Stamford mixed-use building, let to five operators on a 6.","summary":"The food-market anchor runs to 2034 with ten option years, there are no arrears and the single corner vacancy is being held for a licensed operator. The completed residential lease-up supports the forward rental.","occRationale":{"direction":"Improving","strength":"Strong","confidence":0.87,"text":"Improving within Stabilised: the deliberately held corner unit is under offer and would take occupancy above 93%."},"noiRationale":{"direction":"Improving","strength":"Moderate","confidence":0.82,"text":"Improving from Growing to Strong: completed residential lease-up has increased footfall, with the corner letting the main remaining variable."},"evidence":[{"quote":"The R-6 corner unit has been withheld from the market pending a licensed operator.","doc":"AMR","page":8},{"quote":"Alder & Bright Market runs to October 2034 with ten option years remaining.","doc":"AMR","page":8}],"measures":["Conclude terms on the R-6 corner unit with the licensed operator — Leasing, Q4.","Benchmark 2027 renewals against post-lease-up footfall data — Asset Mgmt, Q1."],"history":[]},{"id":"MRP","name":"Maple Row Plaza","city":"Paramus, NJ","format":"Unanchored strip centre","yearBuilt":1987,"acquired":"2014-08","gla":53600,"leased":42100,"vacant":11500,"contractedRent":784720,"noi":517915,"avgPsf":18.64,"walt":1.3,"arrears":72000,"anchor":"Ridgeway Discount Mart","expiring12m":4,"reported":{"occ":78.5,"growth":-4.2},"projected":{"occ":74.0,"growth":-5.8},"manager":null,"review":true,"outline":"Unanchored 1987 strip centre in Paramus with four near-term expiries, material vacancy and no anchor covenant.","summary":"Four of five leases expire or have recently expired, three have no option years and none has confirmed renewal. The centre has 11,500 sqft available and has received no capital spend since acquisition.","occRationale":{"direction":"Deteriorating","strength":"Moderate","confidence":0.9,"text":"Deteriorating within Weak: four expiries sit against existing vacancy, with no anchor covenant to stabilise the remaining rent roll."},"noiRationale":{"direction":"Deteriorating","strength":"Moderate","confidence":0.88,"text":"Deteriorating within Declining: renewals are being sought at discounts to passing rent and incentives compound the occupancy risk."},"evidence":[{"quote":"Four of the five Maple Row leases expire within twelve months of 30 September.","doc":"AMR","page":10},{"quote":"Ridgeway Discount Mart carries $61,000 outstanding and expires May 2027 with no option.","doc":"AMR","page":10}],"measures":["Commission a repositioning appraisal against a hold-and-refurbish case — Development, Q1.","Offer two-year extensions at passing rent to the three no-option tenants — Leasing, Q4."],"history":[]},{"id":"LSU","name":"Lexington Street Units","city":"Manhattan, NY","format":"High-street retail condominium","yearBuilt":1926,"acquired":"2021-06","gla":8890,"leased":8350,"vacant":540,"contractedRent":2497000,"noi":1822810,"avgPsf":299.04,"walt":4.3,"arrears":0,"anchor":"Marchetti Leathers","expiring12m":0,"reported":{"occ":93.9,"growth":1.0},"projected":{"occ":94.0,"growth":1.6},"manager":null,"review":false,"outline":"Four high-street retail condominium units in Manhattan let to independent operators at an average $299.","summary":"No lease expires within twelve months and there are no arrears. The only unlet space is 540 sqft of basement storage rather than trading area.","occRationale":{"direction":"Holding","strength":"Weak","confidence":0.94,"text":"Holding within Stabilised: no lease expires inside the year and the small vacancy is ancillary basement storage."},"noiRationale":{"direction":"Improving","strength":"Weak","confidence":0.78,"text":"Improving modestly within Growing: the 2024 florist letting was 12% above the prior rent, but no contractual uplift occurs inside the year."},"evidence":[{"quote":"No Lexington Street lease expires within twelve months of 30 September.","doc":"AMR","page":12},{"quote":"The unlet 540 sqft is basement storage, not trading area.","doc":"AMR","page":12}],"measures":["Market the basement store to ground-floor tenants as ancillary space — Leasing, Q1.","Prepare the 2028 review evidence file using the 2024 letting — Asset Mgmt, Q2."],"history":[]},{"id":"WFS","name":"Westfall Square","city":"Elizabeth, NJ","format":"Enclosed community centre","yearBuilt":1979,"acquired":"2012-02","gla":176100,"leased":121900,"vacant":54200,"contractedRent":1366860,"noi":2000000,"avgPsf":11.21,"walt":1.1,"arrears":399600,"anchor":"Grandview Department Co.","expiring12m":3,"reported":{"occ":69.2,"growth":-6.0},"projected":{"occ":64.0,"growth":-7.2},"manager":null,"review":true,"outline":"Enclosed community centre in Elizabeth with structural vacancy and arrears concentrated in a department-store anchor.","summary":"Grandview occupies 96,000 sqft at $9.40 psf, owes $340,000 and expires in January 2027 with no option. Re-letting in the current format has been rejected while a medical and last-mile change-of-use.","occRationale":{"direction":"Deteriorating","strength":"Strong","confidence":0.97,"text":"Deteriorating within Vacant: the January anchor expiry is not expected to renew and 54,200 sqft is already vacant."},"noiRationale":{"direction":"Deteriorating","strength":"Strong","confidence":0.96,"text":"Deteriorating within Declining: the anchor rent is below the centre average and is not being collected in full; no re-letting income is assumed."},"evidence":[{"quote":"Grandview occupies 96,000 sqft at $9.40 psf, owes $340,000 and expires in January 2027 with no option.","doc":"AMR","page":14},{"quote":"Westfall occupancy was 69.2% with 54,200 sqft vacant.","doc":"AMR","page":14}],"measures":["Take a formal position on Grandview: standstill agreement or forfeiture — Legal, Q4.","Commission a change-of-use study covering medical and last-mile logistics — Development, Q1."],"history":[]},{"id":"CDV","name":"Cedar & Vine","city":"Brooklyn, NY","format":"Urban infill retail","yearBuilt":2015,"acquired":"2020-09","gla":23040,"leased":22800,"vacant":240,"contractedRent":1571300,"noi":1147049,"avgPsf":68.92,"walt":3.5,"arrears":0,"anchor":"Cedarhouse Provisions","expiring12m":2,"reported":{"occ":99.0,"growth":5.5},"projected":{"occ":100.0,"growth":6.9},"manager":null,"review":false,"outline":"Urban infill retail parade in Brooklyn, effectively fully let with a food-hall anchor to 2031.","summary":"Only 240 sqft is unlet, there are no arrears and both tenants expiring within the year have asked to extend. Turnover rent from the food-hall anchor supports income growth.","occRationale":{"direction":"Holding","strength":"Weak","confidence":0.95,"text":"Holding in Full: the residual vacancy is immaterial and both near-term expiries want to stay."},"noiRationale":{"direction":"Improving","strength":"Moderate","confidence":0.86,"text":"Improving within Strong: rising anchor sales drive turnover rent, so growth is supported by trade rather than vacancy lease-up."},"evidence":[{"quote":"Cedar & Vine was 99.0% occupied with 240 sqft available.","doc":"AMR","page":16},{"quote":"Both tenants expiring within the year have requested extensions.","doc":"AMR","page":16}],"measures":["Hold both expiring units at passing rent rather than testing the market — Leasing, Q4.","Test a turnover-rent structure with the bakery at renewal — Asset Mgmt, Q4."],"history":[]},{"id":"OGC","name":"Orchard Gate Center","city":"White Plains, NY","format":"Grocery-anchored neighbourhood centre","yearBuilt":1994,"acquired":"2017-07","gla":91800,"leased":78600,"vacant":13200,"contractedRent":1742480,"noi":1237161,"avgPsf":22.17,"walt":2.4,"arrears":34000,"anchor":"Fieldcrest Grocers","expiring12m":1,"reported":{"occ":85.6,"growth":0.0},"projected":{"occ":88.0,"growth":1.8},"manager":null,"review":true,"outline":"Grocery-anchored White Plains centre with flat reported NOI and a subdivided vacancy that is partly under offer.","summary":"Fieldcrest Grocers anchors the centre to 2029 with ten option years. The 13,200 sqft vacancy has been split into two units and one is under offer, while Bellamy Home Goods carries $34,000 of.","occRationale":{"direction":"Improving","strength":"Moderate","confidence":0.83,"text":"Improving within Stabilised: the 7,400 sqft subdivided unit is under offer, providing the main route to higher occupancy."},"noiRationale":{"direction":"Improving","strength":"Moderate","confidence":0.76,"text":"Improving from Flat to Growing: reported NOI was exactly flat, but the letting under offer could overcome the absence of a contractual uplift."},"evidence":[{"quote":"Orchard Gate reported flat net operating income year on year.","doc":"AMR","page":18},{"quote":"The 13,200 sqft vacancy was subdivided into units of 7,400 and 5,800 sqft.","doc":"AMR","page":18}],"measures":["Conclude the offer on the 7,400 sqft subdivided unit — Leasing, Q4.","Recover the Bellamy balance against the rent deposit — Finance, Q4."],"history":[]},{"id":"SBV","name":"Saltbox Village","city":"Huntington, NY","format":"Lifestyle centre","yearBuilt":2007,"acquired":"2015-11","gla":66600,"leased":48700,"vacant":17900,"contractedRent":1118010,"noi":749067,"avgPsf":22.96,"walt":1.3,"arrears":87200,"anchor":"Saltbox Cinema Group","expiring12m":3,"reported":{"occ":73.1,"growth":-2.6},"projected":{"occ":76.5,"growth":-1.2},"manager":null,"review":true,"outline":"Lifestyle centre in Huntington with material restaurant vacancy and a cinema anchor on an arrears recovery plan.","summary":"The cinema has resumed full payments and its concession steps back to full rent in March 2027. Two of three vacant restaurant units are under offer, so the trajectory has improved despite weak reported figures.","occRationale":{"direction":"Improving","strength":"Moderate","confidence":0.82,"text":"Improving within Weak: two restaurant units are under offer, recovering from the 2023 vacancy low."},"noiRationale":{"direction":"Improving","strength":"Moderate","confidence":0.85,"text":"Improving from Declining to Flat: the cinema concession ends in March 2027 and arrears are being recovered, although the asset remains exposed to short WALT."},"evidence":[{"quote":"The cinema has resumed full monthly payments and carries $76,000 on a recovery plan.","doc":"AMR","page":20},{"quote":"Two of the three vacant restaurant units are under offer.","doc":"AMR","page":20}],"measures":["Document the cinema recovery plan and March 2027 step-up — Legal, Q4.","Conclude both restaurant unit offers before winter trading — Leasing, Q4."],"history":[]},{"id":"QBR","name":"Quarry Bend Retail Park","city":"Danbury, CT","format":"Power centre","yearBuilt":2001,"acquired":"2019-08","gla":160100,"leased":148100,"vacant":12000,"contractedRent":2424320,"noi":1697024,"avgPsf":16.37,"walt":4.2,"arrears":0,"anchor":"Stonefield Warehouse Club","expiring12m":1,"reported":{"occ":92.5,"growth":4.4},"projected":{"occ":95.0,"growth":5.1},"manager":null,"review":false,"outline":"Danbury power centre with a warehouse-club anchor to 2032, no arrears and two enquiries on its vacancy.","summary":"The anchor has a fixed 2027 uplift and ten option years. Two mid-box enquiries are close to quoting rent on the 12,000 sqft former electronics unit.","occRationale":{"direction":"Improving","strength":"Moderate","confidence":0.86,"text":"Improving from Stabilised to Full: two credible enquiries provide a route to occupancy at or above 95%."},"noiRationale":{"direction":"Improving","strength":"Weak","confidence":0.91,"text":"Improving within Strong: the 2027 anchor uplift is contractual and a vacancy letting would be above the centre average."},"evidence":[{"quote":"Two mid-box enquiries have been received on the 12,000 sqft vacancy at close to quoting rent.","doc":"AMR","page":22},{"quote":"Stonefield Warehouse Club runs to March 2032 with ten option years.","doc":"AMR","page":22}],"measures":["Convert the stronger mid-box enquiry to terms — Leasing, Q4.","Verify the 2027 anchor uplift calculation and billing date — Finance, Q4."],"history":[]},{"id":"FWO","name":"Fairwater Outlets","city":"Central Valley, NY","format":"Outlet centre","yearBuilt":1996,"acquired":"2013-04","gla":77500,"leased":50000,"vacant":27500,"contractedRent":605940,"noi":393861,"avgPsf":12.12,"walt":0.8,"arrears":153500,"anchor":"Wexler Outlet Apparel","expiring12m":4,"reported":{"occ":64.5,"growth":-5.1},"projected":{"occ":61.0,"growth":-6.4},"manager":null,"review":true,"outline":"Outlet centre in Central Valley with structural vacancy, the portfolio's shortest WALT and four near-term expiries.","summary":"Four of five leases expire within twelve months, no renewals are agreed and $153,500 is outstanding across three tenants. The centre is being run for cash while a hold-or-exit decision is prepared.","occRationale":{"direction":"Deteriorating","strength":"Moderate","confidence":0.94,"text":"Deteriorating within Vacant: four expiries compound 27,500 sqft of existing vacancy, with no agreed renewals."},"noiRationale":{"direction":"Deteriorating","strength":"Moderate","confidence":0.92,"text":"Deteriorating within Declining: renewal discussions begin below passing rent and arrears may not be recovered in full; no replacement income is assumed within the year."},"evidence":[{"quote":"Fairwater's WALT was 0.8 years, the shortest in the portfolio.","doc":"AMR","page":24},{"quote":"Four of the five leases expire within twelve months.","doc":"AMR","page":24}],"measures":["Take a hold-or-exit decision before committing to 2027 renewals — Investment, Q4.","Offer short flexible terms rather than reversionary deals — Leasing, Q4."],"history":[]},{"id":"BYM","name":"Beacon Yard Market","city":"Jersey City, NJ","format":"Urban infill retail","yearBuilt":2022,"acquired":"2022-01","gla":34960,"leased":34100,"vacant":860,"contractedRent":1948200,"noi":1441668,"avgPsf":57.13,"walt":7.7,"arrears":0,"anchor":"Beacon Fresh Market","expiring12m":0,"reported":{"occ":97.5,"growth":6.8},"projected":{"occ":98.5,"growth":7.4},"manager":null,"review":false,"outline":"Retail at the base of a Jersey City development, 97.","summary":"The fifteen-year food-market anchor runs to 2037, no arrears are outstanding and three of five leases have fixed annual uplifts. Residential lease-up completed ahead of plan.","occRationale":{"direction":"Holding","strength":"Weak","confidence":0.96,"text":"Holding within Full: only 860 sqft is unlet and nothing expires inside twelve months."},"noiRationale":{"direction":"Improving","strength":"Weak","confidence":0.9,"text":"Improving within Strong: three fixed annual uplifts and completed residential lease-up make growth contractual rather than dependent on new letting."},"evidence":[{"quote":"No Beacon Yard lease expires within twelve months.","doc":"AMR","page":26},{"quote":"Beacon Yard reported 6.8% NOI growth, the strongest in the portfolio.","doc":"AMR","page":26}],"measures":["Index the three uplift-bearing leases and confirm 2027 billing — Finance, Q4.","Let the residual 860 sqft as ancillary storage — Leasing, Q1."],"history":[]}],"leases":[{"assetId":"NGT","tenant":"Marlow & Sons Hardware","unit":"Expiry disclosed; area and rent not disclosed","sqft":0,"psf":0.0,"start":"2026-09","expiry":"2027-03","opt":0,"arrears":0,"anchor":false},{"assetId":"NGT","tenant":"Undisclosed tenancy","unit":"Count-only expiry 2; month, area and rent not disclosed","sqft":0,"psf":0.0,"start":"2026-09","expiry":"2027-09","opt":0,"arrears":0,"anchor":false},{"assetId":"RBC","tenant":"Rampart Sporting Goods","unit":"42,000 sqft box; rent not disclosed","sqft":42000,"psf":0.0,"start":"2026-09","expiry":"2026-11","opt":0,"arrears":128000,"anchor":false},{"assetId":"RBC","tenant":"Halcyon Home Depot Co.","unit":"Anchor expiry; area and rent not disclosed","sqft":0,"psf":0.0,"start":"2026-09","expiry":"2027-02","opt":0,"arrears":0,"anchor":true},{"assetId":"RBC","tenant":"Undisclosed tenancy","unit":"Count-only expiry 3; month, area and rent not disclosed","sqft":0,"psf":0.0,"start":"2026-09","expiry":"2027-09","opt":0,"arrears":0,"anchor":false},{"assetId":"HPR","tenant":"Undisclosed tenancy","unit":"Count-only expiry 1; month, area and rent not disclosed","sqft":0,"psf":0.0,"start":"2026-09","expiry":"2027-09","opt":0,"arrears":0,"anchor":false},{"assetId":"MRP","tenant":"Ridgeway Discount Mart","unit":"Expiry disclosed; area and rent not disclosed","sqft":0,"psf":0.0,"start":"2026-09","expiry":"2027-05","opt":0,"arrears":61000,"anchor":false},{"assetId":"MRP","tenant":"Undisclosed tenancy","unit":"Count-only expiry 2; month, area and rent not disclosed","sqft":0,"psf":0.0,"start":"2026-09","expiry":"2027-09","opt":0,"arrears":0,"anchor":false},{"assetId":"MRP","tenant":"Undisclosed tenancy","unit":"Count-only expiry 3; month, area and rent not disclosed","sqft":0,"psf":0.0,"start":"2026-09","expiry":"2027-09","opt":0,"arrears":0,"anchor":false},{"assetId":"MRP","tenant":"Undisclosed tenancy","unit":"Count-only expiry 4; month, area and rent not disclosed","sqft":0,"psf":0.0,"start":"2026-09","expiry":"2027-09","opt":0,"arrears":0,"anchor":false},{"assetId":"WFS","tenant":"Grandview Department Co.","unit":"Department-store anchor","sqft":96000,"psf":9.4,"start":"2026-09","expiry":"2027-01","opt":0,"arrears":340000,"anchor":true},{"assetId":"WFS","tenant":"Undisclosed tenancy","unit":"Count-only expiry 2; month, area and rent not disclosed","sqft":0,"psf":0.0,"start":"2026-09","expiry":"2027-09","opt":0,"arrears":0,"anchor":false},{"assetId":"WFS","tenant":"Undisclosed tenancy","unit":"Count-only expiry 3; month, area and rent not disclosed","sqft":0,"psf":0.0,"start":"2026-09","expiry":"2027-09","opt":0,"arrears":0,"anchor":false},{"assetId":"CDV","tenant":"Vine Street Bakery","unit":"Exact month, area and rent not disclosed","sqft":0,"psf":0.0,"start":"2026-09","expiry":"2027-09","opt":0,"arrears":0,"anchor":false},{"assetId":"CDV","tenant":"Harrow Barbers","unit":"Exact month, area and rent not disclosed","sqft":0,"psf":0.0,"start":"2026-09","expiry":"2027-09","opt":0,"arrears":0,"anchor":false},{"assetId":"OGC","tenant":"Undisclosed tenancy","unit":"Count-only expiry 1; month, area and rent not disclosed","sqft":0,"psf":0.0,"start":"2026-09","expiry":"2027-09","opt":0,"arrears":0,"anchor":false},{"assetId":"SBV","tenant":"Undisclosed tenancy","unit":"Count-only expiry 1; month, area and rent not disclosed","sqft":0,"psf":0.0,"start":"2026-09","expiry":"2027-09","opt":0,"arrears":0,"anchor":false},{"assetId":"SBV","tenant":"Undisclosed tenancy","unit":"Count-only expiry 2; month, area and rent not disclosed","sqft":0,"psf":0.0,"start":"2026-09","expiry":"2027-09","opt":0,"arrears":0,"anchor":false},{"assetId":"SBV","tenant":"Undisclosed tenancy","unit":"Count-only expiry 3; month, area and rent not disclosed","sqft":0,"psf":0.0,"start":"2026-09","expiry":"2027-09","opt":0,"arrears":0,"anchor":false},{"assetId":"QBR","tenant":"Undisclosed tenancy","unit":"Count-only expiry 1; month, area and rent not disclosed","sqft":0,"psf":0.0,"start":"2026-09","expiry":"2027-09","opt":0,"arrears":0,"anchor":false},{"assetId":"FWO","tenant":"Wexler Outlet Apparel","unit":"Expiry disclosed; area and rent not disclosed","sqft":0,"psf":0.0,"start":"2026-09","expiry":"2027-05","opt":0,"arrears":88000,"anchor":true},{"assetId":"FWO","tenant":"Undisclosed tenancy","unit":"Count-only expiry 2; month, area and rent not disclosed","sqft":0,"psf":0.0,"start":"2026-09","expiry":"2027-09","opt":0,"arrears":0,"anchor":false},{"assetId":"FWO","tenant":"Undisclosed tenancy","unit":"Count-only expiry 3; month, area and rent not disclosed","sqft":0,"psf":0.0,"start":"2026-09","expiry":"2027-09","opt":0,"arrears":0,"anchor":false},{"assetId":"FWO","tenant":"Undisclosed tenancy","unit":"Count-only expiry 4; month, area and rent not disclosed","sqft":0,"psf":0.0,"start":"2026-09","expiry":"2027-09","opt":0,"arrears":0,"anchor":false}],"notes":[{"title":"Westfall is a use decision, not a leasing problem","body":"Re-letting in the current format was rejected. Medical and last-mile logistics are the live change-of-use workstreams, with no further leasing capital committed until the study reports."},{"title":"Riverbend and Fairwater share a conservative assumption","body":"Both projections assume no replacement income within twelve months, reflecting 18–24 month big-box letting evidence. The assumption is deliberately held flat rather than modelled optimistically."},{"title":"Arrears are concentrated, not systemic","body":"Portfolio arrears total $900,800; $556,000 is concentrated with tenants at Westfall, Riverbend and Fairwater, while five assets report no arrears."},{"title":"Lease schedule coverage","body":"The asset management report gives the 24-expiry count but not a full rent roll. Undisclosed expiries are represented as zero-area, zero-rent count-only entries at the twelve-month boundary; obtain the rent roll before relying on the expiry-rent profile."}]};
+var PORTFOLIO = {
+ "meta": {
+  "portfolio": "Retail Asset Management",
+  "asOf": "2026-09-30",
+  "sampleData": true
+ },
+ "assets": []
+};
 /* ==== DATA END ==== */
 </script>
+
 <script>
-(function () {
+(function(){
 "use strict";
-
-// ---------------------------------------------------------------------------
-// Axes and plot geometry. Single source for both the forward mapping and its
-// inverse, so widening the plot can never desynchronise the drag from the
-// cursor. The viewBox is set from here too, rather than hardcoded in markup.
-// ---------------------------------------------------------------------------
-var PLOT = { L: 92, T: 34, W: 650, H: 520, PAD_B: 96, PAD_R: 108 };
-PLOT.VBW = PLOT.L + PLOT.W + PLOT.PAD_R;
-PLOT.VBH = PLOT.T + PLOT.H + PLOT.PAD_B;
-
-// How much the projection must close the gap to the ideal corner before it is
-// called an improvement. Tuned so the seed data reads 6 up / 2 hold / 4 down.
-var MOVE_TAU = 0.05;
-
-var STORE_KEY = "retail-portfolio-demo-2026q3-v1";
-
-var D, AX, assets, selected, drag = null;
-
-function xOf(v) { return PLOT.L + (v - AX.occ.min) / (AX.occ.max - AX.occ.min) * PLOT.W; }
-function yOf(v) { return PLOT.T + (AX.growth.max - v) / (AX.growth.max - AX.growth.min) * PLOT.H; }
-function xInv(px) { return AX.occ.min + (px - PLOT.L) / PLOT.W * (AX.occ.max - AX.occ.min); }
-function yInv(py) { return AX.growth.max - (py - PLOT.T) / PLOT.H * (AX.growth.max - AX.growth.min); }
-
-function clampAx(v, ax) {
-  return Math.max(ax.min, Math.min(ax.max, Math.round(v * 10) / 10));
-}
-function fmt(v, ax) {
-  return (ax.signed && v > 0 ? "+" : "") + v.toFixed(ax.decimals) + ax.unit;
-}
-// Quartile-free banding: cuts and labels both come from the axis descriptor,
-// and there is deliberately no "on the boundary" special case.
-function band(v, ax) {
-  var i = 0;
-  while (i < ax.bandCuts.length && v >= ax.bandCuts[i]) i++;
-  return ax.bandLabels[i];
-}
-function pos(a) { return a.manager || a.projected; }
-// Normalised distance from the ideal corner (full occupancy, strongest growth).
-function dist(p) {
-  var nx = (AX.occ.max - p.occ) / (AX.occ.max - AX.occ.min);
-  var ny = (AX.growth.max - p.growth) / (AX.growth.max - AX.growth.min);
-  return Math.sqrt(nx * nx + ny * ny);
-}
-// The only definition of movement. Everything that shows a direction calls this.
-function movement(a) {
-  var delta = dist(a.reported) - dist(a.projected);
-  if (delta > MOVE_TAU) return { glyph: "↑", cls: "up", label: "Improving", delta: delta };
-  if (delta < -MOVE_TAU) return { glyph: "↓", cls: "down", label: "Deteriorating", delta: delta };
-  return { glyph: "→", cls: "hold", label: "Holding", delta: delta };
-}
-// Ranking: exposure x trajectory. Moves when a marker is dragged, which is the
-// point -- ranking by NOI alone would freeze the panel during the demo.
-function attention(a) {
-  var totalNoi = totals().noi || 1;
-  return (a.noi / totalNoi) * dist(pos(a));
-}
-// Recomputed from the assets array on every render. Deliberately NOT read from
-// meta.totals: a frozen total would leave the headline unchanged when a single
-// asset's number is edited, which is the whole point of the demo.
-function totals() {
-  var t = { assets: assets.length, gla: 0, leased: 0, noi: 0, rent: 0, waltW: 0, expiring: 0, arrears: 0 };
-  assets.forEach(function (a) {
-    t.gla += a.gla || 0; t.leased += a.leased || 0; t.noi += a.noi || 0;
-    t.rent += a.contractedRent || 0; t.arrears += a.arrears || 0;
-    t.waltW += (a.contractedRent || 0) * (a.walt || 0);
-  });
-  var horizon = horizonMonth();
-  t.expiring = (D.leases || []).filter(function (l) { return l.expiry <= horizon; }).length;
-  t.occupancy = t.gla ? t.leased / t.gla * 100 : 0;
-  t.walt = t.rent ? t.waltW / t.rent : 0;
-  return t;
-}
-function horizonMonth() {
-  var p = String(D.meta.asOf).split("-");
-  return new Date(Date.UTC(+p[0] + 1, +p[1] - 1, 1)).toISOString().slice(0, 7);
-}
-function money(n) {
-  if (Math.abs(n) >= 1e6) return "$" + (n / 1e6).toFixed(1) + "M";
-  if (Math.abs(n) >= 1e3) return "$" + Math.round(n / 1e3) + "k";
-  return "$" + n;
-}
-function num(n) { return n.toLocaleString("en-US"); }
-function esc(s) {
-  return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
-}
-function monthName(ym) {
-  var p = String(ym).split("-");
-  var m = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-  return m[parseInt(p[1], 10) - 1] + " " + p[0];
-}
-
-// ---------------------------------------------------------------------------
-// Validation. Turns a bad edit into a listed problem instead of a blank page.
-// ---------------------------------------------------------------------------
-function validate() {
-  var problems = [], seen = {};
-  if (!D || !D.axes || !Array.isArray(D.assets)) {
-    return ["The DATA block does not define PORTFOLIO with an axes block and an assets array."];
-  }
-  // An empty assets array is the starting state, not a fault: the dashboard is
-  // populated by uploading documents to the assistant.
-  if (!D.assets.length) return [];
-  D.assets.forEach(function (a, i) {
-    var where = a.id || ("assets[" + i + "]");
-    if (!a.id) problems.push(where + ": missing id");
-    else if (seen[a.id]) problems.push(where + ": duplicate id");
-    seen[a.id] = true;
-    if (!a.name) problems.push(where + ": missing name");
-    ["reported", "projected"].forEach(function (k) {
-      var p = a[k];
-      if (!p || typeof p.occ !== "number" || typeof p.growth !== "number") {
-        problems.push(where + ": " + k + " must have numeric occ and growth");
-        return;
-      }
-      if (p.occ < 0 || p.occ > 100) problems.push(where + ": " + k + ".occ " + p.occ + " outside 0..100");
-      if (p.growth < -20 || p.growth > 20) problems.push(where + ": " + k + ".growth " + p.growth + " outside -20..20");
-    });
-    if (a.manager && (typeof a.manager.occ !== "number" || typeof a.manager.growth !== "number")) {
-      problems.push(where + ": manager must be null or have numeric occ and growth");
-    }
-  });
-  (D.leases || []).forEach(function (l, i) {
-    if (!seen[l.assetId]) problems.push("leases[" + i + "]: assetId '" + l.assetId + "' matches no asset");
-  });
-  return problems;
-}
-
-function showAlert(title, items) {
-  var el = document.getElementById("alert");
-  el.innerHTML = "<strong>" + esc(title) + "</strong><ul>" +
-    items.slice(0, 12).map(function (p) { return "<li>" + esc(p) + "</li>"; }).join("") +
-    (items.length > 12 ? "<li>and " + (items.length - 12) + " more</li>" : "") + "</ul>";
-  el.style.display = "block";
-}
-
-// ---------------------------------------------------------------------------
-// Persistence. Only the mutable fields are stored, merged back by id, and the
-// restored selection is validated -- a stale id used to throw and leave the
-// detail pane dead with nothing on screen to say why.
-// ---------------------------------------------------------------------------
-function load() {
-  try {
-    var saved = JSON.parse(localStorage.getItem(STORE_KEY) || "null");
-    if (!saved || !Array.isArray(saved.assets)) return;
-    saved.assets.forEach(function (s) {
-      var a = assets.filter(function (x) { return x.id === s.id; })[0];
-      if (!a) return;
-      if (s.reported) a.reported = s.reported;
-      if (s.manager !== undefined) a.manager = s.manager;
-      if (Array.isArray(s.history)) a.history = s.history;
-    });
-    if (saved.selected && assets.some(function (a) { return a.id === saved.selected; })) {
-      selected = saved.selected;
-    }
-  } catch (e) { /* private mode, cleared storage, quota - render from seed */ }
-}
-function save() {
-  try {
-    localStorage.setItem(STORE_KEY, JSON.stringify({
-      selected: selected,
-      assets: assets.map(function (a) {
-        return { id: a.id, reported: a.reported, manager: a.manager, history: a.history };
-      })
-    }));
-  } catch (e) { /* never let a storage failure break the page */ }
-}
-function current() {
-  return assets.filter(function (a) { return a.id === selected; })[0] || assets[0];
-}
-
-// ---------------------------------------------------------------------------
-// Renderers
-// ---------------------------------------------------------------------------
-function renderChrome() {
-  var t = totals();
-  document.getElementById("pageTitle").textContent =
-    D.meta.client + " — " + D.meta.portfolio;
-  document.getElementById("pageSub").textContent =
-    t.assets + " assets · " + num(t.gla) + " sqft · asset management review · as at " +
-    monthName(D.meta.asOf.slice(0, 7));
-  document.getElementById("axisSub").textContent =
-    AX.occ.label + " (X) · " + AX.growth.label + " (Y) · reported, projected and manager positions";
-  document.getElementById("footer").textContent =
-    "Illustrative sample data · internal asset-management working document · " +
-    "a manager view is not reported until “Accept as reported” is used.";
-}
-
-function renderCards() {
-  var t = totals();
-  var flagged = assets.filter(function (a) { return a.review; }).length;
-  var cards = [
-    { k: "Portfolio NOI", v: money(t.noi), n: num(t.gla) + " sqft across " + t.assets + " assets" },
-    { k: "Occupancy", v: t.occupancy.toFixed(1) + "%", n: num(t.gla - t.leased) + " sqft available" },
-    { k: "WALT", v: t.walt.toFixed(1) + " yr", n: "rent weighted · " + money(t.arrears) + " arrears" },
-    { k: "Expiring in 12 months", v: t.expiring + " leases", n: flagged + " assets flagged for review" }
-  ];
-  document.getElementById("cards").innerHTML = cards.map(function (c) {
-    return '<div class="card"><div class="k">' + esc(c.k) + '</div><div class="v">' +
-      esc(c.v) + '</div><div class="n">' + esc(c.n) + "</div></div>";
-  }).join("");
-}
-
-function renderList() {
-  var ranked = assets.slice().sort(function (a, b) {
-    return attention(b) - attention(a) || b.noi - a.noi;
-  });
-  var flagged = assets.filter(function (a) { return a.review; }).length;
-  document.getElementById("rankSub").textContent =
-    "Exposure × trajectory · " + flagged + " flagged for review · not a valuation";
-  document.getElementById("assetList").innerHTML = ranked.map(function (a) {
-    var m = movement(a), p = pos(a);
-    return '<button class="asset-row' + (a.id === selected ? " active" : "") +
-      '" data-id="' + esc(a.id) + '">' +
-      '<div class="aid">' + esc(a.id) + "</div>" +
-      '<div><div class="an">' + esc(a.name) +
-      '<span class="badge ' + m.cls + '">' + m.glyph + " " + esc(m.label) + "</span>" +
-      (a.review ? '<span class="badge review">review</span>' : "") + "</div>" +
-      '<div class="am">' + esc(a.city) + " · " + money(a.noi) + " NOI</div></div>" +
-      '<div class="score">' + fmt(p.occ, AX.occ) + "<br>" + fmt(p.growth, AX.growth) + "</div>" +
-      "</button>";
-  }).join("");
-  Array.prototype.forEach.call(document.querySelectorAll(".asset-row"), function (b) {
-    b.onclick = function () { selected = b.getAttribute("data-id"); save(); renderAll(); };
-  });
-}
-
-function renderPlot() {
-  var svg = document.getElementById("plot");
-  svg.setAttribute("viewBox", "0 0 " + PLOT.VBW + " " + PLOT.VBH);
-  var L = PLOT.L, T = PLOT.T, W = PLOT.W, H = PLOT.H;
-  // Desirable corner is top-right (full occupancy, strongest growth), so the
-  // gradient runs red at bottom-left to green at top-right -- the opposite way
-  // round from a risk heatmap.
-  var s = '<defs><linearGradient id="grad" x1="0%" y1="100%" x2="100%" y2="0%">' +
-    '<stop offset="0%" stop-color="#d93b35"/><stop offset="30%" stop-color="#ef8b3c"/>' +
-    '<stop offset="55%" stop-color="#f5cf4b"/><stop offset="78%" stop-color="#dce45c"/>' +
-    '<stop offset="100%" stop-color="#49b66e"/></linearGradient>' +
-    '<marker id="arrN" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">' +
-    '<path d="M 0 0 L 10 5 L 0 10 z" fill="#071f3d"/></marker>' +
-    '<marker id="arrP" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">' +
-    '<path d="M 0 0 L 10 5 L 0 10 z" fill="#7c3aed"/></marker></defs>';
-  s += '<rect x="' + L + '" y="' + T + '" width="' + W + '" height="' + H + '" rx="4" fill="url(#grad)" opacity=".92"/>';
-
-  AX.occ.ticks.forEach(function (v) {
-    var px = xOf(v);
-    s += '<line x1="' + px + '" y1="' + T + '" x2="' + px + '" y2="' + (T + H) + '" stroke="#fff" stroke-opacity=".65"/>';
-    s += '<text class="tick" x="' + px + '" y="' + (T + H + 18) + '" text-anchor="middle">' + fmt(v, AX.occ) + "</text>";
-  });
-  AX.growth.ticks.forEach(function (v) {
-    var py = yOf(v);
-    s += '<line x1="' + L + '" y1="' + py + '" x2="' + (L + W) + '" y2="' + py + '" stroke="#fff" stroke-opacity=".65"/>';
-    s += '<text class="tick" x="' + (L - 10) + '" y="' + (py + 4) + '" text-anchor="end">' + fmt(v, AX.growth) + "</text>";
-  });
-  // Band labels sit at the midpoint of each band, derived from the cuts so they
-  // cannot drift out of step with band().
-  function mids(ax) {
-    var edges = [ax.min].concat(ax.bandCuts, [ax.max]), out = [];
-    for (var i = 0; i < edges.length - 1; i++) out.push((edges[i] + edges[i + 1]) / 2);
-    return out;
-  }
-  mids(AX.occ).forEach(function (v, i) {
-    s += '<text class="bandlabel" x="' + xOf(v) + '" y="' + (T + H + 39) + '" text-anchor="middle">' + esc(AX.occ.bandLabels[i]) + "</text>";
-  });
-  mids(AX.growth).forEach(function (v, i) {
-    s += '<text class="bandlabel" x="27" y="' + yOf(v) + '" text-anchor="middle" transform="rotate(-90 27 ' + yOf(v) + ')">' + esc(AX.growth.bandLabels[i]) + "</text>";
-  });
-  s += '<text class="axislabel" x="' + (L + W / 2) + '" y="' + (PLOT.VBH - 18) + '" text-anchor="middle">' + esc(AX.occ.label) + "</text>";
-  s += '<text class="axislabel" x="13" y="' + (T + H / 2) + '" text-anchor="middle" transform="rotate(-90 13 ' + (T + H / 2) + ')">' + esc(AX.growth.label) + "</text>";
-
-  // Connectors first, so markers sit on top of them.
-  assets.forEach(function (a) {
-    var sel = a.id === selected ? " selected" : "";
-    var r = a.reported, p = a.projected, m = a.manager;
-    if (r.occ !== p.occ || r.growth !== p.growth) {
-      s += '<line class="arrow' + sel + '" x1="' + xOf(r.occ) + '" y1="' + yOf(r.growth) +
-        '" x2="' + xOf(p.occ) + '" y2="' + yOf(p.growth) +
-        '" stroke="#071f3d" stroke-dasharray="5 4" marker-end="url(#arrN)"/>';
-    }
-    if (m && (m.occ !== p.occ || m.growth !== p.growth)) {
-      s += '<line class="arrow' + sel + '" x1="' + xOf(p.occ) + '" y1="' + yOf(p.growth) +
-        '" x2="' + xOf(m.occ) + '" y2="' + yOf(m.growth) +
-        '" stroke="#7c3aed" stroke-dasharray="5 4" marker-end="url(#arrP)"/>';
-    }
-  });
-
-  assets.forEach(function (a) {
-    var r = a.reported, p = a.projected, m = a.manager;
-    var op = a.id === selected ? 1 : 0.82;
-    s += '<g class="asset-mark" data-id="' + esc(a.id) + '" opacity="' + op + '">';
-    s += '<circle data-kind="reported" cx="' + xOf(r.occ) + '" cy="' + yOf(r.growth) +
-      '" r="9" fill="#fff" fill-opacity=".65" stroke="#18b8d8" stroke-width="3"/>';
-    s += '<circle data-kind="projected" cx="' + xOf(p.occ) + '" cy="' + yOf(p.growth) +
-      '" r="6.5" fill="#071f3d" stroke="#fff" stroke-width="1.5"/>';
-    if (m) {
-      var mx = xOf(m.occ), my = yOf(m.growth);
-      s += '<path data-kind="manager" d="M ' + mx + " " + (my - 8) + " L " + (mx + 8) + " " + my +
-        " L " + mx + " " + (my + 8) + " L " + (mx - 8) + " " + my + ' Z" fill="#7c3aed" stroke="#fff" stroke-width="1.5"/>';
-    }
-    var lab = m || p;
-    s += '<text class="marker-label" x="' + (xOf(lab.occ) + 10) + '" y="' + (yOf(lab.growth) - 10) + '">' + esc(a.id) + "</text>";
-    s += "</g>";
-  });
-  svg.innerHTML = s;
-
-  Array.prototype.forEach.call(svg.querySelectorAll(".asset-mark"), function (g) {
-    var id = g.getAttribute("data-id");
-    g.addEventListener("click", function () { selected = id; save(); renderAll(); });
-    g.addEventListener("pointermove", function (e) { showTip(e, id); });
-    g.addEventListener("pointerleave", hideTip);
-    Array.prototype.forEach.call(
-      g.querySelectorAll('[data-kind="projected"],[data-kind="manager"]'),
-      function (el) {
-        el.addEventListener("pointerdown", function (e) {
-          e.preventDefault(); e.stopPropagation();
-          selected = id;
-          var a = current();
-          // Grabbing the projected dot creates the manager view and hands the
-          // drag to it, rather than moving the projection itself.
-          if (el.getAttribute("data-kind") === "projected" && !a.manager) {
-            a.manager = { occ: a.projected.occ, growth: a.projected.growth };
-          }
-          drag = { id: id };
-          save(); renderAll();
-        });
-      });
-  });
-}
-
-function posBox(label, cls, p) {
-  if (!p) {
-    return '<div class="scorebox ' + cls + '"><strong>' + esc(label) +
-      '</strong><div class="band">Not set — drag from the projected point</div></div>';
-  }
-  return '<div class="scorebox ' + cls + '"><strong>' + esc(label) + "</strong>" +
-    '<div class="coords">' + fmt(p.occ, AX.occ) + " · " + fmt(p.growth, AX.growth) + "</div>" +
-    '<div class="band">' + esc(band(p.occ, AX.occ)) + " occupancy · " +
-    esc(band(p.growth, AX.growth)) + " NOI</div></div>";
-}
-
-function renderDetail() {
-  var a = current();
-  if (!a) { document.getElementById("detail").innerHTML = ""; return; }
-  var m = movement(a);
-  var rat = function (r, ax, title) {
-    if (!r) return "";
-    var conf = typeof r.confidence === "number" ? " · confidence " + r.confidence.toFixed(2) : "";
-    return '<div class="dim"><b>' + esc(title) +
-      (r.direction ? " · " + esc(r.direction) : "") +
-      (r.strength ? " · " + esc(r.strength) : "") + conf + "</b>" +
-      (r.text ? "<br>" + esc(r.text) : "") + "</div>";
-  };
-  var facts = [
-    ["Format", a.format], ["City", a.city],
-    ["Built / acquired", a.yearBuilt + " / " + monthName(a.acquired)],
-    ["Gross lettable area", num(a.gla) + " sqft"],
-    ["Leased / vacant", num(a.leased) + " / " + num(a.vacant) + " sqft"],
-    ["Contracted rent", money(a.contractedRent)],
-    ["Net operating income", money(a.noi)],
-    ["Average passing rent", "$" + a.avgPsf.toFixed(2) + " psf"],
-    ["WALT", a.walt.toFixed(1) + " yr"],
-    ["Anchor tenant", a.anchor || "None"],
-    ["Arrears", a.arrears ? money(a.arrears) : "None"],
-    ["Expiring in 12 months", a.expiring12m + " leases"]
-  ];
-  var html =
-    '<div class="panel-head"><div><div class="titleline">' +
-      '<span class="pill">' + esc(a.id) + "</span><h2>" + esc(a.name) + "</h2>" +
-      '<span class="badge ' + m.cls + '">' + m.glyph + " " + esc(m.label) + "</span>" +
-      (a.review ? '<span class="pill amber">Flagged for review</span>' : "") +
-    '</div><div class="sub">Select a marker or a ranking row · drag the navy projected dot or the purple manager diamond</div></div></div>' +
-    '<div class="body"><div class="detail-grid"><div>' +
-      "<p>" + esc(a.outline) + "</p>" +
-      '<div class="scores">' +
-        posBox("Reported", "rep", a.reported) +
-        posBox("Projected", "prj", a.projected) +
-        posBox("Manager view", "mgr", a.manager) +
-      "</div>" +
-      '<div class="controls">' +
-        '<button id="resetMgr">Reset to projected</button>' +
-        '<button id="clearMgr">Clear manager view</button>' +
-        '<button class="accept" id="acceptMgr"' + (a.manager ? "" : " disabled") + ">Accept as reported</button>" +
-      "</div>" +
-      '<div class="section"><h3>Trading and leasing</h3><p>' + esc(a.summary) + "</p></div>" +
-      '<div class="section"><h3>Position rationale</h3>' +
-        rat(a.occRationale, AX.occ, AX.occ.label) +
-        rat(a.noiRationale, AX.growth, AX.growth.label) +
-      "</div>" +
-    '</div><div>' +
-      '<div class="section" style="border-top:0;margin-top:0;padding-top:0"><h3>Asset facts</h3><table class="facts">' +
-        facts.map(function (f) {
-          return "<tr><td>" + esc(f[0]) + "</td><td>" + esc(f[1]) + "</td></tr>";
-        }).join("") +
-      "</table></div>" +
-      '<div class="section"><h3>Supporting evidence</h3>' +
-        a.evidence.map(function (e) {
-          return '<div class="ev">' + esc(e.quote) +
-            '<div class="cite">' + esc(docName(e.doc)) + ", page " + e.page + "</div></div>";
-        }).join("") +
-      "</div>" +
-      '<div class="section"><h3>Asset management actions</h3><ul class="clean">' +
-        a.measures.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") +
-      "</ul></div>" +
-      '<div class="section"><h3>Position history</h3>' +
-        (a.history.length
-          ? a.history.map(function (h) {
-              return '<div class="history">' + esc(h.date) + " — accepted " +
-                fmt(h.accepted.occ, AX.occ) + " · " + fmt(h.accepted.growth, AX.growth) +
-                ", from " + fmt(h.reported.occ, AX.occ) + " · " + fmt(h.reported.growth, AX.growth) +
-                "</div>";
-            }).join("")
-          : '<div class="small">No accepted-position history yet.</div>') +
-      "</div>" +
-    "</div></div></div>";
-  document.getElementById("detail").innerHTML = html;
-
-  document.getElementById("resetMgr").onclick = function () {
-    a.manager = { occ: a.projected.occ, growth: a.projected.growth };
-    save(); renderAll();
-  };
-  document.getElementById("clearMgr").onclick = function () {
-    a.manager = null; save(); renderAll();
-  };
-  document.getElementById("acceptMgr").onclick = function () {
-    if (!a.manager) return;
-    a.history.push({
-      date: new Date().toISOString().slice(0, 10),
-      reported: { occ: a.reported.occ, growth: a.reported.growth },
-      projected: { occ: a.projected.occ, growth: a.projected.growth },
-      accepted: { occ: a.manager.occ, growth: a.manager.growth }
-    });
-    a.reported = { occ: a.manager.occ, growth: a.manager.growth };
-    // Collapse the projection onto the accepted position so the arrows settle
-    // rather than pointing backwards at a superseded forecast.
-    a.projected = { occ: a.manager.occ, growth: a.manager.growth };
-    a.manager = null;
-    save(); renderAll();
-  };
-}
-
-function docName(key) {
-  var names = {
-    AMR: "Q3 2026 Asset Management Report",
-    RR: "Rent Roll Extract, 30 Sep 2026",
-    "LA-RAM": "Lease Abstract — Rampart Sporting Goods",
-    "LA-FLD": "Lease Abstract — Fieldcrest Grocers"
-  };
-  return names[key] || key;
-}
-
-// The canonical commercial-real-estate chart: how much contracted rent rolls
-// off in each year. It is what makes a projected NOI decline legible -- a tall
-// near-year bar is the reason, sitting right next to the effect.
-function renderNoi() {
-  var svg = document.getElementById("noiChart");
-  var ranked = assets.slice().sort(function (a, b) { return b.noi - a.noi; });
-  if (!ranked.length) { svg.innerHTML = ""; return; }
-  var max = Math.max.apply(null, ranked.map(function (a) { return a.noi; })) || 1;
-  var total = ranked.reduce(function (t, a) { return t + a.noi; }, 0);
-  var W = 1180, H = 250, L = 58, T = 22, PB = 44;
-  var pw = W - L - 12, ph = H - T - PB;
-  var step = pw / ranked.length, bw = Math.min(64, step - 12);
-  svg.setAttribute("viewBox", "0 0 " + W + " " + H);
-  var s = "";
-  [0, 0.25, 0.5, 0.75, 1].forEach(function (f) {
-    var py = T + ph - f * ph;
-    s += '<line x1="' + L + '" y1="' + py + '" x2="' + (L + pw) + '" y2="' + py +
-      '" stroke="#dbeade"/>';
-    s += '<text class="tick" x="' + (L - 8) + '" y="' + (py + 4) + '" text-anchor="end">' +
-      money(Math.round(f * max)) + "</text>";
-  });
-  ranked.forEach(function (a, i) {
-    var cx = L + (i + 0.5) * step, h = a.noi / max * ph;
-    var sel = a.id === selected;
-    s += '<g class="asset-mark" data-id="' + esc(a.id) + '">';
-    s += '<rect x="' + (cx - bw / 2) + '" y="' + (T + ph - h) + '" width="' + bw +
-      '" height="' + Math.max(1, h) + '" rx="4" fill="' + (sel ? "#075c3c" : "#19a66a") +
-      '" opacity="' + (sel ? 1 : 0.72) + '"/>';
-    s += '<text class="tick" x="' + cx + '" y="' + (T + ph - h - 6) + '" text-anchor="middle"' +
-      (sel ? ' font-weight="800"' : "") + ">" + money(a.noi) + "</text>";
-    s += '<text class="bandlabel" x="' + cx + '" y="' + (T + ph + 17) +
-      '" text-anchor="middle">' + esc(a.id) + "</text>";
-    s += '<text class="tick" x="' + cx + '" y="' + (T + ph + 32) + '" text-anchor="middle">' +
-      Math.round(a.noi / total * 100) + "%</text>";
-    s += "</g>";
-  });
-  svg.innerHTML = s;
-  document.getElementById("noiSub").textContent =
-    "Annual NOI per asset · " + money(total) + " total · sorted by contribution · click a bar to open the asset";
-  Array.prototype.forEach.call(svg.querySelectorAll(".asset-mark"), function (g) {
-    g.addEventListener("click", function () {
-      selected = g.getAttribute("data-id"); save(); renderAll();
-    });
-  });
-}
-
-function renderExpiryProfile() {
-  var svg = document.getElementById("expiryChart");
-  var byYear = {}, total = 0;
-  (D.leases || []).forEach(function (l) {
-    var y = String(l.expiry).slice(0, 4), rent = l.sqft * l.psf;
-    if (!byYear[y]) byYear[y] = { total: 0, mine: 0 };
-    byYear[y].total += rent;
-    if (l.assetId === selected) byYear[y].mine += rent;
-    total += rent;
-  });
-  var years = Object.keys(byYear).sort();
-  if (!years.length) { svg.innerHTML = ""; return; }
-  var W = 620, H = 210, L = 46, T = 12, PB = 40;
-  var pw = W - L - 10, ph = H - T - PB;
-  var max = Math.max.apply(null, years.map(function (y) { return byYear[y].total; }));
-  var bw = Math.min(52, pw / years.length - 8);
-  svg.setAttribute("viewBox", "0 0 " + W + " " + H);
-  var s = "";
-  [0, 0.5, 1].forEach(function (f) {
-    var py = T + ph - f * ph;
-    s += '<line x1="' + L + '" y1="' + py + '" x2="' + (L + pw) + '" y2="' + py + '" stroke="#dbeade"/>';
-    s += '<text class="tick" x="' + (L - 8) + '" y="' + (py + 4) + '" text-anchor="end">' +
-      (f * max >= 1e6 ? "$" + (f * max / 1e6).toFixed(1) + "M" : "$" + Math.round(f * max / 1e3) + "k") + "</text>";
-  });
-  years.forEach(function (y, i) {
-    var d = byYear[y];
-    var cx = L + (i + 0.5) * (pw / years.length);
-    var hTot = d.total / max * ph, hMine = d.mine / max * ph;
-    s += '<rect x="' + (cx - bw / 2) + '" y="' + (T + ph - hTot) + '" width="' + bw +
-      '" height="' + hTot + '" rx="3" fill="#a8d9bf"/>';
-    if (hMine > 0.4) {
-      s += '<rect x="' + (cx - bw / 2) + '" y="' + (T + ph - hMine) + '" width="' + bw +
-        '" height="' + hMine + '" rx="3" fill="#19a66a"/>';
-    }
-    s += '<text class="tick" x="' + cx + '" y="' + (T + ph + 16) + '" text-anchor="middle">' + esc(y) + "</text>";
-    s += '<text class="bandlabel" x="' + cx + '" y="' + (T + ph + 31) + '" text-anchor="middle">' +
-      Math.round(d.total / total * 100) + "%</text>";
-  });
-  svg.innerHTML = s;
-}
-
-function renderExpiry() {
-  var horizon = horizonMonth();
-  var byId = {};
-  assets.forEach(function (a) { byId[a.id] = a; });
-  var rows = (D.leases || []).filter(function (l) { return l.expiry <= horizon; });
-  if (!rows.length) {
-    document.getElementById("expiry").innerHTML = '<div class="small">No leases expire within twelve months.</div>';
-    return;
-  }
-  document.getElementById("expiry").innerHTML =
-    '<div class="section" style="border-top:0;margin-top:0;padding-top:0"><h3>Next twelve months</h3></div>' +
-    '<table class="exp"><thead><tr><th>Expiry</th><th>Asset</th><th>Tenant</th>' +
-    '<th class="r">Sqft</th><th class="r">$ psf</th><th class="r">Option</th><th class="r">Arrears</th></tr></thead><tbody>' +
-    rows.map(function (l) {
-      var a = byId[l.assetId];
-      return "<tr" + (l.assetId === selected ? ' class="mine"' : "") + ">" +
-        "<td>" + esc(monthName(l.expiry)) + "</td>" +
-        "<td>" + esc(l.assetId) + "</td>" +
-        "<td>" + esc(l.tenant) + (l.anchor ? " <span class=\"badge hold\">anchor</span>" : "") + "</td>" +
-        '<td class="r">' + num(l.sqft) + "</td>" +
-        '<td class="r">' + l.psf.toFixed(2) + "</td>" +
-        '<td class="r">' + (l.opt ? l.opt + " yr" : "—") + "</td>" +
-        '<td class="r">' + (l.arrears ? money(l.arrears) : "—") + "</td>" +
-        "</tr>";
-    }).join("") + "</tbody></table>";
-}
-
-function renderNotes() {
-  document.getElementById("notes").innerHTML = (D.notes || []).map(function (n) {
-    return '<div class="note"><b>' + esc(n.title) + "</b><br>" + esc(n.body) + "</div>";
-  }).join("");
-}
-
-function showTip(e, id) {
-  var a = assets.filter(function (x) { return x.id === id; })[0];
-  if (!a) return;
-  var p = pos(a), t = document.getElementById("tooltip");
-  t.innerHTML = "<b>" + esc(a.id) + " · " + esc(a.name) + "</b><br>" +
-    AX.occ.label + " " + fmt(p.occ, AX.occ) + " · " +
-    AX.growth.label + " " + fmt(p.growth, AX.growth) +
-    (a.manager ? "<br>manager view" : "<br>projected");
-  t.style.display = "block";
-  t.style.left = (e.clientX + 12) + "px";
-  t.style.top = (e.clientY + 12) + "px";
-}
-function hideTip() { document.getElementById("tooltip").style.display = "none"; }
-
-var CHROME = ["notice", "cards", "noiPanel", "mainRow", "detail", "bottomRow"];
-
-function showChrome(on) {
-  CHROME.forEach(function (id) {
-    var el = document.getElementById(id);
-    if (el) el.style.display = on ? "" : "none";
-  });
-  document.getElementById("empty").style.display = on ? "none" : "block";
-}
-
-function renderEmptyState() {
-  showChrome(false);
-  document.getElementById("pageTitle").textContent =
-    (D.meta && D.meta.portfolio) || "Portfolio dashboard";
-  document.getElementById("pageSub").textContent =
-    "No data yet — upload source documents to the assistant";
-  document.getElementById("footer").textContent = "";
-}
-
-function renderAll() {
-  try {
-    if (!assets.length) { renderEmptyState(); return; }
-    showChrome(true);
-    renderChrome(); renderCards(); renderNoi(); renderList(); renderPlot(); renderDetail();
-    renderExpiryProfile(); renderExpiry(); renderNotes();
-  } catch (err) {
-    showAlert("The dashboard could not finish rendering. The data file is probably malformed.",
-      [String(err && err.message || err)]);
-  }
-}
-
-// ---------------------------------------------------------------------------
-// Boot
-// ---------------------------------------------------------------------------
-function boot() {
-  D = PORTFOLIO;
-  var problems = validate();
-  if (problems.length) {
-    showAlert("The DATA block has " + problems.length + " problem" + (problems.length > 1 ? "s" : "") + ":", problems);
-    if (!D || !D.assets || !D.assets.length || !D.axes) return;
-  }
-  AX = D.axes;
-  assets = D.assets;
-  // Prose travels with each asset. Anything missing degrades gracefully: the
-  // asset still plots, its prose sections just read as unavailable.
-  assets.forEach(function (a) {
-    if (!Array.isArray(a.history)) a.history = [];
-    if (!a.outline) a.outline = "No description recorded for this asset.";
-    if (!a.summary) a.summary = "No commentary recorded for this asset.";
-    a.occRationale = a.occRationale || {};
-    a.noiRationale = a.noiRationale || {};
-    if (!Array.isArray(a.evidence)) a.evidence = [];
-    if (!Array.isArray(a.measures)) a.measures = [];
-  });
-  D.notes = D.notes || [];
-  if (assets.length) {
-    // Open on the entity that most needs attention -- the interesting one.
-    var ranked = assets.slice().sort(function (a, b) { return attention(b) - attention(a); });
-    selected = ranked[0].id;
-  }
-  load();
-  renderAll();
-
-  window.addEventListener("pointermove", function (e) {
-    if (!drag) return;
-    var svg = document.getElementById("plot");
-    var pt = svg.createSVGPoint();
-    pt.x = e.clientX; pt.y = e.clientY;
-    var q = pt.matrixTransform(svg.getScreenCTM().inverse());
-    var a = assets.filter(function (x) { return x.id === drag.id; })[0];
-    if (!a) return;
-    a.manager = { occ: clampAx(xInv(q.x), AX.occ), growth: clampAx(yInv(q.y), AX.growth) };
-    save(); renderAll();
-  });
-  window.addEventListener("pointerup", function () { drag = null; });
-}
-
-boot();
+var D=PORTFOLIO, A=(D&&Array.isArray(D.assets))?D.assets:[];
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+function num(n){return (n||0).toLocaleString("en-US")}
+function money(n){n=n||0;return Math.abs(n)>=1e6?"$"+(n/1e6).toFixed(1)+"M":
+  Math.abs(n)>=1e3?"$"+Math.round(n/1e3)+"k":"$"+n}
+function month(ym){var p=String(ym||"").split("-"),
+  m=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  return p.length>1?m[parseInt(p[1],10)-1]+" "+p[0]:String(ym||"")}
+function totals(){var t={n:A.length,gla:0,noi:0,arr:0,exp:0,ww:0,ow:0,rev:0};
+  A.forEach(function(a){t.gla+=a.gla||0;t.noi+=a.noi||0;t.arr+=a.arrears||0;
+    t.exp+=a.expiring12m||0;t.ww+=(a.noi||0)*(a.walt||0);t.ow+=(a.gla||0)*(a.occ||0);
+    if(a.review)t.rev++});
+  t.walt=t.noi?t.ww/t.noi:0;t.occ=t.gla?t.ow/t.gla:0;return t}
+function validate(){var p=[],seen={};
+  if(!D||!Array.isArray(D.assets))return["The DATA block must define PORTFOLIO with an assets array."];
+  D.assets.forEach(function(a,i){var w=a.id||("assets["+i+"]");
+    if(!a.id)p.push(w+": missing id");else if(seen[a.id])p.push(w+": duplicate id");
+    seen[a.id]=1;
+    if(!a.name)p.push(w+": missing name");
+    if(typeof a.noi!=="number")p.push(w+": noi must be a number");
+    if(typeof a.occ!=="number")p.push(w+": occ must be a number");
+    else if(a.occ<0||a.occ>100)p.push(w+": occ "+a.occ+" outside 0..100")});
+  return p}
+function alertBox(t,items){var el=document.getElementById("alert");
+  el.innerHTML="<b>"+esc(t)+"</b><ul style='margin:6px 0 0;padding-left:20px'>"+
+    items.slice(0,10).map(function(x){return "<li>"+esc(x)+"</li>"}).join("")+"</ul>";
+  el.style.display="block"}
+function renderCards(){var t=totals();
+  var c=[["Portfolio NOI",money(t.noi),num(t.gla)+" sq ft across "+t.n+" assets"],
+   ["Occupancy",t.occ.toFixed(1)+"%","area weighted"],
+   ["WALT",t.walt.toFixed(1)+" yr","income weighted"],
+   ["Expiring in 12 months",t.exp+" leases",t.rev+" flagged for review"]];
+  document.getElementById("cards").innerHTML=c.map(function(x){
+    return '<div class="card"><div class="k">'+esc(x[0])+'</div><div class="v">'+esc(x[1])+
+      '</div><div class="n">'+esc(x[2])+'</div></div>'}).join("")}
+function renderBars(){var svg=document.getElementById("bars");
+  var r=A.slice().sort(function(a,b){return (b.noi||0)-(a.noi||0)});
+  if(!r.length){svg.innerHTML="";return}
+  var peak=Math.max.apply(null,r.map(function(a){return a.noi||0}))||1;
+  var mag=Math.pow(10,Math.floor(Math.log(peak)/Math.LN10)),max=mag;
+  [1,1.5,2,2.5,3,4,5,6,8,10].some(function(m){if(mag*m>=peak){max=mag*m;return true}});
+  var tot=r.reduce(function(s,a){return s+(a.noi||0)},0);
+  var W=1160,H=240,L=56,T=20,PB=42,pw=W-L-12,ph=H-T-PB,step=pw/r.length,bw=Math.min(66,step-12);
+  svg.setAttribute("viewBox","0 0 "+W+" "+H);var s="";
+  [0,.25,.5,.75,1].forEach(function(f){var y=T+ph-f*ph;
+    s+='<line x1="'+L+'" y1="'+y+'" x2="'+(L+pw)+'" y2="'+y+'" stroke="#dbeade"/>'+
+       '<text class="tick" x="'+(L-8)+'" y="'+(y+4)+'" text-anchor="end">'+money(Math.round(f*max))+'</text>'});
+  r.forEach(function(a,i){var cx=L+(i+.5)*step,h=(a.noi||0)/max*ph;
+    s+='<rect x="'+(cx-bw/2)+'" y="'+(T+ph-h)+'" width="'+bw+'" height="'+Math.max(1,h)+
+       '" rx="4" fill="#19a66a" opacity=".85"/>'+
+       '<text class="tick" x="'+cx+'" y="'+(T+ph-h-6)+'" text-anchor="middle">'+money(a.noi)+'</text>'+
+       '<text class="blab" x="'+cx+'" y="'+(T+ph+16)+'" text-anchor="middle">'+esc(a.id)+'</text>'+
+       '<text class="tick" x="'+cx+'" y="'+(T+ph+31)+'" text-anchor="middle">'+
+       Math.round((a.noi||0)/tot*100)+'%</text>'});
+  svg.innerHTML=s;
+  document.getElementById("noisub").textContent=
+    "Annual NOI per asset · "+money(tot)+" total · sorted by contribution"}
+function renderTable(){var r=A.slice().sort(function(a,b){return (b.noi||0)-(a.noi||0)});
+  var head="<thead><tr><th>Asset</th><th>Location</th><th class='r'>GLA</th>"+
+    "<th class='r'>Occupancy</th><th class='r'>NOI</th><th class='r'>WALT</th>"+
+    "<th class='r'>Expiring</th><th class='r'>Arrears</th><th>Note</th></tr></thead>";
+  var body=r.map(function(a){return "<tr><td><span class='aid'>"+esc(a.id)+
+    "</span><br><span class='an'>"+esc(a.name)+"</span>"+
+    (a.review?"<span class='flag'>review</span>":"")+"</td><td class='ac'>"+esc(a.city||"")+
+    "</td><td class='r'>"+num(a.gla)+"</td><td class='r'>"+
+    (typeof a.occ==="number"?a.occ.toFixed(1)+"%":"—")+"</td><td class='r'>"+money(a.noi)+
+    "</td><td class='r'>"+(typeof a.walt==="number"?a.walt.toFixed(1)+" yr":"—")+
+    "</td><td class='r'>"+(a.expiring12m||0)+"</td><td class='r'>"+
+    (a.arrears?money(a.arrears):"—")+"</td><td class='note'>"+esc(a.note||"")+"</td></tr>"}).join("");
+  document.getElementById("tbl").innerHTML=head+"<tbody>"+body+"</tbody>"}
+function renderAll(){try{
+  var t=totals();
+  document.getElementById("ttl").textContent=(D.meta&&D.meta.portfolio)||"Portfolio";
+  if(!A.length){document.getElementById("chrome").style.display="none";
+    document.getElementById("empty").style.display="block";
+    document.getElementById("sub").textContent="No data yet — upload a report to the assistant";
+    document.getElementById("foot").textContent="";return}
+  document.getElementById("chrome").style.display="";
+  document.getElementById("empty").style.display="none";
+  document.getElementById("sub").textContent=
+    t.n+" assets · "+num(t.gla)+" sq ft · as at "+month((D.meta&&D.meta.asOf||"").slice(0,7));
+  document.getElementById("foot").textContent=
+    "Illustrative sample data · internal asset-management working document";
+  renderCards();renderBars();renderTable()}
+  catch(e){alertBox("The dashboard could not finish rendering. The data is probably malformed.",
+    [String(e&&e.message||e)])}}
+var probs=validate();
+if(probs.length)alertBox("The DATA block has "+probs.length+" problem(s):",probs);
+renderAll();
 })();
 </script>
 </body>
